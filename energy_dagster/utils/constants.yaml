@@ -1,0 +1,64 @@
+data_sources:
+  geoboundaries_municipalities:
+    url: "https://daten.gdz.bkg.bund.de/produkte/vg/vg5000_1231/aktuell/vg5000_12-31.utm32s.shape.ebenen.zip"
+    filename: "vg5000_1231.zip"
+    save_directory: "geoboundaries_municipalities"
+    zipfile_path: "vg5000_12-31.utm32s.shape.ebenen/vg5000_ebenen_1231/VG5000_GEM.shp"
+
+  geoboundaries_districts:
+    url: "https://daten.gdz.bkg.bund.de/produkte/vg/vg5000_1231/aktuell/vg5000_12-31.utm32s.shape.ebenen.zip"
+    filename: "vg5000_1231.zip"
+    save_directory: "geoboundaries_districts"
+    zipfile_path: "vg5000_12-31.utm32s.shape.ebenen/vg5000_ebenen_1231/VG5000_KRS.shp"
+
+  ladesaeulenregister:
+    url: "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeulenregister.xlsx?__blob=publicationFile&v=43"
+    filename: "Ladesaeulenregister.xlsx"
+    save_directory: "ladesaeulenregister"
+
+  zensus:
+    url: "https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung.zip?__blob=publicationFile&v=2"
+    filename: "csv_Bevoelkerung.zip"
+    save_directory: "zensus"
+    csv_filename: "Zensus11_Datensatz_Bevoelkerung.csv"
+    extract_directory: "bevoelkerung"
+
+  osm_bayern:
+    url: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"
+    filename: "bayern-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_unterfranken:
+    url: "https://download.geofabrik.de/europe/germany/bayern/unterfranken-latest.osm.pbf"
+    filename: "unterfranken-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_schwaben:
+    url: "https://download.geofabrik.de/europe/germany/bayern/schwaben-latest.osm.pbf"
+    filename: "schwaben-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_oberpfalz:
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberpfalz-latest.osm.pbf"
+    filename: "oberpfalz-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_oberfranken:
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberfranken-latest.osm.pbf"
+    filename: "oberfranken-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_oberbayern:
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberbayern-latest.osm.pbf"
+    filename: "oberbayern-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_niederbayern:
+    url: "https://download.geofabrik.de/europe/germany/bayern/niederbayern-latest.osm.pbf"
+    filename: "niederbayern-latest.osm.pbf"
+    save_directory: "osm"
+
+  osm_mittelfranken:
+    url: "https://download.geofabrik.de/europe/germany/bayern/mittelfranken-latest.osm.pbf"
+    filename: "mittelfranken-latest.osm.pbf"
+    save_directory: "osm"
