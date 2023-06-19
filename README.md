@@ -4,25 +4,20 @@ This is a [Dagster](https://dagster.io/) project scaffolded with [`dagster proje
 
 ## Getting started
 
-First, install your Dagster code location as a Python package. By using the --editable flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
+1. First, install your Dagster code location as a Python package. By using the --editable flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-Next, make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. You can check this by running:
+2. Next, make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. You can check this by running:
 
 ```bash
 docker compose version
 ```
 
-To initialize the database and to create the docker container, run:
 
-```bash
-docker compose up -d
-```
-
-You now need to create a `.env` file in your main repository and add credentials. The `.env` file will not be uploaded to git. 
+3. You now need to create a `.env` file in your main repository and add credentials. The `.env` file will not be uploaded to git. 
 To use the postgres IO manager, it should have the following content:
 
 ```
@@ -38,7 +33,15 @@ export DBT_PROFILES_PATH = path/to/dbt_profile
 export MASTR_DOWNLOAD_DATE = today
 ```
 
-Then, start the Dagster UI web server:
+
+4. To initialize the database and to create the docker container, run:
+
+```bash
+python initialize.py
+```
+Check if the database is running on the server and port specified in the `.env` file. 
+
+5. Start the Dagster UI web server:
 
 ```bash
 dagster dev
@@ -50,7 +53,7 @@ If the environment variables were loaded successfully, you should see the follow
 dagster - INFO - Loaded environment variables from .env file: pwd,uid,server,db,port,schema, DBT_PROJECT_PATH, DBT_PROFILES_PATH, MASTR_DOWNLOAD_DATE
 ```
 
-Open http://localhost:3000 with your browser to see the project.
+6. Open http://localhost:3000 with your browser to see the project.
 
 You can start writing assets in `energy_dagster/assets.py`. The assets are automatically loaded into the Dagster code location as you define them.
 
