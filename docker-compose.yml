@@ -1,0 +1,16 @@
+version: '3'
+services:
+  energy_database:
+    image: postgis/postgis:15-3.3
+    container_name: energy_database
+    ports:
+      - '5512:5432'
+    environment:
+      POSTGRES_DB: energy_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - energyDatabaseVolume:/var/lib/postgresql/data
+
+volumes:
+  energyDatabaseVolume:
