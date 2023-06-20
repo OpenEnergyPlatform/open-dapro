@@ -110,8 +110,7 @@ def download_from_constants(data_source: str):
 
 
 def get_raw_data_filepath():
-    return os.path.join(os.path.expanduser("~"), ".energy-dagster", "data")
-
+    return os.path.join(os.path.expanduser("~"), ".dagster", "dagster_energy_files")
 
 def download_from_url(url: str, save_directory: str, filename: str) -> None:
     """Downloads a file from a given url and saves it to the given path
