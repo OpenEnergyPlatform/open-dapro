@@ -28,6 +28,7 @@ export server = localhost
 export db = energy_database
 export port = 5512
 export schema = raw
+export DAGSTER_HOME = ~/.dagster/dagster_home
 export MASTR_DOWNLOAD_DATE = today
 ```
 
