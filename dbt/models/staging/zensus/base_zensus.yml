@@ -1,0 +1,23 @@
+version: 2
+models:
+  - name: base_zensus
+    columns:
+      - name: community_key_12
+        description: ''
+      - name: community_name
+        description: ''
+      - name: regional_level
+        description: ''
+      - name: number_inhabitants
+        description: ''
+      - name: nuts2_in_ags
+        description: ''
+      - name: federal_state_in_ags
+        description: ''
+      - name: district_in_ags
+        description: ''
+      - name: municipalities_association_in_ags
+        description: ''
+      - name: municipality_in_ags
+        description: ''
+sources: []

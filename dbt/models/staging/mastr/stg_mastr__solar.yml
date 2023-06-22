@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: stg_mastr__solar
+    description: ''
+    columns:
+      - name: mastr_id
+        description: ''
+      - name: municipality_id
+        description: ''
+      - name: municipality
+        description: ''
+      - name: district
+        description: ''
+      - name: zip_code
+        description: ''
+      - name: commissioning_date
+        description: ''
+      - name: planned_commissioning_date
+        description: ''
+      - name: unit_owner_mastr_id
+        description: ''
+      - name: power
+        description: ''
+      - name: orientation
+        description: ''
+      - name: orientation_secondary
+        description: ''
+      - name: combination_with_storage
+        description: ''
+      - name: utilization_area
+        description: ''
+      - name: download_date
+        description: ''
+      - name: district_id
+        description: ''
+      - name: installation_year
+        description: ''

@@ -1,0 +1,867 @@
+version: 2
+
+sources:
+  - name: raw_mastr
+    schema: public
+    tables:
+      - name: solar_extended
+        columns:
+          - name: ZugeordneteWirkleistungWechselrichter
+            description: ''
+          - name: GemeinsamerWechselrichterMitSpeicher
+            description: ''
+          - name: AnzahlModule
+            description: ''
+          - name: Lage
+            description: ''
+          - name: Leistungsbegrenzung
+            description: ''
+          - name: EinheitlicheAusrichtungUndNeigungswinkel
+            description: ''
+          - name: Hauptausrichtung
+            description: ''
+          - name: HauptausrichtungNeigungswinkel
+            description: ''
+          - name: Nebenausrichtung
+            description: ''
+          - name: NebenausrichtungNeigungswinkel
+            description: ''
+          - name: InAnspruchGenommeneFlaeche
+            description: ''
+          - name: ArtDerFlaeche
+            description: ''
+          - name: InAnspruchGenommeneAckerflaeche
+            description: ''
+          - name: Nutzungsbereich
+            description: ''
+          - name: Buergerenergie
+            description: ''
+          - name: EegMastrNummer
+            description: ''
+          - name: ArtDerFlaecheIds
+            description: ''
+          - name: NetzbetreiberMastrNummer
+            description: ''
+          - name: Registrierungsdatum
+            description: ''
+          - name: EinheitMastrNummer
+            description: ''
+          - name: DatumLetzteAktualisierung
+            description: ''
+          - name: LokationMastrNummer
+            description: ''
+          - name: NetzbetreiberpruefungStatus
+            description: ''
+          - name: NetzbetreiberpruefungDatum
+            description: ''
+          - name: AnlagenbetreiberMastrNummer
+            description: ''
+          - name: Land
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Landkreis
+            description: ''
+          - name: Gemeinde
+            description: ''
+          - name: Gemeindeschluessel
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Gemarkung
+            description: ''
+          - name: FlurFlurstuecknummern
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: StrasseNichtGefunden
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: HausnummerNichtGefunden
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Laengengrad
+            description: ''
+          - name: Breitengrad
+            description: ''
+          - name: UtmZonenwert
+            description: ''
+          - name: UtmEast
+            description: ''
+          - name: UtmNorth
+            description: ''
+          - name: GaussKruegerHoch
+            description: ''
+          - name: GaussKruegerRechts
+            description: ''
+          - name: Meldedatum
+            description: ''
+          - name: GeplantesInbetriebnahmedatum
+            description: ''
+          - name: Inbetriebnahmedatum
+            description: ''
+          - name: DatumEndgueltigeStilllegung
+            description: ''
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: ''
+          - name: DatumBeendigungVorlaeufigenStilllegung
+            description: ''
+          - name: DatumWiederaufnahmeBetrieb
+            description: ''
+          - name: EinheitSystemstatus
+            description: ''
+          - name: EinheitBetriebsstatus
+            description: ''
+          - name: BestandsanlageMastrNummer
+            description: ''
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: ''
+          - name: AltAnlagenbetreiberMastrNummer
+            description: ''
+          - name: DatumDesBetreiberwechsels
+            description: ''
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: ''
+          - name: NameStromerzeugungseinheit
+            description: ''
+          - name: Weic
+            description: ''
+          - name: WeicDisplayName
+            description: ''
+          - name: Kraftwerksnummer
+            description: ''
+          - name: Energietraeger
+            description: ''
+          - name: Bruttoleistung
+            description: ''
+          - name: Nettonennleistung
+            description: ''
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: ''
+          - name: Schwarzstartfaehigkeit
+            description: ''
+          - name: Inselbetriebsfaehigkeit
+            description: ''
+          - name: Einsatzverantwortlicher
+            description: ''
+          - name: FernsteuerbarkeitNb
+            description: ''
+          - name: FernsteuerbarkeitDv
+            description: ''
+          - name: FernsteuerbarkeitDr
+            description: ''
+          - name: Einspeisungsart
+            description: ''
+          - name: PraequalifiziertFuerRegelenergie
+            description: ''
+          - name: GenMastrNummer
+            description: ''
+          - name: Netzbetreiberzuordnungen
+            description: ''
+          - name: Hausnummer_nv
+            description: ''
+          - name: Weic_nv
+            description: ''
+          - name: Kraftwerksnummer_nv
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+      - name: wind_extended
+        columns:
+          - name: NameWindpark
+            description: ''
+          - name: Lage
+            description: ''
+          - name: Seelage
+            description: ''
+          - name: ClusterOstsee
+            description: ''
+          - name: ClusterNordsee
+            description: ''
+          - name: Hersteller
+            description: ''
+          - name: HerstellerId
+            description: ''
+          - name: Technologie
+            description: ''
+          - name: Typenbezeichnung
+            description: ''
+          - name: Nabenhoehe
+            description: ''
+          - name: Rotordurchmesser
+            description: ''
+          - name: Rotorblattenteisungssystem
+            description: ''
+          - name: AuflageAbschaltungLeistungsbegrenzung
+            description: ''
+          - name: AuflagenAbschaltungSchallimmissionsschutzNachts
+            description: ''
+          - name: AuflagenAbschaltungSchallimmissionsschutzTagsueber
+            description: ''
+          - name: AuflagenAbschaltungSchattenwurf
+            description: ''
+          - name: AuflagenAbschaltungTierschutz
+            description: ''
+          - name: AuflagenAbschaltungEiswurf
+            description: ''
+          - name: AuflagenAbschaltungSonstige
+            description: ''
+          - name: Wassertiefe
+            description: ''
+          - name: Kuestenentfernung
+            description: ''
+          - name: Buergerenergie
+            description: ''
+          - name: Nachtkennzeichen
+            description: ''
+          - name: EegMastrNummer
+            description: ''
+          - name: NetzbetreiberMastrNummer
+            description: ''
+          - name: Registrierungsdatum
+            description: ''
+          - name: EinheitMastrNummer
+            description: ''
+          - name: DatumLetzteAktualisierung
+            description: ''
+          - name: LokationMastrNummer
+            description: ''
+          - name: NetzbetreiberpruefungStatus
+            description: ''
+          - name: NetzbetreiberpruefungDatum
+            description: ''
+          - name: AnlagenbetreiberMastrNummer
+            description: ''
+          - name: Land
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Landkreis
+            description: ''
+          - name: Gemeinde
+            description: ''
+          - name: Gemeindeschluessel
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Gemarkung
+            description: ''
+          - name: FlurFlurstuecknummern
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: StrasseNichtGefunden
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: HausnummerNichtGefunden
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Laengengrad
+            description: ''
+          - name: Breitengrad
+            description: ''
+          - name: UtmZonenwert
+            description: ''
+          - name: UtmEast
+            description: ''
+          - name: UtmNorth
+            description: ''
+          - name: GaussKruegerHoch
+            description: ''
+          - name: GaussKruegerRechts
+            description: ''
+          - name: Meldedatum
+            description: ''
+          - name: GeplantesInbetriebnahmedatum
+            description: ''
+          - name: Inbetriebnahmedatum
+            description: ''
+          - name: DatumEndgueltigeStilllegung
+            description: ''
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: ''
+          - name: DatumBeendigungVorlaeufigenStilllegung
+            description: ''
+          - name: DatumWiederaufnahmeBetrieb
+            description: ''
+          - name: EinheitSystemstatus
+            description: ''
+          - name: EinheitBetriebsstatus
+            description: ''
+          - name: BestandsanlageMastrNummer
+            description: ''
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: ''
+          - name: AltAnlagenbetreiberMastrNummer
+            description: ''
+          - name: DatumDesBetreiberwechsels
+            description: ''
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: ''
+          - name: NameStromerzeugungseinheit
+            description: ''
+          - name: Weic
+            description: ''
+          - name: WeicDisplayName
+            description: ''
+          - name: Kraftwerksnummer
+            description: ''
+          - name: Energietraeger
+            description: ''
+          - name: Bruttoleistung
+            description: ''
+          - name: Nettonennleistung
+            description: ''
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: ''
+          - name: Schwarzstartfaehigkeit
+            description: ''
+          - name: Inselbetriebsfaehigkeit
+            description: ''
+          - name: Einsatzverantwortlicher
+            description: ''
+          - name: FernsteuerbarkeitNb
+            description: ''
+          - name: FernsteuerbarkeitDv
+            description: ''
+          - name: FernsteuerbarkeitDr
+            description: ''
+          - name: Einspeisungsart
+            description: ''
+          - name: PraequalifiziertFuerRegelenergie
+            description: ''
+          - name: GenMastrNummer
+            description: ''
+          - name: Netzbetreiberzuordnungen
+            description: ''
+          - name: Hausnummer_nv
+            description: ''
+          - name: Weic_nv
+            description: ''
+          - name: Kraftwerksnummer_nv
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+      - name: storage_extended
+        columns:
+          - name: Einsatzort
+            description: ''
+          - name: AcDcKoppelung
+            description: ''
+          - name: Batterietechnologie
+            description: ''
+          - name: PumpbetriebLeistungsaufnahme
+            description: ''
+          - name: PumpbetriebKontinuierlichRegelbar
+            description: ''
+          - name: Pumpspeichertechnologie
+            description: ''
+          - name: Notstromaggregat
+            description: ''
+          - name: BestandteilGrenzkraftwerk
+            description: ''
+          - name: NettonennleistungDeutschland
+            description: ''
+          - name: ZugeordnenteWirkleistungWechselrichter
+            description: ''
+          - name: NutzbareSpeicherkapazitaet
+            description: ''
+          - name: SpeMastrNummer
+            description: ''
+          - name: EegMastrNummer
+            description: ''
+          - name: EegAnlagentyp
+            description: ''
+          - name: Technologie
+            description: ''
+          - name: NetzbetreiberMastrNummer
+            description: ''
+          - name: Registrierungsdatum
+            description: ''
+          - name: EinheitMastrNummer
+            description: ''
+          - name: DatumLetzteAktualisierung
+            description: ''
+          - name: LokationMastrNummer
+            description: ''
+          - name: NetzbetreiberpruefungStatus
+            description: ''
+          - name: NetzbetreiberpruefungDatum
+            description: ''
+          - name: AnlagenbetreiberMastrNummer
+            description: ''
+          - name: Land
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Landkreis
+            description: ''
+          - name: Gemeinde
+            description: ''
+          - name: Gemeindeschluessel
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Gemarkung
+            description: ''
+          - name: FlurFlurstuecknummern
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: StrasseNichtGefunden
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: HausnummerNichtGefunden
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Laengengrad
+            description: ''
+          - name: Breitengrad
+            description: ''
+          - name: UtmZonenwert
+            description: ''
+          - name: UtmEast
+            description: ''
+          - name: UtmNorth
+            description: ''
+          - name: GaussKruegerHoch
+            description: ''
+          - name: GaussKruegerRechts
+            description: ''
+          - name: Meldedatum
+            description: ''
+          - name: GeplantesInbetriebnahmedatum
+            description: ''
+          - name: Inbetriebnahmedatum
+            description: ''
+          - name: DatumEndgueltigeStilllegung
+            description: ''
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: ''
+          - name: DatumBeendigungVorlaeufigenStilllegung
+            description: ''
+          - name: DatumWiederaufnahmeBetrieb
+            description: ''
+          - name: EinheitSystemstatus
+            description: ''
+          - name: EinheitBetriebsstatus
+            description: ''
+          - name: BestandsanlageMastrNummer
+            description: ''
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: ''
+          - name: AltAnlagenbetreiberMastrNummer
+            description: ''
+          - name: DatumDesBetreiberwechsels
+            description: ''
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: ''
+          - name: NameStromerzeugungseinheit
+            description: ''
+          - name: Weic
+            description: ''
+          - name: WeicDisplayName
+            description: ''
+          - name: Kraftwerksnummer
+            description: ''
+          - name: Energietraeger
+            description: ''
+          - name: Bruttoleistung
+            description: ''
+          - name: Nettonennleistung
+            description: ''
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: ''
+          - name: Schwarzstartfaehigkeit
+            description: ''
+          - name: Inselbetriebsfaehigkeit
+            description: ''
+          - name: Einsatzverantwortlicher
+            description: ''
+          - name: FernsteuerbarkeitNb
+            description: ''
+          - name: FernsteuerbarkeitDv
+            description: ''
+          - name: FernsteuerbarkeitDr
+            description: ''
+          - name: Einspeisungsart
+            description: ''
+          - name: PraequalifiziertFuerRegelenergie
+            description: ''
+          - name: GenMastrNummer
+            description: ''
+          - name: Netzbetreiberzuordnungen
+            description: ''
+          - name: Hausnummer_nv
+            description: ''
+          - name: Weic_nv
+            description: ''
+          - name: Kraftwerksnummer_nv
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+      - name: storage_units
+        columns:
+          - name: MastrNummer
+            description: ''
+          - name: Registrierungsdatum
+            description: ''
+          - name: DatumLetzteAktualisierung
+            description: ''
+          - name: NutzbareSpeicherkapazitaet
+            description: ''
+          - name: VerknuepfteEinheit
+            description: ''
+          - name: AnlageBetriebsstatus
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+      - name: biomass_extended
+        columns:
+          - name: Hauptbrennstoff
+            description: ''
+          - name: Biomasseart
+            description: ''
+          - name: Technologie
+            description: ''
+          - name: EegMastrNummer
+            description: ''
+          - name: KwkMastrNummer
+            description: ''
+          - name: NetzbetreiberMastrNummer
+            description: ''
+          - name: Registrierungsdatum
+            description: ''
+          - name: EinheitMastrNummer
+            description: ''
+          - name: DatumLetzteAktualisierung
+            description: ''
+          - name: LokationMastrNummer
+            description: ''
+          - name: NetzbetreiberpruefungStatus
+            description: ''
+          - name: NetzbetreiberpruefungDatum
+            description: ''
+          - name: AnlagenbetreiberMastrNummer
+            description: ''
+          - name: Land
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Landkreis
+            description: ''
+          - name: Gemeinde
+            description: ''
+          - name: Gemeindeschluessel
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Gemarkung
+            description: ''
+          - name: FlurFlurstuecknummern
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: StrasseNichtGefunden
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: HausnummerNichtGefunden
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Laengengrad
+            description: ''
+          - name: Breitengrad
+            description: ''
+          - name: UtmZonenwert
+            description: ''
+          - name: UtmEast
+            description: ''
+          - name: UtmNorth
+            description: ''
+          - name: GaussKruegerHoch
+            description: ''
+          - name: GaussKruegerRechts
+            description: ''
+          - name: Meldedatum
+            description: ''
+          - name: GeplantesInbetriebnahmedatum
+            description: ''
+          - name: Inbetriebnahmedatum
+            description: ''
+          - name: DatumEndgueltigeStilllegung
+            description: ''
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: ''
+          - name: DatumBeendigungVorlaeufigenStilllegung
+            description: ''
+          - name: DatumWiederaufnahmeBetrieb
+            description: ''
+          - name: EinheitSystemstatus
+            description: ''
+          - name: EinheitBetriebsstatus
+            description: ''
+          - name: BestandsanlageMastrNummer
+            description: ''
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: ''
+          - name: AltAnlagenbetreiberMastrNummer
+            description: ''
+          - name: DatumDesBetreiberwechsels
+            description: ''
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: ''
+          - name: NameStromerzeugungseinheit
+            description: ''
+          - name: Weic
+            description: ''
+          - name: WeicDisplayName
+            description: ''
+          - name: Kraftwerksnummer
+            description: ''
+          - name: Energietraeger
+            description: ''
+          - name: Bruttoleistung
+            description: ''
+          - name: Nettonennleistung
+            description: ''
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: ''
+          - name: Schwarzstartfaehigkeit
+            description: ''
+          - name: Inselbetriebsfaehigkeit
+            description: ''
+          - name: Einsatzverantwortlicher
+            description: ''
+          - name: FernsteuerbarkeitNb
+            description: ''
+          - name: FernsteuerbarkeitDv
+            description: ''
+          - name: FernsteuerbarkeitDr
+            description: ''
+          - name: Einspeisungsart
+            description: ''
+          - name: PraequalifiziertFuerRegelenergie
+            description: ''
+          - name: GenMastrNummer
+            description: ''
+          - name: Netzbetreiberzuordnungen
+            description: ''
+          - name: Hausnummer_nv
+            description: ''
+          - name: Weic_nv
+            description: ''
+          - name: Kraftwerksnummer_nv
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+      - name: market_actors
+
+        columns:
+          - name: MastrNummer
+            description: ''
+          - name: Personenart
+            description: ''
+          - name: Marktfunktion
+            description: ''
+          - name: RegistergerichtAusland
+            description: ''
+          - name: Registernummer
+            description: ''
+          - name: DatumLetzeAktualisierung
+            description: ''
+          - name: Firmenname
+            description: ''
+          - name: Rechtsform
+            description: ''
+          - name: Land
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: Hausnummer_nv
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Nuts2
+            description: ''
+          - name: Email
+            description: ''
+          - name: Telefon
+            description: ''
+          - name: Fax_nv
+            description: ''
+          - name: Webseite_nv
+            description: ''
+          - name: Taetigkeitsbeginn
+            description: ''
+          - name: AcerCode_nv
+            description: ''
+          - name: Umsatzsteueridentifikationsnummer_nv
+            description: ''
+          - name: BundesnetzagenturBetriebsnummer
+            description: ''
+          - name: BundesnetzagenturBetriebsnummer_nv
+            description: ''
+          - name: HausnummerAnZustelladresse_nv
+            description: ''
+          - name: Kmu
+            description: ''
+          - name: RegistrierungsdatumMarktakteur
+            description: ''
+          - name: Fax
+            description: ''
+          - name: HauptwirtdschaftszweigAbteilung
+            description: ''
+          - name: HauptwirtdschaftszweigGruppe
+            description: ''
+          - name: HauptwirtdschaftszweigAbschnitt
+            description: ''
+          - name: Webseite
+            description: ''
+          - name: Umsatzsteueridentifikationsnummer
+            description: ''
+          - name: Registergericht
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: LandAnZustelladresse
+            description: ''
+          - name: PostleitzahlAnZustelladresse
+            description: ''
+          - name: OrtAnZustelladresse
+            description: ''
+          - name: StrasseAnZustelladresse
+            description: ''
+          - name: HausnummerAnZustelladresse
+            description: ''
+          - name: RegisternummerAusland
+            description: ''
+          - name: SonstigeRechtsform
+            description: ''
+          - name: AcerCode
+            description: ''
+          - name: AdresszusatzAnZustelladresse
+            description: ''
+          - name: Taetigkeitsende
+            description: ''
+          - name: Region
+            description: ''
+          - name: Taetigkeitsende_nv
+            description: ''
+          - name: Marktrollen
+            description: ''
+          - name: Gasgrosshaendler
+            description: ''
+          - name: BelieferungVonLetztverbrauchernGas
+            description: ''
+          - name: BelieferungHaushaltskundenGas
+            description: ''
+          - name: Netz
+            description: ''
+          - name: Direktvermarktungsunternehmen
+            description: ''
+          - name: BelieferungVonLetztverbrauchernStrom
+            description: ''
+          - name: BelieferungHaushaltskundenStrom
+            description: ''
+          - name: Stromgrosshaendler
+            description: ''
+          - name: MarktakteurVorname
+            description: ''
+          - name: MarktakteurNachname
+            description: ''
+          - name: DatenQuelle
+            description: ''
+          - name: DatumDownload
+            description: ''
+  - name: raw
+    schema: raw
+    tables:
+      - name: charging_points
+        columns:
+          - name: Betreiber
+            description: ''
+          - name: Strasse
+            description: ''
+          - name: Hausnummer
+            description: ''
+          - name: Adresszusatz
+            description: ''
+          - name: Postleitzahl
+            description: ''
+          - name: Ort
+            description: ''
+          - name: Bundesland
+            description: ''
+          - name: Kreis/kreisfreie Stadt
+            description: ''
+          - name: Breitengrad
+            description: ''
+          - name: L�ngengrad
+            description: ''
+          - name: Inbetriebnahmedatum
+            description: ''
+          - name: Anschlussleistung
+            description: ''
+          - name: Art der Ladeeinrichung
+            description: ''
+          - name: Anzahl Ladepunkte
+            description: ''
+          - name: Steckertypen1
+            description: ''
+          - name: P1 [kW]
+            description: ''
+          - name: Public Key1
+            description: ''
+          - name: Steckertypen2
+            description: ''
+          - name: P2 [kW]
+            description: ''
+          - name: Public Key2
+            description: ''
+          - name: Steckertypen3
+            description: ''
+          - name: P3 [kW]
+            description: ''
+          - name: Public Key3
+            description: ''
+          - name: Steckertypen4
+            description: ''
+          - name: P4 [kW]
+            description: ''
+          - name: Public Key4
+            description: ''
+      - name: zensus
+      - name: districts
+      - name: municipalities

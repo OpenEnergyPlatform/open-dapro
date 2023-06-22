@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: int_districts
+    description: ''
+    columns:
+      - name: district_id
+        description: ''
+      - name: district
+        description: ''
+      - name: nuts
+        description: ''
+      - name: legal_effective_date
+        description: ''
+      - name: geometry_array
+        description: ''
+      - name: number_inhabitants
+        description: ''
+      - name: center
+        description: ''

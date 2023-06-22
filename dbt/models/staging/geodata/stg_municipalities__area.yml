@@ -1,0 +1,15 @@
+version: 2
+models:
+- name: stg_municipalities__area
+  description: ''
+  columns:
+  - name: municipality_id
+    description: ''
+  - name: municipality
+    description: ''
+  - name: nuts
+    description: ''
+  - name: legal_effective_date
+    description: ''
+  - name: geometry_array
+    description: ''

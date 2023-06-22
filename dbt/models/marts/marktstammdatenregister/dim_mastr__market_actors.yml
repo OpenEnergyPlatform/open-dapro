@@ -1,0 +1,41 @@
+version: 2
+models:
+  - name: dim_mastr__market_actors
+    description: ''
+    columns:
+      - name: mastr_id
+        description: ''
+      - name: actor_type
+        description: ''
+      - name: market_function
+        description: ''
+      - name: company_name
+        description: ''
+      - name: legal_status
+        description: ''
+      - name: country
+        description: ''
+      - name: street
+        description: ''
+      - name: street_number
+        description: ''
+      - name: zip_code
+        description: ''
+      - name: municipality
+        description: ''
+      - name: state
+        description: ''
+      - name: start_of_activities
+        description: ''
+      - name: website
+        description: ''
+      - name: download_date
+        description: ''
+      - name: unit_owner_mastr_id
+        description: ''
+      - name: biomass_power_aggregated
+        description: ''
+      - name: solar_power_aggregated
+        description: ''
+      - name: wind_power_aggregated
+        description: ''

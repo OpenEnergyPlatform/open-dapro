@@ -1,0 +1,35 @@
+version: 2
+models:
+  - name: dim_mastr__temporal_expansion_municipalities
+    description: ''
+    columns:
+      - name: municipality_id
+        description: ''
+      - name: municipality
+        description: ''
+      - name: installation_year
+        description: ''
+      - name: power_biomass_per_year
+        description: ''
+      - name: power_biomass_cummulative
+        description: ''
+      - name: download_date_biomass
+        description: ''
+      - name: power_solar_per_year
+        description: ''
+      - name: power_solar_cummulative
+        description: ''
+      - name: download_date_solar
+        description: ''
+      - name: power_wind_per_year
+        description: ''
+      - name: power_wind_cummulative
+        description: ''
+      - name: download_date_wind
+        description: ''
+      - name: capacity_storage_per_year
+        description: ''
+      - name: capacity_storage_cummulative
+        description: ''
+      - name: download_date_storage
+        description: ''

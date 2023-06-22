@@ -15,5 +15,5 @@ setup(
         "openpyxl",
         "GeoAlchemy2",
     ],
-    extras_require={"dev": ["dagit", "pytest", "black"]},
+    extras_require={"dev": ["dagit", "pytest", "black", "dbt-osmosis", "sqlfluff", "pre-commit"]},
 )

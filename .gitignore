@@ -1,3 +1,8 @@
+# dbt
+target/
+dbt_packages/
+logs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -55,6 +60,7 @@ coverage.xml
 local_settings.py
 
 # Flask stuff:
+instance/
 .webassets-cache
 
 # Scrapy stuff:
@@ -173,3 +179,11 @@ tmp*/
 
 # temp python files
 tmp*.py
+
+# vscode
+.vscode
+
+
+# own additions
+.idea/
+*.ipynb*

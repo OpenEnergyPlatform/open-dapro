@@ -1,0 +1,21 @@
+version: 2
+models:
+  - name: stg_charging_points
+    columns:
+      - name: zip_code
+        description: ''
+      - name: municipality
+        description: ''
+      - name: street
+        description: ''
+      - name: street_number
+        description: ''
+      - name: adress_addition
+        description: ''
+      - name: charging_equipment
+        description: ''
+      - name: amount_charging_points
+        description: ''
+      - name: connectors_and_power
+        description: ''
+sources: []

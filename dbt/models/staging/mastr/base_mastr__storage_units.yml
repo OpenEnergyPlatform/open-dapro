@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: base_mastr__storage_units
+    description: ''
+    columns:
+      - name: mastr_id_storage_unit
+        description: ''
+      - name: linked_unit_id
+        description: ''
+      - name: storage_capacity
+        description: ''
+      - name: download_date
+        description: ''

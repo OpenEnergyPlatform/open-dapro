@@ -1,0 +1,15 @@
+version: 2
+models:
+- name: stg_districts__area
+  description: ''
+  columns:
+  - name: district_id
+    description: ''
+  - name: district
+    description: ''
+  - name: nuts
+    description: ''
+  - name: legal_effective_date
+    description: ''
+  - name: geometry_array
+    description: ''
