@@ -18,4 +18,6 @@ models:
         description: ''
       - name: connectors_and_power
         description: ''
+      - name: geo_point
+        description: ''
 sources: []
