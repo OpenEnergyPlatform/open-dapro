@@ -86,4 +86,10 @@ pre-commit install
 
 This will install the hooks in your local repository. They will be executed before every commit and check for linting errors using the [sqlfluff](https://docs.sqlfluff.com/en/stable/) and [black](https://black.readthedocs.io/en/stable/) packages.
 
- 
+### dbt osmosis
+You can use `dbt-osmosis` for creating, updating, and deleting dbt property files.
+This can be done using the following command:
+
+```
+dbt-osmosis yaml refactor .\models\marts\
+```
