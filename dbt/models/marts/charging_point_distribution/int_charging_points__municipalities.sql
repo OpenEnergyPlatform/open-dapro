@@ -15,6 +15,7 @@ final as (
         sum(amount_charging_points) as amount_charging_points
     from municipalities_area left join charging_points
         on st_contains(geometry_array, geo_point)
+    where amount_charging_points is not null
     group by municipality_id
 )
 
