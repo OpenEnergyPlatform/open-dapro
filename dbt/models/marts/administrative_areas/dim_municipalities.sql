@@ -22,6 +22,10 @@ municipalities as (
     from {{ ref('int_municipalities') }}
 ),
 
+charging_points_per_municipality as (
+    select * from {{ ref('int_charging_points__municipalities') }}
+),
+
 mastr_aggregated as (
     select
         municipality_id,
@@ -37,13 +41,27 @@ mastr_aggregated as (
     group by municipality_id
 ),
 
-final as (
+join_municipalities as (
     select
         municipalities.municipality_id,
-        municipalities.municipality,
-        municipalities.number_inhabitants,
-        municipalities.geometry_array,
-        municipalities.center,
+        municipality,
+        number_inhabitants,
+        amount_charging_points,
+        geometry_array,
+        center
+    from municipalities
+    left join charging_points_per_municipality
+        on municipalities.municipality_id = charging_points_per_municipality.municipality_id
+),
+
+final as (
+    select
+        join_municipalities.municipality_id,
+        join_municipalities.municipality,
+        join_municipalities.number_inhabitants,
+        join_municipalities.amount_charging_points,
+        join_municipalities.geometry_array,
+        join_municipalities.center,
         mastr_aggregated.download_date_biomass,
         mastr_aggregated.download_date_solar,
         mastr_aggregated.download_date_wind,
@@ -52,10 +70,10 @@ final as (
         round(mastr_aggregated.power_solar) as power_solar,
         round(mastr_aggregated.power_wind) as power_wind,
         round(mastr_aggregated.capacity_storage) as capacity_storage
-    from municipalities
+    from join_municipalities
     left join
         mastr_aggregated
-        on municipalities.municipality_id = mastr_aggregated.municipality_id
+        on join_municipalities.municipality_id = mastr_aggregated.municipality_id
 )
 
 select * from final
