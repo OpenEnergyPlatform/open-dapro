@@ -78,12 +78,38 @@ def create_schemas(schema_names: list, engine: sqlalchemy.engine.Engine) -> None
         print(f"Schema {schema_name} was created.")
 
 
+def initialize_development_environment():
+    initialize_database()
+    initialize_dagster_home()
+    install_dbt_packages()
+
+
+def install_dbt_packages():
+    current_dir = os.getcwd()
+    dbt_dir = os.path.join(current_dir, "dbt")
+    subprocess.run(["dbt", "deps"], cwd=dbt_dir)
+    print("DBT packages were installed.")
+
+
+def initialize_dagster_home():
+    try:
+        DAGSTER_HOME = os.environ["DAGSTER_HOME"]
+    except KeyError:
+        load_dotenv()
+        DAGSTER_HOME = os.environ["DAGSTER_HOME"]
+    if not os.path.exists(DAGSTER_HOME):
+        os.makedirs(DAGSTER_HOME)
+        print("Dagster home was created.")
+
+
 def initialize_database():
     engine = get_engine()
     setup_docker()
     if test_connection(engine):
         create_schemas(["raw"], engine)
+        print("Database was initialized successfully.")
+        return None
 
 
 if __name__ == "__main__":
-    initialize_database()
+    initialize_development_environment()

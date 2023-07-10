@@ -1,16 +1,137 @@
-version: '3'
+version: "3.7"
+name: dagster-docker
+
 services:
-  energy_database:
-    image: postgis/postgis:15-3.3
-    container_name: energy_database
+  # This service runs the postgres DB used by dagster for run storage, schedule storage,
+  # and event log storage.
+  docker_postgresql:
+    image: postgres:13
+    container_name: docker_postgresql
     ports:
-      - '5512:5432'
+      - '5433:5432' #host:container
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres_db"
+    volumes:
+      - dagsterPostgres:/var/lib/postgresql/data
+    networks:
+      - docker_network
+
+  # This service runs the gRPC server that loads your user code, in both dagit
+  # and dagster-daemon. By setting DAGSTER_CURRENT_IMAGE to its own image, we tell the
+  # run launcher to use this same image when launching runs in a new container as well.
+  # Multiple containers like this can be deployed separately - each just needs to run on
+  # its own port, and have its own entry in the workspace.yaml file that's loaded by dagit.
+  docker_user_code:
+    build:
+      context: .
+      dockerfile: ./docker/user_code/Dockerfile
+    container_name: docker_user_code
+    image: docker_user_code_image
+    restart: always
+    environment:
+      DAGSTER_POSTGRES_USER: "postgres"
+      DAGSTER_POSTGRES_PASSWORD: "postgres"
+      DAGSTER_POSTGRES_DB: "postgres_db"
+      DAGSTER_CURRENT_IMAGE: "docker_user_code_image"
+      pwd: postgres
+      uid:  postgres
+      server: dagster_energy_database
+      db: energy_database
+      port: 5432
+      schema: raw
+      MASTR_DOWNLOAD_DATE: today
+      DBT_PROFILE_FOLDER: prod
+    networks:
+      - docker_network
+    depends_on:
+      - docker_postgresql
+
+  # This service runs dagit, which loads your user code from the user code container.
+  # Since our instance uses the QueuedRunCoordinator, any runs submitted from dagit will be put on
+  # a queue and later dequeued and launched by dagster-daemon.
+  docker_dagit:
+    build:
+      context: .
+      dockerfile: ./docker/dagster/Dockerfile
+    entrypoint:
+      - dagit
+      - -h
+      - "0.0.0.0"
+      - -p
+      - "3000"
+      - -w
+      - workspace.yaml
+    container_name: docker_dagit
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    environment:
+      DAGSTER_POSTGRES_USER: "postgres"
+      DAGSTER_POSTGRES_PASSWORD: "postgres"
+      DAGSTER_POSTGRES_DB: "postgres_db"
+    volumes: # Make docker client accessible so we can terminate containers from dagit
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/io_manager_storage:/tmp/io_manager_storage
+    networks:
+      - docker_network
+    depends_on:
+      - docker_postgresql
+      - docker_user_code
+
+  # This service runs the dagster-daemon process, which is responsible for taking runs
+  # off of the queue and launching them, as well as creating runs from schedules or sensors.
+  docker_daemon:
+    build:
+      context: .
+      dockerfile: ./docker/dagster/Dockerfile
+    entrypoint:
+      - dagster-daemon
+      - run
+    container_name: docker_daemon
+    restart: on-failure
+    environment:
+      DAGSTER_POSTGRES_USER: "postgres"
+      DAGSTER_POSTGRES_PASSWORD: "postgres"
+      DAGSTER_POSTGRES_DB: "postgres_db"
+      #pwd: ${pwd}
+      #uid:  ${uid}
+      #server: ${server}
+      #db: ${db}
+      #port: ${port}
+      #schema: ${schema}
+      #MASTR_DOWNLOAD_DATE: ${MASTR_DOWNLOAD_DATE}
+    volumes: # Make docker client accessible so we can launch containers using host docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/io_manager_storage:/tmp/io_manager_storage
+    networks:
+      - docker_network
+    depends_on:
+      - docker_postgresql
+      - docker_user_code
+
+  dagster_energy_database:
+    image: postgis/postgis:15-3.3
+    container_name: dagster_energy_database
+    ports:
+      - '5510:5432' #host:container
     environment:
       POSTGRES_DB: energy_database
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
       - energyDatabaseVolume:/var/lib/postgresql/data
+      - ./docker/init_energy_database.sql:/docker-entrypoint-initdb.d/create_schema.sql
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    driver: bridge
+    name: docker_network
 
 volumes:
+  dagsterPostgres:
   energyDatabaseVolume:

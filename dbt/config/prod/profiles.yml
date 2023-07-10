@@ -1,0 +1,15 @@
+energy_dbt:
+  target: prod
+  outputs:
+    prod:
+      type: postgres
+      host: dagster_energy_database
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: energy_database
+      schema: data
+      threads: 10
+      keepalives_idle: 0 # default 0, indicating the system default. See below
+      connect_timeout: 10 # default 10 seconds
+      retries: 1  # default 1 retry on error/timeout when opening connections

@@ -1,0 +1,8 @@
+.git
+docs/
+.env
+.gitignore
+.env.template
+.pre-commit-config.yaml
+README.md
+*.egg-info/

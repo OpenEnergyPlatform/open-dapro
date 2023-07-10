@@ -32,7 +32,6 @@ export DAGSTER_HOME = ~/.dagster/dagster_home
 export MASTR_DOWNLOAD_DATE = today
 ```
 
-
 4. To initialize the database and to create the docker container, run:
 
 ```bash
@@ -92,4 +91,11 @@ This can be done using the following command:
 
 ```
 dbt-osmosis yaml refactor .\models\marts\
+```
+
+## Deployment
+To run the pipelines in production, you can use the following command from the root directory of the project:
+
+```bash
+docker-compose up --build
 ```
