@@ -6,7 +6,7 @@ from energy_dagster import assets
 from energy_dagster.assets import DBT_PROFILES_PATH, DBT_PROJECT_PATH
 import os
 
-from energy_dagster.jobs import mastr_schedule
+from energy_dagster.jobs import mastr_schedule, raw_data_schedule
 
 BASE_DIR = os.path.join(os.path.expanduser("~"), ".dagster", "dagster_energy_files")
 
@@ -42,6 +42,6 @@ resources = {
 
 defs = Definitions(
     assets=load_assets_from_modules([assets]),
-    schedules=[mastr_schedule],
+    schedules=[mastr_schedule, raw_data_schedule],
     resources=resources,
 )
