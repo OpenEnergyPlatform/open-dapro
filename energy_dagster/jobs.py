@@ -12,5 +12,5 @@ raw_data_asset_job = define_asset_job(
 mastr_schedule = ScheduleDefinition(job=mastr_asset_job, cron_schedule="0 12 * * 0")
 # cron_schedule="0 1 11 * *" means that the job will run at the 11th of every month at 1:00
 raw_data_schedule = ScheduleDefinition(
-    job=raw_data_asset_job, cron_schedule="0 1 11 * *"
+    job=raw_data_asset_job, cron_schedule="0 11 11 * *"
 )
