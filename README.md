@@ -99,3 +99,9 @@ To run the pipelines in production, you can use the following command from the r
 ```bash
 docker-compose up --build
 ```
+
+To start the schedulers, enter the `docker_dagit` container and run the following command:
+
+```bash
+dagster schedule start --start-all
+```
