@@ -16,6 +16,8 @@ WORKDIR /opt/dagster/app
 
 RUN pip install .
 
+RUN cd dbt && dbt deps
+
 # Run dagster gRPC server on port 4000
 
 EXPOSE 4000
