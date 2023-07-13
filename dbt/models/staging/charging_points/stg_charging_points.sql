@@ -24,7 +24,7 @@ refactored as (
             CAST(
                 REPLACE(
                     REGEXP_REPLACE(
-                        REPLACE(TRIM("Längengrad"), E'\u00A0', ''), '[[:space:]]', '', 'g'
+                        REPLACE(TRIM(CAST("Längengrad" as char)), E'\u00A0', ''), '[[:space:]]', '', 'g'
                     ),
                     ',',
                     '.'
@@ -33,7 +33,7 @@ refactored as (
             CAST(
                 REPLACE(
                     REGEXP_REPLACE(
-                        REPLACE(TRIM("Breitengrad"), E'\u00A0', ''), '[[:space:]]', '', 'g'
+                        REPLACE(TRIM(CAST("Breitengrad" as char)), E'\u00A0', ''), '[[:space:]]', '', 'g'
                     ),
                     ',',
                     '.'
