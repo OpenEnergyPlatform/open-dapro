@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
+import os
 
 from dagster import (
     IOManager,
@@ -8,7 +9,11 @@ from dagster import (
     OutputContext,
     StringSource,
     io_manager,
+    MetadataValue,
 )
+
+# from ydata_profiling import ProfileReport
+
 
 # Code from https://github.com/hnawaz007/pythondataanalysis/blob/48df26b18a16aeeb8b25bcd0bdd736adb1f7f49f/dagster-project/etl/etl/io/db_io_manager.py
 
@@ -45,7 +50,23 @@ class PostgresDataframeIOManager(IOManager):
 
         # Recording metadata from an I/O manager:
         # https://docs.dagster.io/concepts/io-management/io-managers#recording-metadata-from-an-io-manager
-        context.add_output_metadata({"db": self.db, "table_name": table_name})
+        # profile = ProfileReport(obj, title=table_name)
+        # DAGSTER_HOME = os.path.normpath(os.getenv("DAGSTER_HOME"))
+        # profile_path = os.path.expanduser(os.path.join(DAGSTER_HOME, "profiles", f"{table_name}.html"))
+        # if not os.path.exists(os.path.dirname(profile_path)):
+        #    os.makedirs(os.path.dirname(profile_path))
+        # profile.to_file(profile_path)
+        # print(profile_path)
+
+        context.add_output_metadata(
+            {
+                "db": self.db,
+                "table_name": table_name,
+                "descriptive_statistics": MetadataValue.md(
+                    obj.describe(include="all").to_markdown()
+                ),
+            }
+        )
 
     def load_input(self, context: InputContext):
         # upstream_output.asset_key is the asset key given to the Out that we're loading for
