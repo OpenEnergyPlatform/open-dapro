@@ -17,7 +17,7 @@ COPY .  /opt/dagster/app
 
 WORKDIR /opt/dagster/app
 
-RUN conda install -c conda-forge fiona
+RUN conda install -c conda-forge geopandas
 RUN pip install .
 
 RUN cd dbt && dbt deps
