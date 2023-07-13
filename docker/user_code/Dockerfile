@@ -1,7 +1,10 @@
-FROM python:3.9-slim
+#FROM python:3.9-slim
+FROM continuumio/miniconda3
 
 # Checkout and install dagster libraries needed to run the gRPC server
 # exposing your repository to dagit and dagster-daemon, and to load the DagsterInstance
+
+RUN pip install --upgrade pip
 
 RUN pip install \
     dagster \
@@ -14,6 +17,7 @@ COPY .  /opt/dagster/app
 
 WORKDIR /opt/dagster/app
 
+RUN conda install -c conda-forge fiona
 RUN pip install .
 
 RUN cd dbt && dbt deps
