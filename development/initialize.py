@@ -1,12 +1,13 @@
 import os
 import subprocess
 import time
+
 import sqlalchemy
-from sqlalchemy import exc, create_engine, DDL
 from dotenv import load_dotenv
+from sqlalchemy import DDL, create_engine, exc
 
 
-def get_engine():
+def get_engine() -> sqlalchemy.engine.Engine:
     try:
         host = os.environ["server"]
     except KeyError:
@@ -58,7 +59,7 @@ def test_connection(engine: sqlalchemy.engine.Engine) -> bool:
                 "Connection to database could not be established."
                 f" Retries {counter_connection_test}/{number_total_retries}"
             )
-        return False
+    return False
 
 
 def create_schemas(schema_names: list, engine: sqlalchemy.engine.Engine) -> None:
@@ -78,37 +79,39 @@ def create_schemas(schema_names: list, engine: sqlalchemy.engine.Engine) -> None
         print(f"Schema {schema_name} was created.")
 
 
-def initialize_development_environment():
+def initialize_development_environment() -> None:
     initialize_database()
     initialize_dagster_home()
     install_dbt_packages()
 
 
-def install_dbt_packages():
+def install_dbt_packages() -> None:
     current_dir = os.getcwd()
     dbt_dir = os.path.join(current_dir, "dbt")
     subprocess.run(["dbt", "deps"], cwd=dbt_dir)
     print("DBT packages were installed.")
 
 
-def initialize_dagster_home():
+def initialize_dagster_home() -> None:
     try:
         DAGSTER_HOME = os.environ["DAGSTER_HOME"]
     except KeyError:
         load_dotenv()
         DAGSTER_HOME = os.environ["DAGSTER_HOME"]
-    if not os.path.exists(DAGSTER_HOME):
-        os.makedirs(DAGSTER_HOME)
-        print("Dagster home was created.")
+    dagster_home_abspath = os.path.abspath(os.path.expanduser(DAGSTER_HOME))
+    if not os.path.exists(dagster_home_abspath):
+        os.makedirs(dagster_home_abspath)
+        print(f"Dagster home was created at {dagster_home_abspath}")
+    else:
+        print(f"Dagster home already exists at {dagster_home_abspath}")
 
 
-def initialize_database():
+def initialize_database() -> None:
     engine = get_engine()
     setup_docker()
     if test_connection(engine):
         create_schemas(["raw"], engine)
         print("Database was initialized successfully.")
-        return None
 
 
 if __name__ == "__main__":

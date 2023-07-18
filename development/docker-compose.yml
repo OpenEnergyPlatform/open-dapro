@@ -1,0 +1,19 @@
+version: "3.7"
+name: dagster-dev
+
+services:
+  dagster_dev_energy_database:
+      image: postgis/postgis:15-3.3
+      container_name: dagster_dev_energy_database
+      ports:
+        - '5511:5432' #host:container
+      environment:
+        POSTGRES_DB: energy_database
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      volumes:
+        - energyDatabaseVolumeDev:/var/lib/postgresql/data
+        - ../docker/init_energy_database.sql:/docker-entrypoint-initdb.d/create_schema.sql
+
+volumes:
+  energyDatabaseVolumeDev:
