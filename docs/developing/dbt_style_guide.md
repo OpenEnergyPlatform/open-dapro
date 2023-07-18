@@ -1,5 +1,5 @@
 # dbt Style Guide
-This style guide is taken from [here](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md).
+This style guide is a shortened version of the [dbt-labs style guide](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md).
 
 
 ## Model Organization  
@@ -22,13 +22,14 @@ See [Model Layers](#model-layers) for more information.
 - Models not within the `staging` folder should select from [refs](https://docs.getdbt.com/reference/dbt-jinja-functions/ref).
 - The following are the DAG stages that we tend to utilize:
 
-| dag_stage | Typically found in | description                                                        |
-|-----------|--------------------|--------------------------------------------------------------------|
-| seed_     | /seeds             | <li> Indicates a data set created from `dbt seed`. |
-| stg_      | /models/staging    | <li> Indicates a data set that is being cleaned and standardized. </li><li> In absence of a base_ layer, it representthe 1:1 relationship between the source and first layer of models. li> |                                                                                                           |
-| int_      | /models/marts      | <li> Indicates a logical step towards creating a final data set. </li><li>Typically used for:</li><ul><li>Breaking ua very large fct_ or dim_ model into smaller pieces to reduce complexity</li><li>Creating a reusable data set to reference in multiple downstream fctand dim_ models</li></ul> |
-| dim_      | /models/marts      | <li> Flags data which is used to describe an entity. </li><li> Indicates a final data which is robust, versatile, anready for consumption. </li> |
-| base_     | /models/staging    | <li> Indicates cleaning and standardization on a data set before joining to other data sets in `stg_` models.<li> Typically used when multiple sources are rarely used independently. <br/><br/> <strong><em>Example</strong></em>: <br>Location data in our org is seldom used partially, so we want to create one cleaned data set which puts it all together. <br/><br/> <em>Step 1</em>: Models to clean and standardize each data set:<br/><ul><li>base_location__addresses.sql</li><li>base_location__countries.sql</li><li>base_location__states.sql</li></ul><br/><em>Step 2</em>: A model to join all location data as one entity for use in downstream modeling:<ul><li>stg_location__locations.sql</li></ul> |
+    | dag_stage | Typically found in | description                                                        |
+    |-----------|--------------------|--------------------------------------------------------------------|
+    | seed_     | /seeds             | <li> Indicates a data set created from `dbt seed`. |
+    | stg_      | /models/staging    | <li> Indicates a data set that is being cleaned and standardized. </li><li> In absence of a base_ layer, it representthe 1:1 relationship between the source and first layer of models. li> |                                                                                                           |
+    | int_      | /models/marts      | <li> Indicates a logical step towards creating a final data set. </li><li>Typically used for:</li><ul><li>Breaking ua very large fct_ or dim_ model into smaller pieces to reduce complexity</li><li>Creating a reusable data set to reference in multiple downstream fctand dim_ models</li></ul> |
+    | dim_      | /models/marts      | <li> Flags data which is used to describe an entity. </li><li> Indicates a final data which is robust, versatile, anready for consumption. </li> |
+    | base_     | /models/staging    | <li> Indicates cleaning and standardization on a data set before joining to other data sets in `stg_` models.<li> Typically used when multiple sources are rarely used independently. <br/><br/> <strong><em>Example</strong></em>: <br>Location data in our org is seldom used partially, so we want to create one cleaned data set which puts it all together. <br/><br/> <em>Step 1</em>: Models to clean and standardize each data set:<br/><ul><li>base_location__addresses.sql</li><li>base_location__countries.sql</li><li>base_location__states.sql</li></ul><br/><em>Step 2</em>: A model to join all location data as one entity for use in downstream modeling:<ul><li>stg_location__locations.sql</li></ul> |
+
 ## Model File Naming and Coding
 
 - All objects should be plural.  
@@ -122,10 +123,11 @@ For more information about why we use so many CTEs, check out [this glossary ent
 - CTEs that are duplicated across models should be pulled out and created as their own models.
 
 - CTEs fall in to two main categories:
-  | Term    | Definition                                                                                                                                                             |
-  |---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | Import  | Used to bring data into a model. These are kept relatively simple and refrain from complex operations such as joins and column transformations.                        |
-  | Logical | Used to perform a logical step with the data that is brought into the model toward the end result. |
+
+    | Term    | Definition                                                                                                                                                             |
+    |---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Import  | Used to bring data into a model. These are kept relatively simple and refrain from complex operations such as joins and column transformations.                        |
+    | Logical | Used to perform a logical step with the data that is brought into the model toward the end result. |
 
 - All `{{ ref() }}` or `{{ source() }}` statements should be placed within import CTEs so that dependent model references are easily seen and located.
 
@@ -435,9 +437,9 @@ For more information about why we use so many CTEs, check out [this glossary ent
       | 4      | order_pending | 
 
       
-  {% enddocs %}
+    {% enddocs %}
 
-  {% docs statuses %} 
+    {% docs statuses %} 
 
       Statuses can be found in many of our raw data sets. The following lists
       statuses and their descriptions:
@@ -448,7 +450,7 @@ For more information about why we use so many CTEs, check out [this glossary ent
       | pending       | An order has been paid, but doesn't have a tracking number.                 |
       | order_pending | A customer has not yet paid at checkout, but has items in their cart. | 
 
-  {% enddocs %}
+    {% enddocs %}
 ```
 
 ## Jinja style guide

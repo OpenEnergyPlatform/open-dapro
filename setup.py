@@ -16,6 +16,15 @@ setup(
         "GeoAlchemy2",
     ],
     extras_require={
-        "dev": ["dagit", "pytest", "black", "dbt-osmosis", "sqlfluff", "pre-commit"]
+        "dev": [
+            "dagit",
+            "pytest",
+            "black",
+            "dbt-osmosis",
+            "sqlfluff",
+            "pre-commit",
+            "mkdocstrings[python]",
+            "mkdocs-material",
+        ]
     },
 )
