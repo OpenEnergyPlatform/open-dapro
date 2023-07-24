@@ -1,6 +1,6 @@
+import geopandas as gpd
 from dagster import asset
 
-import geopandas as gpd
 from energy_dagster.utils import utils
 
 
@@ -16,13 +16,23 @@ def load_geoboundaries(area: str) -> gpd.GeoDataFrame:
 
 @asset(io_manager_key="postgis_io", key_prefix="raw", group_name="raw_data")
 def districts() -> gpd.GeoDataFrame:
-    """Download district boundary data from url defined in constants.yaml"""
-    gdf = load_geoboundaries(area="geoboundaries_districts")
-    return gdf
+    """Download district boundary data from url defined in constants.yaml
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        GeoDataFrame of the districts and their boundaries.
+    """
+    return load_geoboundaries(area="geoboundaries_districts")
 
 
 @asset(io_manager_key="postgis_io", key_prefix="raw", group_name="raw_data")
 def municipalities() -> gpd.GeoDataFrame:
-    """Download municipality boundary data from url defined in constants.yaml"""
-    gdf = load_geoboundaries(area="geoboundaries_municipalities")
-    return gdf
+    """Download municpality boundary data from url defined in constants.yaml
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        GeoDataFrame of the municipalities and their boundaries.
+    """
+    return load_geoboundaries(area="geoboundaries_municipalities")
