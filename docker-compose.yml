@@ -6,6 +6,7 @@ services:
   # and event log storage.
   docker_postgresql:
     image: postgres:13
+    restart: always
     container_name: docker_postgresql
     ports:
       - '5433:5432' #host:container
@@ -64,6 +65,7 @@ services:
       - -w
       - workspace.yaml
     container_name: docker_dagit
+    restart: always
     expose:
       - "3000"
     ports:
@@ -115,6 +117,7 @@ services:
   dagster_energy_database:
     image: postgis/postgis:15-3.3
     container_name: dagster_energy_database
+    restart: always
     ports:
       - '5510:5432' #host:container
     environment:
