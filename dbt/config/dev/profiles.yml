@@ -6,7 +6,7 @@ energy_dbt:
       host: 127.0.0.1
       user: postgres
       password: postgres
-      port: 5512
+      port: 5511
       dbname: energy_database
       schema: data
       threads: 10

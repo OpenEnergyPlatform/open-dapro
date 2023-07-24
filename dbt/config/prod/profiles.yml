@@ -6,7 +6,7 @@ energy_dbt:
       host: dagster_energy_database
       user: postgres
       password: postgres
-      port: 5432
+      port: 5510
       dbname: energy_database
       schema: data
       threads: 10
