@@ -57,9 +57,9 @@ nav:
   - Getting started: index.md
   - Concepts:
     - Dagster and dbt: dagster_and_dbt.md
+    - User Interface: user_interface.md
   - Join Development:
     - Setup for Development: developing/setup_development.md 
-
     - dbt style guide: developing/dbt_style_guide.md
   
 
