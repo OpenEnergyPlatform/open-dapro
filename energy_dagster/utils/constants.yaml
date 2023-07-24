@@ -16,12 +16,10 @@ data_sources:
     filename: "Ladesaeulenregister.xlsx"
     save_directory: "ladesaeulenregister"
 
-  zensus:
-    url: "https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung.zip?__blob=publicationFile&v=2"
-    filename: "csv_Bevoelkerung.zip"
-    save_directory: "zensus"
-    csv_filename: "Zensus11_Datensatz_Bevoelkerung.csv"
-    extract_directory: "bevoelkerung"
+  lod2_bavaria:
+    url: "https://geodaten.bayern.de/odd/a/lod2/citygml/meta/metalink/09.meta4"
+    filename: "lod2_bayern.meta4"
+    save_directory: "lod2"
 
   osm_bayern:
     url: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"

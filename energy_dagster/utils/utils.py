@@ -87,9 +87,6 @@ def get_constants(data_source: str):
         "filename": filename,
         "zipfile_path": constants["data_sources"][data_source].get("zipfile_path"),
         "csv_filename": constants["data_sources"][data_source].get("csv_filename"),
-        "extract_directory": constants["data_sources"][data_source].get(
-            "extract_directory"
-        ),
     }
 
 
@@ -126,9 +123,6 @@ def download_from_constants(data_source: str):
         "filename": filename,
         "zipfile_path": constants["data_sources"][data_source].get("zipfile_path"),
         "csv_filename": constants["data_sources"][data_source].get("csv_filename"),
-        "extract_directory": constants["data_sources"][data_source].get(
-            "extract_directory"
-        ),
         "download_path": os.path.join(save_directory_path, filename),
     }
 
