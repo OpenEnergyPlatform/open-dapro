@@ -1,24 +1,20 @@
-import pandas as pd
-from sqlalchemy import create_engine
 import os
 
+import pandas as pd
 from dagster import (
-    IOManager,
     InitResourceContext,
     InputContext,
+    IOManager,
+    MetadataValue,
     OutputContext,
     StringSource,
     io_manager,
-    MetadataValue,
 )
-
-# from ydata_profiling import ProfileReport
-
+from sqlalchemy import create_engine
 
 # Code from https://github.com/hnawaz007/pythondataanalysis/blob/48df26b18a16aeeb8b25bcd0bdd736adb1f7f49f/dagster-project/etl/etl/io/db_io_manager.py
 
 
-# Have a look if a pre-implemented postgres IO manager appears in dastger. Then replace this manager here!
 class PostgresDataframeIOManager(IOManager):
     def __init__(
         self, uid: str, pwd: str, server: str, db: str, port: str, schema: str
@@ -48,16 +44,6 @@ class PostgresDataframeIOManager(IOManager):
             table_name, engine, schema=self.schema, if_exists="replace", index=False
         )
 
-        # Recording metadata from an I/O manager:
-        # https://docs.dagster.io/concepts/io-management/io-managers#recording-metadata-from-an-io-manager
-        # profile = ProfileReport(obj, title=table_name)
-        # DAGSTER_HOME = os.path.normpath(os.getenv("DAGSTER_HOME"))
-        # profile_path = os.path.expanduser(os.path.join(DAGSTER_HOME, "profiles", f"{table_name}.html"))
-        # if not os.path.exists(os.path.dirname(profile_path)):
-        #    os.makedirs(os.path.dirname(profile_path))
-        # profile.to_file(profile_path)
-        # print(profile_path)
-
         context.add_output_metadata(
             {
                 "db": self.db,
@@ -75,8 +61,7 @@ class PostgresDataframeIOManager(IOManager):
         engine = create_engine(
             f"postgresql://{self.uid}:{self.pwd}@{self.server}:{self.port}/{self.db}"
         )
-        df = pd.read_sql(f"SELECT * FROM {self.schema}.{table_name}", engine)
-        return df
+        return pd.read_sql(f"SELECT * FROM {self.schema}.{table_name}", engine)
 
 
 @io_manager(
