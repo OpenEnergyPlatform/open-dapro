@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: int_charging_points__municipalities
+    columns:
+      - name: municipality_id
+        description: 'The id of the municipality (Amtlicher Gemeindeschluessel).'
+      - name: amount_charging_points
+        description: 'Total number of charging points.'

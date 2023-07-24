@@ -4,16 +4,23 @@ models:
     description: ''
     columns:
       - name: district_id
-        description: ''
+        description: 'The id of the district (Amtlicher Gemeindeschluessel).'
+        tests:
+          - not_null
+          - unique
       - name: district
-        description: ''
+        description: The name of the district.
+        tests:
+          - not_null
       - name: nuts
-        description: ''
+        description: 'NUTS3 code of the district.'
+        tests:
+          - not_null
       - name: legal_effective_date
-        description: ''
+        description: 'Date of the latest changes (german: Wirksamkeit, WKS).'
       - name: geometry_array
-        description: ''
+        description: The boundaries of the district.
       - name: number_inhabitants
-        description: ''
+        description: Number of inhabitants in the municiapiliy, taken from the latest zensus.
       - name: center
-        description: ''
+        description: The center of the district, calculated using the Postgis ST_Centroid function.

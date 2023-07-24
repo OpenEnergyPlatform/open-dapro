@@ -1,41 +1,41 @@
 version: 2
 models:
   - name: dim_mastr__market_actors
-    description: ''
+    description: Information about every market actor of from the german core energy registry (Marktstammdatenregister).
     columns:
       - name: mastr_id
-        description: ''
+        description: ID of the market actor.
       - name: actor_type
         description: ''
       - name: market_function
-        description: ''
+        description: Market function of the actor.
       - name: company_name
-        description: ''
+        description: Name of the company (if the market actor is a company).
       - name: legal_status
-        description: ''
+        description: Legal status of the actor.
       - name: country
-        description: ''
+        description: Country, taken from the adress of the market actor.
       - name: street
-        description: ''
+        description: Street, taken from the adress of the market actor.
       - name: street_number
-        description: ''
+        description: Street number, taken from the adress of the market actor.
       - name: zip_code
-        description: ''
+        description: Zip Code, taken from the adress of the market actor.
       - name: municipality
-        description: ''
+        description: Municipality, taken from the adress of the market actor.
       - name: state
-        description: ''
+        description: State, taken from the adress of the market actor.
       - name: start_of_activities
         description: ''
       - name: website
-        description: ''
+        description: Website of the market actor.
       - name: download_date
-        description: ''
+        description: Download date of the market actor data.
       - name: unit_owner_mastr_id
         description: ''
       - name: biomass_power_aggregated
-        description: ''
+        description: Aggregated installed capacity that belongs to the market actor.
       - name: solar_power_aggregated
-        description: ''
+        description: Aggregated installed capacity that belongs to the market actor.
       - name: wind_power_aggregated
-        description: ''
+        description: Aggregated installed capacity that belongs to the market actor.

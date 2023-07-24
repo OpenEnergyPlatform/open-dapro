@@ -4,32 +4,37 @@ models:
     description: ''
     columns:
       - name: district_id
-        description: ''
+        description: The id of the district (Amtlicher Gemeindeschluessel).
+        tests:
+          - not_null
+          - unique
       - name: district
-        description: ''
+        description: The name of the district.
+        tests:
+          - not_null
       - name: installation_year
-        description: ''
+        description: Year of the installation.
       - name: power_biomass_per_year
-        description: ''
+        description: Newly installed capacity of the given technology and year within the district.
       - name: power_biomass_cummulative
-        description: ''
+        description: Sum of the installed capacity of the given technology within the district up to the given year.
       - name: download_date_biomass
-        description: ''
+        description: Download date of the biomass data.
       - name: power_solar_per_year
-        description: ''
+        description: Newly installed capacity of the given technology and year within the district.
       - name: power_solar_cummulative
-        description: ''
+        description: Sum of the installed capacity of the given technology within the district up to the given year.
       - name: download_date_solar
-        description: ''
+        description: Download date of the solar data.
       - name: power_wind_per_year
-        description: ''
+        description: Newly installed capacity of the given technology and year within the district.
       - name: power_wind_cummulative
-        description: ''
+        description: Sum of the installed capacity of the given technology within the district up to the given year.
       - name: download_date_wind
-        description: ''
+        description: Download date of the wind data.
       - name: capacity_storage_per_year
-        description: ''
+        description: Newly installed capacity of the given technology and year within the district.
       - name: capacity_storage_cummulative
-        description: ''
+        description: Sum of the installed capacity of the given technology within the district up to the given year.
       - name: download_date_storage
-        description: ''
+        description: Download date of the electricity storage data.

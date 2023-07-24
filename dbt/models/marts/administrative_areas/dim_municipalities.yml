@@ -13,7 +13,7 @@ models:
         tests:
           - not_null
       - name: number_inhabitants
-        description: ''
+        description: Number of inhabitants in the municiapiliy, taken from the latest zensus.
       - name: geometry_array
         description: The boundaries of the municipality.
         tests:

@@ -828,11 +828,11 @@ sources:
             description: ''
           - name: Breitengrad
             description: ''
-          - name: L�ngengrad
+          - name: Laengengrad
             description: ''
           - name: Inbetriebnahmedatum
             description: ''
-          - name: Anschlussleistung
+          - name: Nennleistung Ladeeinrichtung [kW]
             description: ''
           - name: Art der Ladeeinrichung
             description: ''

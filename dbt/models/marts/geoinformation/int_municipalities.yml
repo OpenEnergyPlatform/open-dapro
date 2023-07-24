@@ -4,16 +4,27 @@ models:
   description: ''
   columns:
   - name: municipality_id
-    description: ''
+    description: The id of the municipality (Amtlicher Gemeindeschluessel).
+    tests:
+      - not_null
+      - unique
   - name: municipality
-    description: ''
+    description: The name of the municipality.
+    tests:
+      - not_null
   - name: nuts
-    description: ''
+    description: NUTS3 code of the district that contains the municipality.
+    tests:
+      - not_null
   - name: legal_effective_date
-    description: ''
+    description: 'Date of the latest changes (german: Wirksamkeit, WKS).'
   - name: geometry_array
-    description: ''
+    description: The boundaries of the municipality.
+    tests:
+      - not_null
   - name: number_inhabitants
-    description: ''
+    description: Number of inhabitants in the municiapiliy, taken from the latest zensus.
   - name: center
-    description: ''
+    description: The center of the municipality, calculated using the Postgis ST_Centroid function.
+    tests:
+      - not_null
