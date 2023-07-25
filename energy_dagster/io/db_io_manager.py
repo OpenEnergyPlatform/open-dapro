@@ -1,5 +1,3 @@
-import os
-
 import pandas as pd
 from dagster import (
     InitResourceContext,
@@ -12,7 +10,9 @@ from dagster import (
 )
 from sqlalchemy import create_engine
 
-# Code from https://github.com/hnawaz007/pythondataanalysis/blob/48df26b18a16aeeb8b25bcd0bdd736adb1f7f49f/dagster-project/etl/etl/io/db_io_manager.py
+# Code from https://github.com/hnawaz007/pythondataanalysis/
+# blob/48df26b18a16aeeb8b25bcd0bdd736adb1f7f49f/dagster-project/
+# etl/etl/io/db_io_manager.py
 
 
 class PostgresDataframeIOManager(IOManager):
@@ -34,6 +34,7 @@ class PostgresDataframeIOManager(IOManager):
 
         table_name = context.asset_key[-1][-1]
         context.log.info(table_name)
+        context.log.info(context.asset_info)
 
         #
         engine = create_engine(
@@ -55,7 +56,7 @@ class PostgresDataframeIOManager(IOManager):
         )
 
     def load_input(self, context: InputContext):
-        # upstream_output.asset_key is the asset key given to the Out that we're loading for
+        # upstream_output.asset_key is the asset key given to the Out that we're loading
         table_name = context.upstream_output.asset_key[-1][-1]
         #
         engine = create_engine(

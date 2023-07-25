@@ -18,8 +18,7 @@ data_sources:
 
   lod2_bavaria:
     url: "https://geodaten.bayern.de/odd/a/lod2/citygml/meta/metalink/09.meta4"
-    filename: "lod2_bayern.meta4"
-    save_directory: "lod2"
+    save_directory: "lod2_bavaria"
 
   osm_bayern:
     url: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"

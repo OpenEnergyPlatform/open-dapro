@@ -14,6 +14,8 @@ setup(
         "numpy",
         "openpyxl",
         "GeoAlchemy2",
+        "docker",
+        "cjio",
     ],
     extras_require={
         "dev": [
