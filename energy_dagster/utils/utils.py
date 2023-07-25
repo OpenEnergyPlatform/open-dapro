@@ -61,7 +61,7 @@ def get_engine(schema="public"):
     )
 
 
-def get_constants(data_source: str):
+def get_constants(data_source: str) -> dict:
     """Downloads a file specified in constants.yaml
 
     Parameters
@@ -71,22 +71,20 @@ def get_constants(data_source: str):
 
     Returns
     -------
-    constants
-        constants from data_source
+    constants : dict
+        containing "url", "filename", "zipfile_path", and "csv_filename"
+
     """
     current_folder = Path(__file__).resolve().parent
 
     with open(current_folder / "constants.yaml", "r") as f:
         constants = yaml.safe_load(f)
 
-    url = constants["data_sources"][data_source]["url"]
-    filename = constants["data_sources"][data_source]["filename"]
-
     return {
-        "url": url,
-        "filename": filename,
+        "url": constants["data_sources"][data_source].get("url"),
+        "filename": constants["data_sources"][data_source].get("filename"),
         "zipfile_path": constants["data_sources"][data_source].get("zipfile_path"),
-        "csv_filename": constants["data_sources"][data_source].get("csv_filename"),
+        "save_directory": constants["data_sources"][data_source].get("save_directory"),
     }
 
 
@@ -122,12 +120,13 @@ def download_from_constants(data_source: str):
         "save_directory_path": save_directory_path,
         "filename": filename,
         "zipfile_path": constants["data_sources"][data_source].get("zipfile_path"),
-        "csv_filename": constants["data_sources"][data_source].get("csv_filename"),
         "download_path": os.path.join(save_directory_path, filename),
     }
 
 
-def download_from_url(url: str, save_directory: str, filename: str) -> None:
+def download_from_url(
+    url: str, save_directory: str, filename: str, overwrite: bool = False
+) -> None:
     """Downloads a file from a given url and saves it to the given path
 
     Parameters
@@ -144,8 +143,7 @@ def download_from_url(url: str, save_directory: str, filename: str) -> None:
 
     save_path = os.path.join(save_directory, filename)
 
-    if os.path.isfile(save_path):
+    if not overwrite and os.path.isfile(save_path):
         print(f"File {filename} already downloaded.")
         return None
-    with open(save_path, "wb") as f:
-        f.write(request.urlopen(url).read())
+    request.urlretrieve(url, save_path)
