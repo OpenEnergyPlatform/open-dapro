@@ -19,7 +19,10 @@ data_sources:
   lod2_bavaria:
     url: "https://geodaten.bayern.de/odd/a/lod2/citygml/meta/metalink/09.meta4"
     save_directory: "lod2_bavaria"
-
+    
+  zensus:
+    url: "https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung.zip?__blob=publicationFile&v=2"
+  
   osm_bayern:
     url: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"
     filename: "bayern-latest.osm.pbf"
