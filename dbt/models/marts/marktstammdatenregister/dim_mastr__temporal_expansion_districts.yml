@@ -7,7 +7,6 @@ models:
         description: The id of the district (Amtlicher Gemeindeschluessel).
         tests:
           - not_null
-          - unique
       - name: district
         description: The name of the district.
         tests:

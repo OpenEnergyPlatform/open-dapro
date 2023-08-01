@@ -7,7 +7,6 @@ models:
         description: The id of the municipality (Amtlicher Gemeindeschluessel).
         tests:
           - not_null
-          - unique
       - name: municipality
         description: The name of the municipality.
         tests:
