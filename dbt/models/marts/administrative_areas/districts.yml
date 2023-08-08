@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_districts
+  - name: districts
     description: Energy system and geoinformation of each german district.
     columns:
       - name: district_id

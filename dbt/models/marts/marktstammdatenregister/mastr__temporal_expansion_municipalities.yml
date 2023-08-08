@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_mastr__temporal_expansion_municipalities
+  - name: mastr__temporal_expansion_municipalities
     description: ''
     columns:
       - name: municipality_id

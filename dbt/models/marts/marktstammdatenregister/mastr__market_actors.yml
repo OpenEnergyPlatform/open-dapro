@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_mastr__market_actors
+  - name: mastr__market_actors
     description: Information about every market actor of from the german core energy registry (Marktstammdatenregister).
     columns:
       - name: mastr_id

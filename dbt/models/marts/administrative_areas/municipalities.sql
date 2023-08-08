@@ -9,7 +9,7 @@ with mastr_temporal_expansion as (
         download_date_solar,
         download_date_wind,
         download_date_storage
-    from {{ ref('dim_mastr__temporal_expansion_municipalities') }}
+    from {{ ref('mastr__temporal_expansion_municipalities') }}
 ),
 
 municipalities as (

@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_mastr__temporal_expansion_districts
+  - name: mastr__temporal_expansion_districts
     description: ''
     columns:
       - name: district_id

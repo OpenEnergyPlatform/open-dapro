@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_municipalities
+  - name: municipalities
     description: Energy system and geoinformation of each german municipality.
     columns:
       - name: municipality_id
