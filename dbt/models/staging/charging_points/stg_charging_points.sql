@@ -20,11 +20,13 @@ refactored as (
         || COALESCE(
             "Steckertypen1" || ' - ' || "P1 [kW]" || ' kW', '' -- noqa: RF05
         ) as connectors_and_power,
-        ST_TRANSFORM(ST_SETSRID(ST_MAKEPOINT(
+        ST_SETSRID(ST_MAKEPOINT(
             CAST(
                 REPLACE(
                     REGEXP_REPLACE(
-                        REPLACE(TRIM(CAST("Längengrad" as char)), E'\u00A0', ''), '[[:space:]]', '', 'g'
+                        REPLACE(
+                            TRIM(CAST("Längengrad" as char)), E'\u00A0', ''
+                        ), '[[:space:]]', '', 'g'
                     ),
                     ',',
                     '.'
@@ -33,13 +35,15 @@ refactored as (
             CAST(
                 REPLACE(
                     REGEXP_REPLACE(
-                        REPLACE(TRIM(CAST("Breitengrad" as char)), E'\u00A0', ''), '[[:space:]]', '', 'g'
+                        REPLACE(
+                            TRIM(CAST("Breitengrad" as char)), E'\u00A0', ''
+                        ), '[[:space:]]', '', 'g'
                     ),
                     ',',
                     '.'
                 ) as double precision
             )
-        ), 4326), 25832) as geo_point
+        ), 4326) as geo_point
 
     from source
 )
