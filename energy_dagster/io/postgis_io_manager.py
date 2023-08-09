@@ -1,14 +1,13 @@
 import geopandas as gpd
-from sqlalchemy import create_engine
-
 from dagster import (
-    IOManager,
     InitResourceContext,
     InputContext,
+    IOManager,
     OutputContext,
     StringSource,
     io_manager,
 )
+from sqlalchemy import create_engine
 
 # Code from https://github.com/hnawaz007/pythondataanalysis/blob/48df26b18a16aeeb8b25bcd0bdd736adb1f7f49f/dagster-project/etl/etl/io/db_io_manager.py
 
@@ -39,6 +38,9 @@ class PostgisGeoDataframeIOManager(IOManager):
             f"postgresql://{self.uid}:{self.pwd}@{self.server}:{self.port}/{self.db}"
         )
         #
+        obj.to_crs(
+            crs="EPSG:4326", inplace=True
+        )  # transform all coordinates to the OSM coordinate system
         obj.to_postgis(
             table_name, engine, schema=self.schema, if_exists="replace", index=False
         )
@@ -54,10 +56,10 @@ class PostgisGeoDataframeIOManager(IOManager):
         engine = create_engine(
             f"postgresql://{self.uid}:{self.pwd}@{self.server}:{self.port}/{self.db}"
         )
-        df = gpd.GeoDataFrame.from_postgis(
+
+        return gpd.GeoDataFrame.from_postgis(
             f"SELECT * FROM {self.schema}.{table_name}", engine
         )
-        return df
 
 
 @io_manager(
