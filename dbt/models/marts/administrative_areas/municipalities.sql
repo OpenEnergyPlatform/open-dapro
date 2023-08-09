@@ -44,24 +44,22 @@ mastr_aggregated as (
 join_municipalities as (
     select
         municipalities.municipality_id,
-        municipality,
-        number_inhabitants,
-        amount_charging_points,
-        geometry_array,
-        center
+        municipalities.municipality,
+        municipalities.number_inhabitants,
+        charging_points_per_municipality.amount_charging_points,
+        municipalities.geometry_array,
+        municipalities.center
     from municipalities
     left join charging_points_per_municipality
         on municipalities.municipality_id = charging_points_per_municipality.municipality_id
 ),
 
 final as (
-    select
+    select --noqa: ST06
         join_municipalities.municipality_id,
         join_municipalities.municipality,
         join_municipalities.number_inhabitants,
         join_municipalities.amount_charging_points,
-        join_municipalities.geometry_array,
-        join_municipalities.center,
         mastr_aggregated.download_date_biomass,
         mastr_aggregated.download_date_solar,
         mastr_aggregated.download_date_wind,
@@ -69,7 +67,9 @@ final as (
         round(mastr_aggregated.power_biomass) as power_biomass,
         round(mastr_aggregated.power_solar) as power_solar,
         round(mastr_aggregated.power_wind) as power_wind,
-        round(mastr_aggregated.capacity_storage) as capacity_storage
+        round(mastr_aggregated.capacity_storage) as capacity_storage,
+        join_municipalities.geometry_array,
+        join_municipalities.center
     from join_municipalities
     left join
         mastr_aggregated
