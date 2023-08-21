@@ -8,7 +8,12 @@ from dagster import asset
 from energy_dagster.utils import utils
 
 
-@asset(io_manager_key="db_io", key_prefix="raw", group_name="raw_data")
+@asset(
+    io_manager_key="db_io",
+    key_prefix="raw",
+    group_name="raw_data",
+    compute_kind="python",
+)
 def zensus() -> pd.DataFrame:
     """Download zensus data from the latest zensus (www.zensus2011.de).
     The link to the dataset can be obtained

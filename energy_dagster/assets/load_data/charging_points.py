@@ -6,7 +6,12 @@ from dagster import asset
 from energy_dagster.utils import utils
 
 
-@asset(io_manager_key="db_io", key_prefix="raw", group_name="raw_data")
+@asset(
+    io_manager_key="db_io",
+    key_prefix="raw",
+    group_name="raw_data",
+    compute_kind="python",
+)
 def charging_points() -> pd.DataFrame:
     """Download charging points data from Ladesaeulenregister offered by
     the german 'bundesnetzagentur'. The link to the dataset can be obtained

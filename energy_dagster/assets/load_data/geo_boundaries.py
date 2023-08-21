@@ -14,7 +14,12 @@ def load_geoboundaries(area: str) -> gpd.GeoDataFrame:
     return gpd.read_file(zipfile)
 
 
-@asset(io_manager_key="postgis_io", key_prefix="raw", group_name="raw_data")
+@asset(
+    io_manager_key="postgis_io",
+    key_prefix="raw",
+    group_name="raw_data",
+    compute_kind="python",
+)
 def districts() -> gpd.GeoDataFrame:
     """Download district boundary data from url defined in constants.yaml
 
@@ -26,7 +31,12 @@ def districts() -> gpd.GeoDataFrame:
     return load_geoboundaries(area="geoboundaries_districts")
 
 
-@asset(io_manager_key="postgis_io", key_prefix="raw", group_name="raw_data")
+@asset(
+    io_manager_key="postgis_io",
+    key_prefix="raw",
+    group_name="raw_data",
+    compute_kind="python",
+)
 def municipalities() -> gpd.GeoDataFrame:
     """Download municpality boundary data from url defined in constants.yaml
 

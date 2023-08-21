@@ -40,7 +40,7 @@ def download_from_meta4(constants_key: str, context) -> None:
             )
 
 
-@asset(key_prefix="raw", group_name="raw_data")
+@asset(key_prefix="raw", group_name="raw_data", compute_kind="python")
 def download_lod2_bavaria(context) -> None:
     """Downloads all citygml files for bavaria from the opendata
     portal.
@@ -49,7 +49,10 @@ def download_lod2_bavaria(context) -> None:
 
 
 @asset(
-    key_prefix="raw", group_name="raw_data", non_argument_deps={"download_lod2_bavaria"}
+    key_prefix="raw",
+    group_name="raw_data",
+    non_argument_deps={"download_lod2_bavaria"},
+    compute_kind="python",
 )
 def convert_citygml_to_cityjson(context) -> None:
     """Converts all citygml files in the data_directory to cityjson files
@@ -77,6 +80,7 @@ def convert_citygml_to_cityjson(context) -> None:
     key_prefix="raw",
     group_name="raw_data",
     non_argument_deps={"convert_citygml_to_cityjson"},
+    compute_kind="python",
 )
 def building_data_from_cityjson(context) -> pd.DataFrame:
     """Extracts building data from cityjson files and writes it to
