@@ -865,3 +865,10 @@ sources:
       - name: zensus
       - name: districts
       - name: municipalities
+      - name: osm_oberfranken
+      - name: osm_mittelfranken
+      - name: osm_unterfranken
+      - name: osm_oberbayern
+      - name: osm_niederbayern
+      - name: osm_oberpfalz
+      - name: osm_schwaben

@@ -29,36 +29,36 @@ data_sources:
     save_directory: "osm"
 
   osm_unterfranken:
-    url: "https://download.geofabrik.de/europe/germany/bayern/unterfranken-latest.osm.pbf"
-    filename: "unterfranken-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/unterfranken-latest-free.shp.zip"
+    filename: "unterfranken-latest.shp.zip"
     save_directory: "osm"
 
   osm_schwaben:
-    url: "https://download.geofabrik.de/europe/germany/bayern/schwaben-latest.osm.pbf"
-    filename: "schwaben-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/schwaben-latest-free.shp.zip"
+    filename: "schwaben-latest.shp.zip"
     save_directory: "osm"
 
   osm_oberpfalz:
-    url: "https://download.geofabrik.de/europe/germany/bayern/oberpfalz-latest.osm.pbf"
-    filename: "oberpfalz-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberpfalz-latest-free.shp.zip"
+    filename: "oberpfalz-latest.shp.zip"
     save_directory: "osm"
 
   osm_oberfranken:
-    url: "https://download.geofabrik.de/europe/germany/bayern/oberfranken-latest.osm.pbf"
-    filename: "oberfranken-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberfranken-latest-free.shp.zip"
+    filename: "oberfranken-latest.shp.zip"
     save_directory: "osm"
 
   osm_oberbayern:
-    url: "https://download.geofabrik.de/europe/germany/bayern/oberbayern-latest.osm.pbf"
-    filename: "oberbayern-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/oberbayern-latest-free.shp.zip"
+    filename: "oberbayern-latest.shp.zip"
     save_directory: "osm"
 
   osm_niederbayern:
-    url: "https://download.geofabrik.de/europe/germany/bayern/niederbayern-latest.osm.pbf"
-    filename: "niederbayern-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/niederbayern-latest-free.shp.zip"
+    filename: "niederbayern-latest.shp.zip"
     save_directory: "osm"
 
   osm_mittelfranken:
-    url: "https://download.geofabrik.de/europe/germany/bayern/mittelfranken-latest.osm.pbf"
-    filename: "mittelfranken-latest.osm.pbf"
+    url: "https://download.geofabrik.de/europe/germany/bayern/mittelfranken-latest-free.shp.zip"
+    filename: "mittelfranken-latest.shp.zip"
     save_directory: "osm"

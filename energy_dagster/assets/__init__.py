@@ -9,6 +9,7 @@ from energy_dagster.assets.load_data import (
     charging_points,
     geo_boundaries,
     mastr,
+    osm,
     zensus,
 )
 
@@ -25,7 +26,7 @@ except KeyError:
 DBT_PROJECT_PATH = file_relative_path(__file__, "../../dbt")
 
 all_assets = load_assets_from_modules(
-    [charging_points, zensus, mastr, geo_boundaries, buildings_lod2]
+    [charging_points, zensus, mastr, geo_boundaries, buildings_lod2, osm]
 )
 dbt_assets = load_assets_from_dbt_project(
     project_dir=DBT_PROJECT_PATH,
