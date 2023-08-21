@@ -2,50 +2,26 @@ with source as (
     select * from {{ source('raw', 'charging_points') }}
 ),
 
-refactored as (
+final as (
     select
         "Postleitzahl" as zip_code,
         "Ort" as municipality,
-        "Straße" as street, -- noqa: RF05
+        "Straße" as street,
         "Hausnummer" as street_number,
         "Adresszusatz" as adress_addition,
-        --"Bundesland" as Bundesland,
-        --"Betreiber" as Betreiber,
-        --"Anschlussleistung" as anschlussleistung,
-        "Art der Ladeeinrichung" as charging_equipment, -- noqa: RF05
-        "Anzahl Ladepunkte" as amount_charging_points, -- noqa: RF05
-        COALESCE("Steckertypen4" || ' - ' || "P4 [kW]" || ' kW | ', '') -- noqa: RF05
-        || COALESCE("Steckertypen3" || ' - ' || "P3 [kW]" || ' kW | ', '') -- noqa: RF05
-        || COALESCE("Steckertypen2" || ' - ' || "P2 [kW]" || ' kW | ', '') -- noqa: RF05
+        "Art der Ladeeinrichung" as charging_equipment,
+        "Anzahl Ladepunkte" as amount_charging_points,
+        COALESCE("Steckertypen4" || ' - ' || "P4 [kW]" || ' kW | ', '')
+        || COALESCE("Steckertypen3" || ' - ' || "P3 [kW]" || ' kW | ', '')
+        || COALESCE("Steckertypen2" || ' - ' || "P2 [kW]" || ' kW | ', '')
         || COALESCE(
-            "Steckertypen1" || ' - ' || "P1 [kW]" || ' kW', '' -- noqa: RF05
+            "Steckertypen1" || ' - ' || "P1 [kW]" || ' kW', ''
         ) as connectors_and_power,
-        ST_SETSRID(ST_MAKEPOINT(
-            CAST(
-                REPLACE(
-                    REGEXP_REPLACE(
-                        REPLACE(
-                            TRIM(CAST("Längengrad" as char)), E'\u00A0', ''
-                        ), '[[:space:]]', '', 'g'
-                    ),
-                    ',',
-                    '.'
-                ) as double precision
-            ),
-            CAST(
-                REPLACE(
-                    REGEXP_REPLACE(
-                        REPLACE(
-                            TRIM(CAST("Breitengrad" as char)), E'\u00A0', ''
-                        ), '[[:space:]]', '', 'g'
-                    ),
-                    ',',
-                    '.'
-                ) as double precision
-            )
-        ), 4326) as geo_point
+        "Längengrad" as longitude,
+        "Breitengrad" as latitude,
+        ST_SETSRID(ST_MAKEPOINT("Längengrad","Breitengrad"), 4326) as geopoint
 
     from source
 )
 
-select * from refactored
+select * from final
