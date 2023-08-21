@@ -26,16 +26,17 @@ export pwd = postgres
 export uid = postgres
 export server = localhost
 export db = energy_database
-export port = 5512
+export port = 5511
 export schema = raw
 export DAGSTER_HOME = ~/.dagster/dagster_home
+export DBT_PROFILE_FOLDER = dev
 export MASTR_DOWNLOAD_DATE = today
 ```
 
 4. To initialize the database and to create the docker container, run:
 
 ```bash
-python initialize.py
+python development/initialize.py
 ```
 Check if the database is running on the server and port specified in the `.env` file. 
 
