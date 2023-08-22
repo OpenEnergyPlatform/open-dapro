@@ -71,20 +71,6 @@ def storage_extended() -> None:
     non_argument_deps={"download_mastr"},
     compute_kind="python",
 )
-def storage_units() -> None:
-    """Download data on electricity storages from the german public
-    registry 'Marktstammdatenregister (MaStR)' using the python package
-    open-mastr.
-    """
-    pass
-
-
-@asset(
-    key_prefix="raw_mastr",
-    group_name="mastr",
-    non_argument_deps={"download_mastr"},
-    compute_kind="python",
-)
 def solar_extended() -> None:
     """Download data on photovoltaic systems from the german public
     registry 'Marktstammdatenregister (MaStR)' using the python package
