@@ -1,37 +1,67 @@
-with source_storage_extended as (
-    select * from {{ ref('base_mastr__storage_extended') }}
+{{
+    config(
+        materialized = 'table'
+    )
+}}
+
+with source_extended as (
+    select * from {{ source('raw_mastr', 'storage_extended') }}
 ),
 
-source_storage_units as (
-    select * from {{ ref('base_mastr__storage_units') }}
+source_units as (
+    select * from {{ source('raw_mastr', 'storage_units') }}
 ),
 
 renamed_storage_units as (
+
     select
-        linked_unit_id as mastr_id,
-        storage_capacity
-    from source_storage_units
+        "VerknuepfteEinheit" as mastr_id,
+        "NutzbareSpeicherkapazitaet" as storage_capacity
+    from source_units
+
 ),
+
+renamed_extended as (
+
+    select
+        "EinheitMastrNummer" as mastr_id,
+        "Gemeindeschluessel" as municipality_id,
+        "Gemeinde" as municipality,
+        "Landkreis" as district,
+        "Postleitzahl" as zip_code,
+        "Inbetriebnahmedatum" as commissioning_date,
+        "GeplantesInbetriebnahmedatum" as planned_commissioning_date,
+        "Nettonennleistung" as power,
+        "DatumDownload" as download_date,
+        left("Gemeindeschluessel", 5) as district_id,
+        concat(
+            date_part('year', "Inbetriebnahmedatum"),
+            date_part('year', "GeplantesInbetriebnahmedatum")
+        ) as installation_year
+    from source_extended
+
+),
+
 
 storage_units as (
     select
         renamed_storage_units.mastr_id as mastr_id,
         renamed_storage_units.storage_capacity,
-        source_storage_extended.municipality_id,
-        source_storage_extended.district_id,
-        source_storage_extended.municipality,
-        source_storage_extended.district,
-        source_storage_extended.zip_code,
-        source_storage_extended.commissioning_date,
-        source_storage_extended.planned_commissioning_date,
-        source_storage_extended.installation_year,
-        source_storage_extended.power,
-        source_storage_extended.download_date
+        renamed_extended.municipality_id,
+        renamed_extended.district_id,
+        renamed_extended.municipality,
+        renamed_extended.district,
+        renamed_extended.zip_code,
+        renamed_extended.commissioning_date,
+        renamed_extended.planned_commissioning_date,
+        renamed_extended.installation_year,
+        renamed_extended.power,
+        renamed_extended.download_date
     from renamed_storage_units
 
     left join
-        source_storage_extended
-        on renamed_storage_units.mastr_id = source_storage_extended.mastr_id
+        renamed_extended
+        on renamed_storage_units.mastr_id = renamed_extended.mastr_id
 )
 
 select * from storage_units
