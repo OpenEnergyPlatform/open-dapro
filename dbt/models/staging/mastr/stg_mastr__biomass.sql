@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized = 'table'
+    )
+}}
+
 with source as (
     select * from {{ source('raw_mastr', 'biomass_extended') }}
 ),
