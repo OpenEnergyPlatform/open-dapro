@@ -1,144 +1,143 @@
 import os
+import shutil
 import urllib.request as request
 
+import geopandas as gpd
 import pandas as pd
 from cjio import cityjson
 from dagster import asset
+from shapely import Polygon
 
 import docker
 from energy_dagster.utils import utils
 
 
-def download_from_meta4(constants_key: str, context) -> None:
-    """Generic function to download data where the urls are
-    specified in a meta4 file
-
-    Parameters
-    ----------
-    constants_key : str
-        key of the constants yml file of the specific dataset
-
-    """
-    constants = utils.get_constants(constants_key)
-    meta4_df = pd.read_xml(request.urlopen(constants["url"]).read())
-    urls = meta4_df["url"]
-    save_directory = os.path.join(
-        utils.get_dagster_data_path(), constants["save_directory"]
-    )
-
-    number_files = len(urls)
-
-    for index, url in enumerate(urls):
-        if (index + 1) % 10 == 0:
-            context.log.info(f"Download progress: {round(index/number_files): .0%}")
-            break
-        if not url:
-            continue
-        if url.startswith("http"):
-            utils.download_from_url(
-                url, save_directory=save_directory, filename=url.split("/")[-1]
-            )
-
-
 @asset(key_prefix="raw", group_name="raw_data", compute_kind="python")
-def download_lod2_bavaria(context) -> None:
-    """Downloads all citygml files for bavaria from the opendata
-    portal.
+def get_lod2_bavaria_in_cityjson(context) -> None:
+    """First downloads the citygml files from the OpenData portal of bavaria,
+    then converts it to cityjson files using the citygml4j/citygml-tools
+    docker image.
     """
-    download_from_meta4(constants_key="lod2_bavaria", context=context)
-
-
-@asset(
-    key_prefix="raw",
-    group_name="raw_data",
-    non_argument_deps={"download_lod2_bavaria"},
-    compute_kind="python",
-)
-def convert_citygml_to_cityjson(context) -> None:
-    """Converts all citygml files in the data_directory to cityjson files
-    using the docker image from citygml4j/citygml-tools.
-    """
-    constants = utils.get_constants("lod2_bavaria")
-
-    data_directory = os.path.join(
-        utils.get_dagster_data_path(), constants["save_directory"]
-    ).replace("\\", "/")
+    number_files_conversion = 100
     client = docker.from_env()
     _ = client.images.pull(repository="citygml4j/citygml-tools")
-    client.containers.run(
-        "citygml4j/citygml-tools",
-        command="to-cityjson *.gml",
-        volumes=[f"{data_directory}:/data"],
-        user=1000,
-        auto_remove=True,
-        name="citygml-tools-dagster",
+    constants = utils.get_constants("lod2_bavaria")
+    meta4_df = pd.read_xml(request.urlopen(constants["url"]).read())
+    urls = meta4_df["url"]
+    gml_directory = os.path.join(
+        utils.get_dagster_data_path(), constants["save_directory"], "gml"
     )
+    json_directory = os.path.join(
+        utils.get_dagster_data_path(), constants["save_directory"], "json"
+    )
+    create_directories([gml_directory, json_directory])
+
+    for index, url in enumerate(urls):
+        if (index + 1) % 500 == 0:
+            context.log.info(f"Download progress: {round(index/len(urls) * 100):.0f}%")
+        if not url:
+            continue
+        if not url.startswith("http"):
+            continue
+        filename = url.split("/")[-1]
+        utils.download_from_url(url, save_directory=gml_directory, filename=filename)
+        if (index + 1) % number_files_conversion != 0:
+            # download number_files_conversion of gml files,
+            # then convert them to json
+            continue
+        client.containers.run(
+            "citygml4j/citygml-tools",
+            command="to-cityjson *.gml --vertex-precision=10",
+            volumes=[gml_directory.replace("\\", "/") + ":/data"],
+            user=1000,
+            auto_remove=True,
+            name="citygml-tools-dagster",
+        )
+        move_json_files(root=gml_directory, target=json_directory)
+        delete_all_files_in_folder(gml_directory)
+
+
+def create_directories(directory_list):
+    for directory in directory_list:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+
+def delete_all_files_in_folder(directory):
+    for file in os.listdir(directory):
+        os.remove(os.path.join(directory, file))
+
+
+def move_json_files(root, target):
+    for file in os.listdir(root):
+        if file.endswith(".json"):
+            shutil.move(os.path.join(root, file), os.path.join(target, file))
 
 
 @asset(
-    io_manager_key="db_io",
+    io_manager_key="postgis_io",
     key_prefix="raw",
     group_name="raw_data",
-    non_argument_deps={"convert_citygml_to_cityjson"},
+    non_argument_deps={"get_lod2_bavaria_in_cityjson"},
     compute_kind="python",
 )
-def building_data_from_cityjson(context) -> pd.DataFrame:
+def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
     """Extracts building data from cityjson files and writes it to
     the database.
     """
     constants = utils.get_constants("lod2_bavaria")
     data_directory = os.path.join(
-        utils.get_dagster_data_path(), constants["save_directory"]
+        utils.get_dagster_data_path(), constants["save_directory"], "json"
     )
+    gdf = None
     for filename in os.listdir(data_directory):
-        if filename.endswith(".gml"):
-            continue
         file_path = os.path.join(data_directory, filename)
         data = cityjson.load(file_path, transform=True)
         buildings = data.get_cityobjects(type=["building", "buildingpart"])
-
-        building_ids = list(buildings.keys())
         (
+            building_ids,
             building_volumes,
             building_roof_areas,
             creation_dates,
             municipality_keys,
             floor_plan_updates,
-        ) = ([], [], [], [], [])
-        for _, building in buildings.items():
-            (
-                volume,
-                roof_surface,
-                creation_date,
-                municipality_key,
-                floor_plan_date,
-            ) = get_building_data(building)
-
+            geometries,
+        ) = ([], [], [], [], [], [], [])
+        for building_id, building in buildings.items():
+            try:
+                (
+                    volume,
+                    roof_surface,
+                    creation_date,
+                    municipality_key,
+                    floor_plan_date,
+                    ground_surface_polygon,
+                ) = get_building_data(building)
+            except Exception:
+                print("ERROR, this building failed:")
+                print(building)
+                continue
+            building_ids.append(building_id)
             building_volumes.append(volume)
             building_roof_areas.append(roof_surface)
             creation_dates.append(creation_date)
             municipality_keys.append(municipality_key)
             floor_plan_updates.append(floor_plan_date)
-        return pd.DataFrame(
-            list(
-                zip(
-                    building_ids,
-                    municipality_keys,
-                    creation_dates,
-                    floor_plan_updates,
-                    building_volumes,
-                    building_roof_areas,
-                )
-            ),
-            columns=[
-                "id",
-                "municipality_key",
-                "creation_dates",
-                "floor_plan_update",
-                "building_volume",
-                "building_roof_area",
-            ],
+            geometries.append(ground_surface_polygon)
+        gdf_new = gpd.GeoDataFrame(
+            {
+                "id": building_ids,
+                "municipality_key": municipality_keys,
+                "creation_dates": creation_dates,
+                "floor_plan_update": floor_plan_updates,
+                "building_volume": building_volumes,
+                "building_roof_area": building_roof_areas,
+            },
+            geometry=geometries,
+            crs="25832",
         )
+        gdf = gdf_new if gdf is None else pd.concat([gdf, gdf_new])
+    return gdf
 
 
 def get_building_data(building):
@@ -151,7 +150,7 @@ def get_building_data(building):
     """
     building_geom = building.geometry[0]
     building_attributes = building.to_json()["attributes"]
-    ground_suface_list = [
+    ground_surface_list = [
         surface
         for surface in building_geom.surfaces.values()
         if surface["type"] == "GroundSurface"
@@ -162,7 +161,7 @@ def get_building_data(building):
         if surface["type"] == "RoofSurface"
     ]
     ground_surface = sum(
-        float(surface["attributes"]["Flaeche"]) for surface in ground_suface_list
+        float(surface["attributes"]["Flaeche"]) for surface in ground_surface_list
     )
     roof_surface = round(
         sum(float(surface["attributes"]["Flaeche"]) for surface in roof_surface_list)
@@ -179,5 +178,23 @@ def get_building_data(building):
     creation_date = building_attributes["creationDate"][:10]
     municipality_key = building_attributes["Gemeindeschluessel"]
     floor_plan_date = building_attributes["Grundrissaktualitaet"]
+    ground_surface_polygon = get_ground_surface_geometry(building, ground_surface_list)
 
-    return volume, roof_surface, creation_date, municipality_key, floor_plan_date
+    return (
+        volume,
+        roof_surface,
+        creation_date,
+        municipality_key,
+        floor_plan_date,
+        ground_surface_polygon,
+    )
+
+
+def get_ground_surface_geometry(building, ground_surface_list):
+    """Returns the ground surface of a given building as a shapely Polygon."""
+
+    building_surfaces = building.geometry[0].get_surfaces()
+    ground_surface_idx = ground_surface_list[0]["surface_idx"][0]
+    ground_surface = building_surfaces[ground_surface_idx[0]][ground_surface_idx[1]][0]
+    ground_surface_points = [(point[0], point[1]) for point in ground_surface]
+    return Polygon(ground_surface_points)
