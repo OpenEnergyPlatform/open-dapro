@@ -138,8 +138,6 @@ def download_from_url(
     filename : str
         name of the file.
     """
-    if not os.path.exists(save_directory):
-        os.makedirs(save_directory)
 
     save_path = os.path.join(save_directory, filename)
 
