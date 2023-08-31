@@ -62,3 +62,9 @@ data_sources:
     url: "https://download.geofabrik.de/europe/germany/bayern/mittelfranken-latest-free.shp.zip"
     filename: "mittelfranken-latest.shp.zip"
     save_directory: "osm"
+
+  alkis_area_usage:
+    url: "https://geodaten.bayern.de/odd/m/3/daten/tn/Nutzung_kreis.gpkg"
+    filename: "alkis_area_usage.gpkg"
+    save_directory: "alkis"
+

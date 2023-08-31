@@ -5,6 +5,7 @@ from dagster_dbt import load_assets_from_dbt_project
 from dotenv import load_dotenv
 
 from energy_dagster.assets.load_data import (
+    alkis_area_usage,
     buildings_lod2,
     charging_points,
     geo_boundaries,
@@ -26,7 +27,15 @@ except KeyError:
 DBT_PROJECT_PATH = file_relative_path(__file__, "../../dbt")
 
 all_assets = load_assets_from_modules(
-    [charging_points, zensus, mastr, geo_boundaries, buildings_lod2, osm]
+    [
+        charging_points,
+        zensus,
+        mastr,
+        geo_boundaries,
+        buildings_lod2,
+        osm,
+        alkis_area_usage,
+    ]
 )
 dbt_assets = load_assets_from_dbt_project(
     project_dir=DBT_PROJECT_PATH,

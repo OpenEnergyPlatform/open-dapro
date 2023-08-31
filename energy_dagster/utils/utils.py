@@ -109,9 +109,11 @@ def download_from_constants(data_source: str):
 
     url = constants["data_sources"][data_source]["url"]
     save_directory = constants["data_sources"][data_source]["save_directory"]
+
     filename = constants["data_sources"][data_source]["filename"]
 
     save_directory_path = os.path.join(get_dagster_data_path(), save_directory)
+    create_directories([save_directory_path])
     download_from_url(url=url, save_directory=save_directory_path, filename=filename)
 
     return {
@@ -145,3 +147,9 @@ def download_from_url(
         print(f"File {filename} already downloaded.")
         return None
     request.urlretrieve(url, save_path)
+
+
+def create_directories(directory_list):
+    for directory in directory_list:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
