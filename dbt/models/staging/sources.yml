@@ -872,3 +872,4 @@ sources:
       - name: osm_niederbayern
       - name: osm_oberpfalz
       - name: osm_schwaben
+      - name: building_data_from_cityjson
