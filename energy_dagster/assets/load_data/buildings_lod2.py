@@ -30,7 +30,7 @@ def get_lod2_bavaria_in_cityjson(context) -> None:
     json_directory = os.path.join(
         utils.get_dagster_data_path(), constants["save_directory"], "json"
     )
-    create_directories([gml_directory, json_directory])
+    utils.create_directories([gml_directory, json_directory])
 
     for index, url in enumerate(urls):
         if (index + 1) % 500 == 0:
@@ -55,12 +55,6 @@ def get_lod2_bavaria_in_cityjson(context) -> None:
         )
         move_json_files(root=gml_directory, target=json_directory)
         delete_all_files_in_folder(gml_directory)
-
-
-def create_directories(directory_list):
-    for directory in directory_list:
-        if not os.path.exists(directory):
-            os.makedirs(directory)
 
 
 def delete_all_files_in_folder(directory):
@@ -98,32 +92,29 @@ def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
             building_ids,
             building_volumes,
             building_roof_areas,
+            building_envelope_areas,
             creation_dates,
             municipality_keys,
             floor_plan_updates,
             geometries,
-        ) = ([], [], [], [], [], [], [])
+        ) = ([], [], [], [], [], [], [], [])
         for building_id, building in buildings.items():
             try:
-                (
-                    volume,
-                    roof_surface,
-                    creation_date,
-                    municipality_key,
-                    floor_plan_date,
-                    ground_surface_polygon,
-                ) = get_building_data(building)
+                building_attributes = get_building_data(building)
             except Exception:
                 print("ERROR, this building failed:")
                 print(building)
                 continue
             building_ids.append(building_id)
-            building_volumes.append(volume)
-            building_roof_areas.append(roof_surface)
-            creation_dates.append(creation_date)
-            municipality_keys.append(municipality_key)
-            floor_plan_updates.append(floor_plan_date)
-            geometries.append(ground_surface_polygon)
+            building_volumes.append(building_attributes["volume"])
+            building_roof_areas.append(building_attributes["roof_surface"])
+            building_envelope_areas.append(
+                building_attributes["building_envelope_surface"]
+            )
+            creation_dates.append(building_attributes["creation_date"])
+            municipality_keys.append(building_attributes["municipality_key"])
+            floor_plan_updates.append(building_attributes["floor_plan_date"])
+            geometries.append(building_attributes["ground_surface_polygon"])
         gdf_new = gpd.GeoDataFrame(
             {
                 "id": building_ids,
@@ -132,6 +123,7 @@ def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
                 "floor_plan_update": floor_plan_updates,
                 "building_volume": building_volumes,
                 "building_roof_area": building_roof_areas,
+                "building_envelope_area": building_envelope_areas,
             },
             geometry=geometries,
             crs="25832",
@@ -150,23 +142,95 @@ def get_building_data(building):
     """
     building_geom = building.geometry[0]
     building_attributes = building.to_json()["attributes"]
-    ground_surface_list = [
+
+    volume = calculate_building_volume(building_geom, building_attributes)
+    roof_surface = calculate_roof_surface(building_geom)
+    building_envelope_surface = calculate_building_envelope_surface(building_geom)
+
+    creation_date = building_attributes["creationDate"][:10]
+    municipality_key = building_attributes["Gemeindeschluessel"]
+    floor_plan_date = building_attributes["Grundrissaktualitaet"]
+    ground_surface_polygon = get_ground_surface_geometry(building_geom)
+
+    return {
+        "volume": volume,
+        "roof_surface": roof_surface,
+        "creation_date": creation_date,
+        "municipality_key": municipality_key,
+        "floor_plan_date": floor_plan_date,
+        "ground_surface_polygon": ground_surface_polygon,
+        "building_envelope_surface": building_envelope_surface,
+    }
+
+
+def calculate_building_envelope_surface(building_geom) -> float:
+    """Calculate the total outer area of a building, e.g. the sum of all areas
+    that are not a Ground surface.
+
+    Parameters
+    ----------
+    building_geom
+
+    Returns
+    -------
+    float
+    The area of the building envelope in m^2
+
+    """
+    outer_surface_list = [
         surface
         for surface in building_geom.surfaces.values()
-        if surface["type"] == "GroundSurface"
+        if surface["type"] != "GroundSurface"
     ]
+    return round(
+        sum(float(surface["attributes"]["Flaeche"]) for surface in outer_surface_list)
+    )
+
+
+def calculate_roof_surface(building_geom) -> float:
+    """Calculates the total surface of all areas marked as roofs.
+
+    Parameters
+    ----------
+    building_geom
+
+    Returns
+    -------
+    float
+        Roof surface in m^2
+    """
+
     roof_surface_list = [
         surface
         for surface in building_geom.surfaces.values()
         if surface["type"] == "RoofSurface"
     ]
+    return round(
+        sum(float(surface["attributes"]["Flaeche"]) for surface in roof_surface_list)
+    )
+
+
+def calculate_building_volume(building_geom, building_attributes) -> float:
+    """Calculate the approximate volume of a building
+
+    Parameters
+    ----------
+    building_geom
+
+    Returns
+    -------
+    float
+        Volume in m^3
+    """
+    ground_surface_list = [
+        surface
+        for surface in building_geom.surfaces.values()
+        if surface["type"] == "GroundSurface"
+    ]
     ground_surface = sum(
         float(surface["attributes"]["Flaeche"]) for surface in ground_surface_list
     )
-    roof_surface = round(
-        sum(float(surface["attributes"]["Flaeche"]) for surface in roof_surface_list)
-    )
-    volume = round(
+    return round(
         ground_surface * float(building_attributes["measuredHeight"])
         + 0.5
         * ground_surface
@@ -175,25 +239,17 @@ def get_building_data(building):
             - float(building_attributes["NiedrigsteTraufeDesGebaeudes"])
         )
     )
-    creation_date = building_attributes["creationDate"][:10]
-    municipality_key = building_attributes["Gemeindeschluessel"]
-    floor_plan_date = building_attributes["Grundrissaktualitaet"]
-    ground_surface_polygon = get_ground_surface_geometry(building, ground_surface_list)
-
-    return (
-        volume,
-        roof_surface,
-        creation_date,
-        municipality_key,
-        floor_plan_date,
-        ground_surface_polygon,
-    )
 
 
-def get_ground_surface_geometry(building, ground_surface_list):
+def get_ground_surface_geometry(building_geom):
     """Returns the ground surface of a given building as a shapely Polygon."""
 
-    building_surfaces = building.geometry[0].get_surfaces()
+    building_surfaces = building_geom.get_surfaces()
+    ground_surface_list = [
+        surface
+        for surface in building_geom.surfaces.values()
+        if surface["type"] == "GroundSurface"
+    ]
     ground_surface_idx = ground_surface_list[0]["surface_idx"][0]
     ground_surface = building_surfaces[ground_surface_idx[0]][ground_surface_idx[1]][0]
     ground_surface_points = [(point[0], point[1]) for point in ground_surface]

@@ -873,3 +873,4 @@ sources:
       - name: osm_oberpfalz
       - name: osm_schwaben
       - name: building_data_from_cityjson
+      - name: load_alkis
