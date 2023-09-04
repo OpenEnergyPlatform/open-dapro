@@ -5,7 +5,7 @@ import urllib.request as request
 import geopandas as gpd
 import pandas as pd
 from cjio import cityjson
-from dagster import asset
+from dagster import AssetExecutionContext, asset
 from shapely import Polygon
 
 import docker
@@ -13,12 +13,8 @@ from energy_dagster.utils import utils
 
 
 @asset(key_prefix="raw", group_name="raw_data", compute_kind="python")
-def get_lod2_bavaria_in_cityjson(context) -> None:
-    """First downloads the citygml files from the OpenData portal of bavaria,
-    then converts it to cityjson files using the citygml4j/citygml-tools
-    docker image.
-    """
-    number_files_conversion = 100
+def lod2_bavaria(context) -> None:
+    number_files_conversion = 5
     client = docker.from_env()
     _ = client.images.pull(repository="citygml4j/citygml-tools")
     constants = utils.get_constants("lod2_bavaria")
@@ -55,35 +51,14 @@ def get_lod2_bavaria_in_cityjson(context) -> None:
         )
         move_json_files(root=gml_directory, target=json_directory)
         delete_all_files_in_folder(gml_directory)
+        write_lod2_to_database(data_directory=json_directory, context=context)
+        delete_all_files_in_folder(json_directory)
 
 
-def delete_all_files_in_folder(directory):
-    for file in os.listdir(directory):
-        os.remove(os.path.join(directory, file))
-
-
-def move_json_files(root, target):
-    for file in os.listdir(root):
-        if file.endswith(".json"):
-            shutil.move(os.path.join(root, file), os.path.join(target, file))
-
-
-@asset(
-    io_manager_key="postgis_io",
-    key_prefix="raw",
-    group_name="raw_data",
-    non_argument_deps={"get_lod2_bavaria_in_cityjson"},
-    compute_kind="python",
-)
-def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
-    """Extracts building data from cityjson files and writes it to
-    the database.
-    """
-    constants = utils.get_constants("lod2_bavaria")
-    data_directory = os.path.join(
-        utils.get_dagster_data_path(), constants["save_directory"], "json"
-    )
-    gdf = None
+def write_lod2_to_database(data_directory: str, context: AssetExecutionContext) -> None:
+    engine = utils.get_engine()
+    schema, table_name = context.asset_key_for_output()[-1]
+    if_exists = "replace"
     for filename in os.listdir(data_directory):
         file_path = os.path.join(data_directory, filename)
         data = cityjson.load(file_path, transform=True)
@@ -115,7 +90,7 @@ def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
             municipality_keys.append(building_attributes["municipality_key"])
             floor_plan_updates.append(building_attributes["floor_plan_date"])
             geometries.append(building_attributes["ground_surface_polygon"])
-        gdf_new = gpd.GeoDataFrame(
+        gdf = gpd.GeoDataFrame(
             {
                 "id": building_ids,
                 "municipality_key": municipality_keys,
@@ -127,9 +102,23 @@ def building_data_from_cityjson(context) -> gpd.GeoDataFrame:
             },
             geometry=geometries,
             crs="25832",
+        ).to_crs(crs="EPSG:4326")
+        gdf.to_postgis(name=table_name, con=engine, if_exists=if_exists, schema=schema)
+        context.log.info(
+            f"Wrote {len(gdf)} to table {schema}.{table_name} in modus {if_exists}"
         )
-        gdf = gdf_new if gdf is None else pd.concat([gdf, gdf_new])
-    return gdf
+        if_exists = "append"
+
+
+def delete_all_files_in_folder(directory):
+    for file in os.listdir(directory):
+        os.remove(os.path.join(directory, file))
+
+
+def move_json_files(root, target):
+    for file in os.listdir(root):
+        if file.endswith(".json"):
+            shutil.move(os.path.join(root, file), os.path.join(target, file))
 
 
 def get_building_data(building):

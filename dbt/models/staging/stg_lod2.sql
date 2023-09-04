@@ -8,7 +8,7 @@
 }}
 
 WITH source_lod2 AS (
-    SELECT * FROM {{ source('raw', 'building_data_from_cityjson') }}
+    SELECT * FROM {{ source('raw', 'lod2_bavaria') }}
 ),
 
 final AS (
