@@ -1,6 +1,9 @@
 {{
     config(
-        materialized = 'table'
+        materialized = 'table',
+        indexes=[
+            {'columns': ['coordinate'], 'type': 'gist'}
+        ]
     )
 }}
 
@@ -25,7 +28,8 @@ renamed as (
         concat(
             date_part('year', "Inbetriebnahmedatum"),
             date_part('year', "GeplantesInbetriebnahmedatum")
-        ) as installation_year
+        ) as installation_year,
+        st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
     from source
 
 )

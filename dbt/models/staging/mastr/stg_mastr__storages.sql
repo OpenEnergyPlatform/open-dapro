@@ -1,6 +1,9 @@
 {{
     config(
-        materialized = 'table'
+        materialized = 'table',
+        indexes=[
+            {'columns': ['coordinate'], 'type': 'gist'}
+        ]
     )
 }}
 
@@ -37,7 +40,8 @@ renamed_extended as (
         concat(
             date_part('year', "Inbetriebnahmedatum"),
             date_part('year', "GeplantesInbetriebnahmedatum")
-        ) as installation_year
+        ) as installation_year,
+        st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
     from source_extended
 
 ),
@@ -56,7 +60,8 @@ storage_units as (
         renamed_extended.planned_commissioning_date,
         renamed_extended.installation_year,
         renamed_extended.power,
-        renamed_extended.download_date
+        renamed_extended.download_date,
+        renamed_extended.coordinate
     from renamed_storage_units
 
     left join
