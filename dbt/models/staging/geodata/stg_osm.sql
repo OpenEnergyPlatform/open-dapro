@@ -1,3 +1,12 @@
+{{ 
+    config(
+        materialized='table',
+        indexes=[
+            {'columns': ['geometry'], 'type': 'gist'}
+        ]
+    ) 
+}}
+
 WITH source_oberbayern AS (
     SELECT * FROM {{ source('raw', 'osm_oberbayern') }}
 ),
