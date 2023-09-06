@@ -1,0 +1,21 @@
+version: 2
+models:
+  - name: stg_lod2
+    description: ''
+    columns:
+      - name: building_id
+        tests:
+          - unique
+        data_type: text
+      - name: municipality_key
+        data_type: text
+        description: ''
+      - name: building_volume
+        data_type: bigint
+        description: ''
+      - name: building_roof_area
+        data_type: bigint
+        description: ''
+      - name: geometry
+        data_type: USER-DEFINED
+        description: ''
