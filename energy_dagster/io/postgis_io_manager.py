@@ -58,7 +58,7 @@ class PostgisGeoDataframeIOManager(IOManager):
         )
 
         return gpd.GeoDataFrame.from_postgis(
-            f"SELECT * FROM {self.schema}.{table_name}", engine
+            f"SELECT * FROM {self.schema}.{table_name}", con=engine, geom_col="geometry"
         )
 
 
