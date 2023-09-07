@@ -53,6 +53,7 @@ def lod2_bavaria(context) -> None:
         delete_all_files_in_folder(gml_directory)
         write_lod2_to_database(data_directory=json_directory, context=context)
         delete_all_files_in_folder(json_directory)
+        return
 
 
 def write_lod2_to_database(data_directory: str, context: AssetExecutionContext) -> None:
@@ -63,44 +64,37 @@ def write_lod2_to_database(data_directory: str, context: AssetExecutionContext) 
         file_path = os.path.join(data_directory, filename)
         data = cityjson.load(file_path, transform=True)
         buildings = data.get_cityobjects(type=["building", "buildingpart"])
-        (
-            building_ids,
-            building_volumes,
-            building_roof_areas,
-            building_envelope_areas,
-            creation_dates,
-            municipality_keys,
-            floor_plan_updates,
-            geometries,
-        ) = ([], [], [], [], [], [], [], [])
+        building_ids = []
+        columns = {
+            "building_volume": [],
+            "building_height": [],
+            "roof_area_north": [],
+            "roof_area_east": [],
+            "roof_area_south": [],
+            "roof_area_west": [],
+            "roof_area_undefined": [],
+            "building_envelope_area": [],
+            "creation_date": [],
+            "municipality_key": [],
+            "floor_plan_update": [],
+            "geometry": [],
+        }
         for building_id, building in buildings.items():
             try:
                 building_attributes = get_building_data(building)
-            except Exception:
+            except Exception as e:
                 print("ERROR, this building failed:")
+                print(e)
                 print(building)
                 continue
+            for column in columns.keys():
+                columns[column].append(building_attributes[column])
+
             building_ids.append(building_id)
-            building_volumes.append(building_attributes["volume"])
-            building_roof_areas.append(building_attributes["roof_surface"])
-            building_envelope_areas.append(
-                building_attributes["building_envelope_surface"]
-            )
-            creation_dates.append(building_attributes["creation_date"])
-            municipality_keys.append(building_attributes["municipality_key"])
-            floor_plan_updates.append(building_attributes["floor_plan_date"])
-            geometries.append(building_attributes["ground_surface_polygon"])
+        columns["building_id"] = building_ids
         gdf = gpd.GeoDataFrame(
-            {
-                "id": building_ids,
-                "municipality_key": municipality_keys,
-                "creation_dates": creation_dates,
-                "floor_plan_update": floor_plan_updates,
-                "building_volume": building_volumes,
-                "building_roof_area": building_roof_areas,
-                "building_envelope_area": building_envelope_areas,
-            },
-            geometry=geometries,
+            columns,
+            geometry="geometry",
             crs="25832",
         ).to_crs(crs="EPSG:4326")
         gdf.to_postgis(name=table_name, con=engine, if_exists=if_exists, schema=schema)
@@ -133,7 +127,7 @@ def get_building_data(building):
     building_attributes = building.to_json()["attributes"]
 
     volume = calculate_building_volume(building_geom, building_attributes)
-    roof_surface = calculate_roof_surface(building_geom)
+    roof_surfaces = calculate_roof_surface(building_geom)
     building_envelope_surface = calculate_building_envelope_surface(building_geom)
 
     creation_date = building_attributes["creationDate"][:10]
@@ -142,13 +136,18 @@ def get_building_data(building):
     ground_surface_polygon = get_ground_surface_geometry(building_geom)
 
     return {
-        "volume": volume,
-        "roof_surface": roof_surface,
+        "building_volume": volume,
+        "building_height": building_attributes["measuredHeight"],
+        "roof_area_north": roof_surfaces["north"],
+        "roof_area_east": roof_surfaces["east"],
+        "roof_area_south": roof_surfaces["south"],
+        "roof_area_west": roof_surfaces["west"],
+        "roof_area_undefined": roof_surfaces["undefined"],
+        "building_envelope_area": building_envelope_surface,
         "creation_date": creation_date,
         "municipality_key": municipality_key,
-        "floor_plan_date": floor_plan_date,
-        "ground_surface_polygon": ground_surface_polygon,
-        "building_envelope_surface": building_envelope_surface,
+        "floor_plan_update": floor_plan_date,
+        "geometry": ground_surface_polygon,
     }
 
 
@@ -176,7 +175,7 @@ def calculate_building_envelope_surface(building_geom) -> float:
     )
 
 
-def calculate_roof_surface(building_geom) -> float:
+def calculate_roof_surface(building_geom) -> dict:
     """Calculates the total surface of all areas marked as roofs.
 
     Parameters
@@ -185,18 +184,37 @@ def calculate_roof_surface(building_geom) -> float:
 
     Returns
     -------
-    float
-        Roof surface in m^2
+    dict
+        Roof surface in different orientations
     """
-
+    north, east, west, south, undefined = [], [], [], [], []
     roof_surface_list = [
         surface
         for surface in building_geom.surfaces.values()
         if surface["type"] == "RoofSurface"
     ]
-    return round(
-        sum(float(surface["attributes"]["Flaeche"]) for surface in roof_surface_list)
-    )
+    for surface in roof_surface_list:
+        orientation = float(surface["attributes"]["Dachorientierung"])
+        area = round(float(surface["attributes"]["Flaeche"]))
+        if 45.0 <= orientation < 135.0:
+            east.append(area)
+        elif 135.0 <= orientation < 225.0:
+            south.append(area)
+        elif 225.0 <= orientation < 315.0:
+            west.append(area)
+        elif orientation >= 315.0 or orientation < 45.0:
+            north.append(area)
+        else:
+            undefined.append(area)
+    return {
+        "north": sum(north),
+        "east": sum(east),
+        "west": sum(west),
+        "south": sum(south),
+        "undefined": sum(undefined),
+    }
+
+    return
 
 
 def calculate_building_volume(building_geom, building_attributes) -> float:
