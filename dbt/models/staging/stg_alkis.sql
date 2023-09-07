@@ -18,6 +18,14 @@ final AS (
         bez AS usage_type_specification,
         geometry
     FROM source_alkis
+    WHERE nutzart IN (
+        'Fläche besonderer funktionaler Prägung',
+        'Fläche gemischter Nutzung',
+        'Flugverkehr',
+        'Industrie- und Gewerbefläche',
+        'Landwirtschaft',
+        'Wohnbaufläche'
+    )
 )
 
 SELECT * FROM final
