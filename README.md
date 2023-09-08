@@ -63,19 +63,6 @@ You can start writing your own assets in `energy_dagster/assets.py`. The assets 
 
 You can specify new Python dependencies in `setup.py`.
 
-### Unit testing
-
-Tests are in the `energy_dagster_tests` directory and you can run tests using `pytest`:
-
-```bash
-pytest energy_dagster_tests
-```
-
-### Schedules and sensors
-
-If you want to enable Dagster [Schedules](https://docs.dagster.io/concepts/partitions-schedules-sensors/schedules) or [Sensors](https://docs.dagster.io/concepts/partitions-schedules-sensors/sensors) for your jobs, the [Dagster Daemon](https://docs.dagster.io/deployment/dagster-daemon) process must be running. This is done automatically when you run `dagster dev`.
-
-Once your Dagster Daemon is running, you can start turning on schedules and sensors for your jobs.
 
 ### pre-commit hooks
 In this project, we use [pre-commit hooks](https://pre-commit.com/) to lint the code before committing. The hooks are defined in the `.pre-commit-config.yaml` file. To install the hooks, run the following command:
