@@ -44,10 +44,13 @@ services:
       schema: raw
       MASTR_DOWNLOAD_DATE: today
       DBT_PROFILE_FOLDER: prod
+      DAGSTER_HOME: opt/dagster/dagster_home
     networks:
       - docker_network
     depends_on:
       - docker_postgresql
+    volumes:
+      - .:/opt/dagster/app
 
   # This service runs dagit, which loads your user code from the user code container.
   # Since our instance uses the QueuedRunCoordinator, any runs submitted from dagit will be put on
@@ -93,7 +96,7 @@ services:
       - dagster-daemon
       - run
     container_name: docker_daemon
-    restart: on-failure
+    restart: always
     environment:
       DAGSTER_POSTGRES_USER: "postgres"
       DAGSTER_POSTGRES_PASSWORD: "postgres"
