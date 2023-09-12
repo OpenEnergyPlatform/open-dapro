@@ -13,6 +13,7 @@ from energy_dagster.assets.load_data import (
     mastr,
     osm,
     zensus,
+    destatis_areas_and_inhabitants,
 )
 
 try:
@@ -42,5 +43,6 @@ all_assets = load_assets_from_modules(
         osm,
         alkis_area_usage,
         districts_to_datasette,
+        destatis_areas_and_inhabitants,
     ]
 )

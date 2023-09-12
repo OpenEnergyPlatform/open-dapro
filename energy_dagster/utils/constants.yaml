@@ -68,3 +68,5 @@ data_sources:
     filename: "alkis_area_usage.gpkg"
     save_directory: "alkis"
 
+  destatis_areas_and_inhabitants:
+    url: "https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/Archiv/GVAuszugQ/AuszugGV2QAktuell.xlsx?__blob=publicationFile"
