@@ -1,8 +1,0 @@
-version: 2
-models:
-  - name: int_charging_points__districts
-    columns:
-      - name: district_id
-        description: 'The id of the district (Amtlicher Gemeindeschluessel).'
-      - name: amount_charging_points
-        description: 'Total number of charging points.'

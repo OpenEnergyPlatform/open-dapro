@@ -874,3 +874,4 @@ sources:
       - name: osm_schwaben
       - name: lod2_bavaria
       - name: load_alkis
+      - name: destatis_areas_and_inhabitants

@@ -3,7 +3,6 @@ with storage as (
         municipality_id,
         installation_year,
         storage_capacity,
-        municipality,
         download_date
     from {{ ref('stg_mastr__storages') }}
 ),
@@ -13,7 +12,6 @@ biomass as (
         municipality_id,
         installation_year,
         power,
-        municipality,
         download_date
     from {{ ref('stg_mastr__biomass') }}
 ),
@@ -23,7 +21,6 @@ solar as (
         municipality_id,
         installation_year,
         power,
-        municipality,
         download_date
     from {{ ref('stg_mastr__solar') }}
 ),
@@ -33,16 +30,14 @@ wind as (
         municipality_id,
         installation_year,
         power,
-        municipality,
         download_date
     from {{ ref('stg_mastr__wind') }}
 ),
 
-stg_municipalities as (
+municipalities as (
     select
-        municipality_id,
-        municipality
-    from {{ ref('stg_municipalities__area') }}
+        municipality_id
+    from {{ ref('stg_destatis_areas_and_inhabitants') }}
 ),
 
 years as (
@@ -51,17 +46,13 @@ years as (
     select null as installation_year
 ),
 
-
 municipalities_with_years as (
     select
-        stg_municipalities.municipality_id,
-        stg_municipalities.municipality,
+        municipalities.municipality_id,
         years.installation_year
-    from stg_municipalities
+    from municipalities
     cross join years
 ),
-
-
 
 storage_aggregated as (
 
@@ -69,8 +60,7 @@ storage_aggregated as (
         municipality_id,
         installation_year,
         max(download_date) as download_date_storage,
-        sum(storage_capacity) as storage_capacity,
-        max(municipality) as municipality
+        sum(storage_capacity) as storage_capacity
     from storage
     group by municipality_id, installation_year
     order by municipality_id, installation_year
@@ -80,7 +70,6 @@ storage_cummulative as (
     select
         municipality_id,
         installation_year,
-        municipality,
         download_date_storage,
         storage_capacity as capacity_storage_per_year,
         sum(storage_capacity)
@@ -92,14 +81,23 @@ storage_cummulative as (
     from storage_aggregated
 ),
 
+storage_updated as (
+  select
+      municipality_id,
+      installation_year,
+      download_date_storage,
+      capacity_storage_per_year,
+      capacity_storage_cummulative
+  from storage_cummulative
+),
+
 biomass_aggregated as (
 
     select
         municipality_id,
         installation_year,
         max(download_date) as download_date_biomass,
-        sum(power) as power,
-        max(municipality) as municipality
+        sum(power) as power
     from biomass
     group by municipality_id, installation_year
     order by municipality_id, installation_year
@@ -109,7 +107,6 @@ biomass_cummulative as (
     select
         municipality_id,
         installation_year,
-        municipality,
         download_date_biomass,
         power as power_biomass_per_year,
         sum(power)
@@ -127,8 +124,7 @@ solar_aggregated as (
         municipality_id,
         installation_year,
         max(download_date) as download_date_solar,
-        sum(power) as power,
-        max(municipality) as municipality
+        sum(power) as power
     from solar
     group by municipality_id, installation_year
     order by municipality_id, installation_year
@@ -136,7 +132,6 @@ solar_aggregated as (
 
 solar_cummulative as (
     select
-        municipality,
         municipality_id,
         installation_year,
         download_date_solar,
@@ -156,8 +151,7 @@ wind_aggregated as (
         municipality_id,
         installation_year,
         max(download_date) as download_date_wind,
-        sum(power) as power,
-        max(municipality) as municipality
+        sum(power) as power
     from wind
     group by municipality_id, installation_year
     order by municipality_id, installation_year
@@ -166,7 +160,6 @@ wind_aggregated as (
 wind_cummulative as (
     select
         municipality_id,
-        municipality,
         installation_year,
         download_date_wind,
         power as power_wind_per_year,
@@ -182,7 +175,6 @@ wind_cummulative as (
 final as (
     select
         m.municipality_id,
-        m.municipality,
         m.installation_year,
         b.power_biomass_per_year,
         b.power_biomass_cummulative,

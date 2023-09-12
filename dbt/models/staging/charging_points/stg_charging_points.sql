@@ -19,7 +19,7 @@ final as (
         ) as connectors_and_power,
         "Längengrad" as longitude,
         "Breitengrad" as latitude,
-        ST_SETSRID(ST_MAKEPOINT("Längengrad","Breitengrad"), 4326) as geopoint
+        ST_SETSRID(ST_MAKEPOINT("Längengrad","Breitengrad"), 4326) as geo_point
 
     from source
 )

@@ -9,13 +9,15 @@ with mastr_temporal_expansion as (
         download_date_solar,
         download_date_wind,
         download_date_storage
-    from {{ ref('mastr__temporal_expansion_municipalities') }}
+    from {{ ref('mastr__temporal_expansion') }}
 ),
 
 municipalities as (
     select
         municipality_id,
         municipality,
+        district_id,
+        district,
         number_inhabitants,
         geometry_array,
         center
@@ -41,10 +43,12 @@ mastr_aggregated as (
     group by municipality_id
 ),
 
-join_municipalities as (
+join_charging_points as (
     select
         municipalities.municipality_id,
         municipalities.municipality,
+        municipalities.district_id,
+        municipalities.district,
         municipalities.number_inhabitants,
         charging_points_per_municipality.amount_charging_points,
         municipalities.geometry_array,
@@ -55,11 +59,13 @@ join_municipalities as (
 ),
 
 final as (
-    select --noqa: ST06
-        join_municipalities.municipality_id,
-        join_municipalities.municipality,
-        join_municipalities.number_inhabitants,
-        join_municipalities.amount_charging_points,
+    select
+        join_charging_points.municipality_id,
+        join_charging_points.municipality,
+        join_charging_points.district_id,
+        join_charging_points.district,
+        join_charging_points.number_inhabitants,
+        join_charging_points.amount_charging_points,
         mastr_aggregated.download_date_biomass,
         mastr_aggregated.download_date_solar,
         mastr_aggregated.download_date_wind,
@@ -68,12 +74,12 @@ final as (
         round(mastr_aggregated.power_solar) as power_solar,
         round(mastr_aggregated.power_wind) as power_wind,
         round(mastr_aggregated.capacity_storage) as capacity_storage,
-        join_municipalities.geometry_array,
-        join_municipalities.center
-    from join_municipalities
+        join_charging_points.geometry_array,
+        join_charging_points.center
+    from join_charging_points
     left join
         mastr_aggregated
-        on join_municipalities.municipality_id = mastr_aggregated.municipality_id
+        on join_charging_points.municipality_id = mastr_aggregated.municipality_id
 )
 
 select * from final

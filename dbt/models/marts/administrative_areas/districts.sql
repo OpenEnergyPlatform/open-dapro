@@ -1,79 +1,50 @@
-with mastr_temporal_expansion as (
-    select
-        district_id,
-        power_biomass_per_year,
-        power_solar_per_year,
-        power_wind_per_year,
-        capacity_storage_per_year,
-        download_date_biomass,
-        download_date_solar,
-        download_date_wind,
-        download_date_storage
-    from {{ ref('mastr__temporal_expansion_districts') }}
+WITH municipalities AS (
+    SELECT * FROM {{ ref("municipalities") }}
 ),
 
-districts as (
-    select
-        district_id,
+districts_area as (
+    select *,
+        st_centroid(geometry_array) as center
+    from {{ ref("stg_districts__area") }}
+    ),
+
+districts_aggregated AS (
+    SELECT
         district,
-        number_inhabitants,
-        geometry_array,
-        center
-    from {{ ref('int_districts') }}
-),
-
-charging_points_per_district as (
-    select * from {{ ref('int_charging_points__districts') }}
-),
-
-mastr_aggregated as (
-    select
         district_id,
-        max(download_date_biomass) as download_date_biomass,
-        max(download_date_solar) as download_date_solar,
-        max(download_date_wind) as download_date_wind,
-        max(download_date_storage) as download_date_storage,
-        sum(power_biomass_per_year) as power_biomass,
-        sum(power_solar_per_year) as power_solar,
-        sum(power_wind_per_year) as power_wind,
-        sum(capacity_storage_per_year) as capacity_storage
-    from mastr_temporal_expansion
-    group by district_id
-),
-
-join_districts as (
-    select
-        districts.district_id,
-        districts.district,
-        districts.number_inhabitants,
-        charging_points_per_district.amount_charging_points,
-        districts.geometry_array,
-        districts.center
-    from districts
-    left join charging_points_per_district
-        on districts.district_id = charging_points_per_district.district_id
+        sum(number_inhabitants) AS number_inhabitants,
+        sum(amount_charging_points) AS amount_charging_points,
+        max(download_date_biomass) AS download_date_biomass,
+        max(download_date_solar) AS download_date_solar,
+        max(download_date_wind) AS download_date_wind,
+        max(download_date_storage) AS download_date_storage,
+        sum(power_biomass) AS power_biomass,
+        sum(power_solar) AS power_solar,
+        sum(power_wind) AS power_wind,
+        sum(capacity_storage) AS capacity_storage
+    FROM municipalities as m
+    where district_id is not null
+    GROUP BY district_id, district
 ),
 
 final as (
-    select --noqa: ST06
-        join_districts.district_id,
-        join_districts.district,
-        join_districts.number_inhabitants,
-        join_districts.amount_charging_points,
-        mastr_aggregated.download_date_biomass,
-        mastr_aggregated.download_date_solar,
-        mastr_aggregated.download_date_wind,
-        mastr_aggregated.download_date_storage,
-        round(mastr_aggregated.power_biomass) as power_biomass,
-        round(mastr_aggregated.power_solar) as power_solar,
-        round(mastr_aggregated.power_wind) as power_wind,
-        round(mastr_aggregated.capacity_storage) as capacity_storage,
-        join_districts.center,
-        join_districts.geometry_array
-    from join_districts
-    left join
-        mastr_aggregated
-        on join_districts.district_id = mastr_aggregated.district_id
+    select
+        a.district,
+        a.district_id,
+        a.number_inhabitants,
+        a.amount_charging_points,
+        a.download_date_biomass,
+        a.download_date_solar,
+        a.download_date_wind,
+        a.download_date_storage,
+        a.power_biomass,
+        a.power_solar,
+        a.power_wind,
+        a.capacity_storage,
+        e.geometry_array,
+        e.center
+
+    from districts_aggregated as a left join districts_area as e on a.district_id = e.district_id
 )
 
-select * from final
+SELECT * FROM final
