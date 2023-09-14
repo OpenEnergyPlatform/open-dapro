@@ -7,6 +7,7 @@ setup(
         "dagster",
         "dagster-dbt",
         "dagster_shell",
+        "dagster-docker",
         "dbt-postgres",
         "open-mastr",
         "SQLAlchemy",
