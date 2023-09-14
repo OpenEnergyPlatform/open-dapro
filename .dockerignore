@@ -6,3 +6,4 @@ docs/
 .pre-commit-config.yaml
 README.md
 *.egg-info/
+.vscode
