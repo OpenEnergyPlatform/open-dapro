@@ -1,6 +1,5 @@
 # dbt
 target/
-dbt_packages/
 logs/
 dbt/config/prod/.user.yml
 
