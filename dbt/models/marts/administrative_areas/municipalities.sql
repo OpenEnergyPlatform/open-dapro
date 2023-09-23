@@ -70,12 +70,12 @@ final as (
         mastr_aggregated.download_date_solar,
         mastr_aggregated.download_date_wind,
         mastr_aggregated.download_date_storage,
+        join_charging_points.geometry_array,
+        join_charging_points.center,
         round(mastr_aggregated.power_biomass) as power_biomass,
         round(mastr_aggregated.power_solar) as power_solar,
         round(mastr_aggregated.power_wind) as power_wind,
-        round(mastr_aggregated.capacity_storage) as capacity_storage,
-        join_charging_points.geometry_array,
-        join_charging_points.center
+        round(mastr_aggregated.capacity_storage) as capacity_storage
     from join_charging_points
     left join
         mastr_aggregated

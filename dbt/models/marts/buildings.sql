@@ -50,8 +50,8 @@ table_with_iou AS (
         *,
         ST_AREA(
             ST_INTERSECTION(lod2_geometry, geometry)
-            ) /
-        ST_AREA(
+        )
+        / ST_AREA(
             ST_UNION(lod2_geometry, geometry)
         ) AS intersection_over_union
     FROM joined_tables

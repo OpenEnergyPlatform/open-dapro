@@ -7,7 +7,7 @@ refactored as (
         source."AGS_12" as community_key_12,
         source."Name" as community_name,
         source."Reg_Hier" as regional_level,
-        source."DEM_1.1" as number_inhabitants, -- noqa: RF01, RF05
+        source."DEM_1.1" as number_inhabitants,
         source."RS_RB_NUTS2"::text as nuts2_in_ags,
         LPAD(source."RS_Land"::text, 2, '0') as federal_state_in_ags,
         LPAD(source."RS_Kreis"::text, 2, '0') as district_in_ags,

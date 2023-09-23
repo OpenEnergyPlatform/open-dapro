@@ -35,8 +35,7 @@ wind as (
 ),
 
 municipalities as (
-    select
-        municipality_id
+    select municipality_id
     from {{ ref('stg_destatis_areas_and_inhabitants') }}
 ),
 
@@ -82,13 +81,13 @@ storage_cummulative as (
 ),
 
 storage_updated as (
-  select
-      municipality_id,
-      installation_year,
-      download_date_storage,
-      capacity_storage_per_year,
-      capacity_storage_cummulative
-  from storage_cummulative
+    select
+        municipality_id,
+        installation_year,
+        download_date_storage,
+        capacity_storage_per_year,
+        capacity_storage_cummulative
+    from storage_cummulative
 ),
 
 biomass_aggregated as (

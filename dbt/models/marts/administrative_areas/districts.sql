@@ -2,11 +2,12 @@ WITH municipalities AS (
     SELECT * FROM {{ ref("municipalities") }}
 ),
 
-districts_area as (
-    select *,
-        st_centroid(geometry_array) as center
-    from {{ ref("stg_districts__area") }}
-    ),
+districts_area AS (
+    SELECT
+        *,
+        st_centroid(geometry_array) AS center
+    FROM {{ ref("stg_districts__area") }}
+),
 
 districts_aggregated AS (
     SELECT
@@ -22,13 +23,13 @@ districts_aggregated AS (
         sum(power_solar) AS power_solar,
         sum(power_wind) AS power_wind,
         sum(capacity_storage) AS capacity_storage
-    FROM municipalities as m
-    where district_id is not null
+    FROM municipalities
+    WHERE district_id IS NOT NULL
     GROUP BY district_id, district
 ),
 
-final as (
-    select
+final AS (
+    SELECT
         a.district,
         a.district_id,
         a.number_inhabitants,
@@ -44,7 +45,7 @@ final as (
         e.geometry_array,
         e.center
 
-    from districts_aggregated as a left join districts_area as e on a.district_id = e.district_id
+    FROM districts_aggregated AS a LEFT JOIN districts_area AS e ON a.district_id = e.district_id
 )
 
 SELECT * FROM final
