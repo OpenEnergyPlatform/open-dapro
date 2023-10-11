@@ -104,7 +104,7 @@ def lod2_factory(
                 data_directory=json_directory, context=context, engine=engine
             )
             delete_all_files_in_folder(json_directory)
-    delete_duplicated_buildings()
+    delete_duplicated_buildings(engine=engine, context=context)
 
 
 def delete_duplicated_buildings(engine, context):
