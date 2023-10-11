@@ -1,12 +1,15 @@
 import os
 import shutil
+import stat
 import urllib.request as request
 
 import geopandas as gpd
 import pandas as pd
+import sqlalchemy
 from cjio import cityjson
 from dagster import AssetExecutionContext, asset
 from shapely import Polygon
+from sqlalchemy.sql import text
 
 import docker
 from energy_dagster.utils import utils
@@ -14,10 +17,21 @@ from energy_dagster.utils import utils
 
 @asset(key_prefix="raw", group_name="raw_data", compute_kind="python")
 def lod2_bavaria(context) -> None:
+    is_develop_mode = False if os.environ.get("IS_DEVELOP_MODE") == "false" else True
+    lod2_factory(
+        region_name="lod2_nuernberger_land",
+        context=context,
+        is_develop_mode=is_develop_mode,
+    )
+
+
+def lod2_factory(
+    region_name: str, context: AssetExecutionContext, is_develop_mode: bool
+):
     number_files_conversion = 5
     client = docker.from_env()
     _ = client.images.pull(repository="citygml4j/citygml-tools")
-    constants = utils.get_constants("lod2_bavaria")
+    constants = utils.get_constants(region_name)
     meta4_df = pd.read_xml(request.urlopen(constants["url"]).read())
     urls = meta4_df["url"]
     gml_directory = os.path.join(
@@ -27,9 +41,13 @@ def lod2_bavaria(context) -> None:
         utils.get_dagster_data_path(), constants["save_directory"], "json"
     )
     utils.create_directories([gml_directory, json_directory])
+    context.log.info(f"LOD2 files are downloaded to {gml_directory}")
+
+    engine = utils.get_engine()
+    delete_table_from_dagster_context(engine, context)
 
     for index, url in enumerate(urls):
-        if (index + 1) % 500 == 0:
+        if (index + 1) % 50 == 0:
             context.log.info(f"Download progress: {round(index/len(urls) * 100):.0f}%")
         if not url:
             continue
@@ -37,29 +55,98 @@ def lod2_bavaria(context) -> None:
             continue
         filename = url.split("/")[-1]
         utils.download_from_url(url, save_directory=gml_directory, filename=filename)
-        if (index + 1) % number_files_conversion != 0:
+        os.chmod(gml_directory, stat.S_IRWXO | stat.S_IRWXU | stat.S_IRWXG)
+
+        if (index + 1) % number_files_conversion == 0:
             # download number_files_conversion of gml files,
             # then convert them to json
-            continue
-        client.containers.run(
-            "citygml4j/citygml-tools",
-            command="to-cityjson *.gml --vertex-precision=10",
-            volumes=[gml_directory.replace("\\", "/") + ":/data"],
-            user=1000,
-            auto_remove=True,
-            name="citygml-tools-dagster",
-        )
-        move_json_files(root=gml_directory, target=json_directory)
-        delete_all_files_in_folder(gml_directory)
-        write_lod2_to_database(data_directory=json_directory, context=context)
-        delete_all_files_in_folder(json_directory)
-        return
+
+            if is_develop_mode:
+                context.log.info("Running in dagster dev mode")
+                client.containers.run(
+                    "citygml4j/citygml-tools",
+                    command="to-cityjson *.gml --vertex-precision=10",
+                    volumes=[gml_directory.replace("\\", "/") + ":/data"],
+                    user=1000,
+                    auto_remove=True,
+                    name="citygml-tools-dagster",
+                )
+
+            else:
+                client.containers.run(
+                    "citygml4j/citygml-tools",
+                    command="to-cityjson lod2_nuernberger_land/gml/*.gml --vertex-precision=10",
+                    volumes={
+                        "dagster-docker_dagsterHomeData": {
+                            "bind": "/data",
+                            "mode": "rw",
+                        }
+                    },
+                    user=1000,
+                    network="docker_network",
+                    auto_remove=True,
+                    name="citygml-tools-dagster",
+                )
+
+            # execute_docker_container(
+            #    context,
+            #    image="citygml4j/citygml-tools",
+            #    command="to-cityjson *.gml --vertex-precision=10",
+            #    container_kwargs={
+            #        "auto_remove": True,
+            #        "volumes": gml_directory.replace("\\", "/") + ":/data",
+            #    },
+            # )
+            move_json_files(root=gml_directory, target=json_directory)
+            delete_all_files_in_folder(gml_directory)
+            write_lod2_to_database(
+                data_directory=json_directory, context=context, engine=engine
+            )
+            delete_all_files_in_folder(json_directory)
+    delete_duplicated_buildings()
 
 
-def write_lod2_to_database(data_directory: str, context: AssetExecutionContext) -> None:
-    engine = utils.get_engine()
+def delete_duplicated_buildings(engine, context):
     schema, table_name = context.asset_key_for_output()[-1]
-    if_exists = "replace"
+    drop_table_sql = text(
+        f""""
+        WITH duplicates AS (
+            SELECT building_id
+            FROM {schema}.{table_name}
+            GROUP BY building_id
+            HAVING COUNT(*) > 1
+        )
+        DELETE FROM {schema}.{table_name}
+        WHERE building_id IN (SELECT building_id FROM duplicates)
+            AND ctid NOT IN (
+                SELECT MIN(ctid) FROM {schema}.{table_name}
+                WHERE building_id IN (SELECT building_id FROM duplicates)
+                GROUP BY building_id
+            );
+        """
+    )
+    with engine.connect() as connection:
+        connection.execute(drop_table_sql)
+        connection.commit()
+
+
+def delete_table_from_dagster_context(engine, context):
+    schema, table_name = context.asset_key_for_output()[-1]
+    drop_table_sql = text(f"DROP TABLE IF EXISTS {schema}.{table_name} CASCADE")
+
+    with engine.connect() as connection:
+        connection.execute(drop_table_sql)
+        connection.commit()
+    context.log.info(f"Drop table {schema}.{table_name}")
+
+
+def write_lod2_to_database(
+    data_directory: str,
+    context: AssetExecutionContext,
+    engine: sqlalchemy.Engine,
+    if_exists: str = "append",
+) -> None:
+    schema, table_name = context.asset_key_for_output()[-1]
     for filename in os.listdir(data_directory):
         file_path = os.path.join(data_directory, filename)
         data = cityjson.load(file_path, transform=True)
@@ -92,16 +179,23 @@ def write_lod2_to_database(data_directory: str, context: AssetExecutionContext) 
 
             building_ids.append(building_id)
         columns["building_id"] = building_ids
-        gdf = gpd.GeoDataFrame(
-            columns,
-            geometry="geometry",
-            crs="25832",
-        ).to_crs(crs="EPSG:4326")
-        gdf.to_postgis(name=table_name, con=engine, if_exists=if_exists, schema=schema)
-        context.log.info(
-            f"Wrote {len(gdf)} to table {schema}.{table_name} in modus {if_exists}"
+        gdf = (
+            gpd.GeoDataFrame(
+                columns,
+                geometry="geometry",
+                crs="25832",
+            )
+            .to_crs(crs="EPSG:4326")
+            .astype(
+                dtype={
+                    "creation_date": "str",
+                    "municipality_key": "str",
+                    "floor_plan_update": "str",
+                    "building_id": "str",
+                },
+            )
         )
-        if_exists = "append"
+        gdf.to_postgis(name=table_name, con=engine, if_exists=if_exists, schema=schema)
 
 
 def delete_all_files_in_folder(directory):

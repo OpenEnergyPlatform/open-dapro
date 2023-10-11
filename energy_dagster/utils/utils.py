@@ -146,6 +146,7 @@ def download_from_url(
     if not overwrite and os.path.isfile(save_path):
         print(f"File {filename} already downloaded.")
         return None
+    create_directories([save_directory])
     request.urlretrieve(url, save_path)
 
 

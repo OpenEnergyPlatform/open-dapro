@@ -44,13 +44,16 @@ services:
       schema: raw
       MASTR_DOWNLOAD_DATE: today
       DBT_PROFILE_FOLDER: prod
-      DAGSTER_HOME: opt/dagster/dagster_home
+      DAGSTER_HOME: /opt/dagster/dagster_home
+      IS_DEVELOP_MODE: False
     networks:
       - docker_network
     depends_on:
       - docker_postgresql
     volumes:
       - .:/opt/dagster/app
+      - /var/run/docker.sock:/var/run/docker.sock # to be able to run docker
+      - dagsterHomeData:/opt/dagster/dagster_home/data # have a shared volume that is also used by citygml container
 
   # This service runs dagit, which loads your user code from the user code container.
   # Since our instance uses the QueuedRunCoordinator, any runs submitted from dagit will be put on
@@ -141,3 +144,4 @@ networks:
 volumes:
   dagsterPostgres:
   energyDatabaseVolume:
+  dagsterHomeData:
