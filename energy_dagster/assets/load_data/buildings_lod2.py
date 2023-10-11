@@ -45,6 +45,7 @@ def lod2_factory(
 
     engine = utils.get_engine()
     delete_table_from_dagster_context(engine, context)
+    delete_all_files_in_folder(gml_directory)
 
     for index, url in enumerate(urls):
         if (index + 1) % 50 == 0:
