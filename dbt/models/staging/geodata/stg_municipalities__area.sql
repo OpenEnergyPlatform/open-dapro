@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('raw', 'municipalities') }}
+    select * from {{ source('raw', 'municipalities_geoboundaries') }}
 ),
 
 renamed as (

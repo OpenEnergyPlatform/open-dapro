@@ -20,7 +20,7 @@ def load_geoboundaries(area: str) -> gpd.GeoDataFrame:
     group_name="raw_data",
     compute_kind="python",
 )
-def districts() -> gpd.GeoDataFrame:
+def districts_geoboundaries() -> gpd.GeoDataFrame:
     """Download district boundary data from url defined in constants.yaml
 
     Returns
@@ -37,7 +37,7 @@ def districts() -> gpd.GeoDataFrame:
     group_name="raw_data",
     compute_kind="python",
 )
-def municipalities() -> gpd.GeoDataFrame:
+def municipalities_geoboundaries() -> gpd.GeoDataFrame:
     """Download municpality boundary data from url defined in constants.yaml
 
     Returns

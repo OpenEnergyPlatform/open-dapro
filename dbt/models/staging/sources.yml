@@ -863,8 +863,8 @@ sources:
           - name: Public Key4
             description: ''
       - name: zensus
-      - name: districts
-      - name: municipalities
+      - name: districts_geoboundaries
+      - name: municipalities_geoboundaries
       - name: osm_oberfranken
       - name: osm_mittelfranken
       - name: osm_unterfranken
