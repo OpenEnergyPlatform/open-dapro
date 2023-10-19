@@ -1,0 +1,53 @@
+version: 2
+models:
+  - name: buildings
+    columns:
+      - name: lod2_id
+        description: ''
+        data_type: text
+      - name: municipality_key
+        description: ''
+        data_type: text
+      - name: building_volume
+        description: ''
+        data_type: bigint
+      - name: roof_area_north
+        description: ''
+        data_type: bigint
+      - name: roof_area_east
+        description: ''
+        data_type: bigint
+      - name: roof_area_south
+        description: ''
+        data_type: bigint
+      - name: roof_area_west
+        description: ''
+        data_type: bigint
+      - name: roof_area_undefined
+        description: ''
+        data_type: bigint
+      - name: alkis_type
+        description: ''
+        data_type: text
+      - name: alkis_type_specification
+        description: ''
+        data_type: text
+      - name: osm_type
+        description: ''
+        data_type: text
+      - name: solar_power
+        description: ''
+        data_type: double precision
+      - name: storage_capacity
+        description: ''
+        data_type: double precision
+      - name: mastr_updated_at
+        description: ''
+        data_type: date
+      - name: lod2_geometry
+        description: ''
+        data_type: USER-DEFINED
+      - name: geometry
+        description: ''
+        data_type: USER-DEFINED
+sources: []
