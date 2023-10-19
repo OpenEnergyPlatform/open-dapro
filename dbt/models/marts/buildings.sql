@@ -38,11 +38,11 @@ joined_tables AS (
         solar.download_date AS mastr_updated_at,
         lod2.geometry AS lod2_geometry,
         osm.geometry AS geometry --noqa 
-    FROM lod2
-    LEFT JOIN alkis ON ST_CONTAINS(alkis.geometry, lod2.geometry)
-    LEFT JOIN solar ON ST_CONTAINS(lod2.geometry, solar.coordinate)
-    LEFT JOIN storages ON ST_CONTAINS(lod2.geometry, storages.coordinate)
-    LEFT JOIN osm ON ST_INTERSECTS(lod2.geometry, osm.geometry)
+    FROM osm
+    LEFT JOIN alkis ON ST_CONTAINS(alkis.geometry, osm.geometry)
+    LEFT JOIN solar ON ST_CONTAINS(osm.geometry, solar.coordinate)
+    LEFT JOIN storages ON ST_CONTAINS(osm.geometry, storages.coordinate)
+    LEFT JOIN lod2 ON ST_INTERSECTS(lod2.geometry, osm.geometry)
 ),
 
 table_with_iou AS (
@@ -61,12 +61,30 @@ final AS (
     SELECT
         lod2_id,
         municipality_key,
-        building_volume,
-        roof_area_north,
-        roof_area_east,
-        roof_area_south,
-        roof_area_west,
-        roof_area_undefined,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN building_volume
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS building_volume,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN roof_area_north
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS roof_area_north,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN roof_area_east
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS roof_area_east,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN roof_area_south
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS roof_area_south,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN roof_area_west
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS roof_area_west,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN roof_area_undefined
+            ELSE NULL  -- or 'None' if you prefer a string
+        END AS roof_area_undefined,
         alkis_type,
         alkis_type_specification,
         osm_type,
@@ -76,26 +94,6 @@ final AS (
         lod2_geometry,
         geometry
     FROM table_with_iou
-    WHERE intersection_over_union >= 0.7
-    UNION
-    SELECT
-        lod2_id,
-        municipality_key,
-        building_volume,
-        roof_area_north,
-        roof_area_east,
-        roof_area_south,
-        roof_area_west,
-        roof_area_undefined,
-        alkis_type,
-        alkis_type_specification,
-        osm_type,
-        solar_power,
-        storage_capacity,
-        mastr_updated_at,
-        lod2_geometry,
-        geometry
-    FROM joined_tables WHERE geometry IS NULL
 )
 
 SELECT * FROM final
