@@ -680,6 +680,275 @@ sources:
             description: ''
           - name: DatumDownload
             description: ''
+      - name: combustion_extended
+        columns:
+          - name: NameKraftwerk
+            data_type: character varying
+            description: ''
+          - name: NameKraftwerksblock
+            data_type: character varying
+            description: ''
+          - name: DatumBaubeginn
+            data_type: date
+            description: ''
+          - name: AnzeigeEinerStilllegung
+            data_type: boolean
+            description: ''
+          - name: ArtDerStilllegung
+            data_type: character varying
+            description: ''
+          - name: DatumBeginnVorlaeufigenOderEndgueltigenStilllegung
+            data_type: date
+            description: ''
+          - name: SteigerungNettonennleistungKombibetrieb
+            data_type: double precision
+            description: ''
+          - name: AnlageIstImKombibetrieb
+            data_type: boolean
+            description: ''
+          - name: MastrNummernKombibetrieb
+            data_type: character varying
+            description: ''
+          - name: NetzreserveAbDatum
+            data_type: date
+            description: ''
+          - name: SicherheitsbereitschaftAbDatum
+            data_type: date
+            description: ''
+          - name: Hauptbrennstoff
+            data_type: character varying
+            description: ''
+          - name: WeitererHauptbrennstoff
+            data_type: character varying
+            description: ''
+          - name: WeitereBrennstoffe
+            data_type: character varying
+            description: ''
+          - name: VerknuepfteErzeugungseinheiten
+            data_type: character varying
+            description: ''
+          - name: BestandteilGrenzkraftwerk
+            data_type: boolean
+            description: ''
+          - name: NettonennleistungDeutschland
+            data_type: double precision
+            description: ''
+          - name: AnteiligNutzungsberechtigte
+            data_type: character varying
+            description: ''
+          - name: Notstromaggregat
+            data_type: boolean
+            description: ''
+          - name: Einsatzort
+            data_type: character varying
+            description: ''
+          - name: KwkMastrNummer
+            data_type: character varying
+            description: ''
+          - name: Technologie
+            data_type: character varying
+            description: ''
+          - name: AusschliesslicheVerwendungImKombibetrieb
+            data_type: boolean
+            description: ''
+          - name: NetzbetreiberMastrNummer
+            data_type: character varying
+            description: ''
+          - name: Registrierungsdatum
+            data_type: date
+            description: ''
+          - name: EinheitMastrNummer
+            data_type: character varying
+            description: ''
+          - name: DatumLetzteAktualisierung
+            data_type: timestamp with time zone
+            description: ''
+          - name: LokationMastrNummer
+            data_type: character varying
+            description: ''
+          - name: NetzbetreiberpruefungStatus
+            data_type: character varying
+            description: ''
+          - name: NetzbetreiberpruefungDatum
+            data_type: date
+            description: ''
+          - name: AnlagenbetreiberMastrNummer
+            data_type: character varying
+            description: ''
+          - name: Land
+            data_type: character varying
+            description: ''
+          - name: Bundesland
+            data_type: character varying
+            description: ''
+          - name: Landkreis
+            data_type: character varying
+            description: ''
+          - name: Gemeinde
+            data_type: character varying
+            description: ''
+          - name: Gemeindeschluessel
+            data_type: character varying
+            description: ''
+          - name: Postleitzahl
+            data_type: character varying
+            description: ''
+          - name: Gemarkung
+            data_type: character varying
+            description: ''
+          - name: FlurFlurstuecknummern
+            data_type: character varying
+            description: ''
+          - name: Strasse
+            data_type: character varying
+            description: ''
+          - name: StrasseNichtGefunden
+            data_type: boolean
+            description: ''
+          - name: Hausnummer
+            data_type: character varying
+            description: ''
+          - name: HausnummerNichtGefunden
+            data_type: boolean
+            description: ''
+          - name: Adresszusatz
+            data_type: character varying
+            description: ''
+          - name: Ort
+            data_type: character varying
+            description: ''
+          - name: Laengengrad
+            data_type: double precision
+            description: ''
+          - name: Breitengrad
+            data_type: double precision
+            description: ''
+          - name: UtmZonenwert
+            data_type: character varying
+            description: ''
+          - name: UtmEast
+            data_type: double precision
+            description: ''
+          - name: UtmNorth
+            data_type: double precision
+            description: ''
+          - name: GaussKruegerHoch
+            data_type: double precision
+            description: ''
+          - name: GaussKruegerRechts
+            data_type: double precision
+            description: ''
+          - name: Meldedatum
+            data_type: date
+            description: ''
+          - name: GeplantesInbetriebnahmedatum
+            data_type: date
+            description: ''
+          - name: Inbetriebnahmedatum
+            data_type: date
+            description: ''
+          - name: DatumEndgueltigeStilllegung
+            data_type: date
+            description: ''
+          - name: DatumBeginnVoruebergehendeStilllegung
+            data_type: date
+            description: ''
+          - name: DatumBeendigungVorlaeufigenStilllegung
+            data_type: date
+            description: ''
+          - name: DatumWiederaufnahmeBetrieb
+            data_type: date
+            description: ''
+          - name: EinheitSystemstatus
+            data_type: character varying
+            description: ''
+          - name: EinheitBetriebsstatus
+            data_type: character varying
+            description: ''
+          - name: BestandsanlageMastrNummer
+            data_type: character varying
+            description: ''
+          - name: NichtVorhandenInMigriertenEinheiten
+            data_type: boolean
+            description: ''
+          - name: AltAnlagenbetreiberMastrNummer
+            data_type: character varying
+            description: ''
+          - name: DatumDesBetreiberwechsels
+            data_type: date
+            description: ''
+          - name: DatumRegistrierungDesBetreiberwechsels
+            data_type: date
+            description: ''
+          - name: NameStromerzeugungseinheit
+            data_type: character varying
+            description: ''
+          - name: Weic
+            data_type: character varying
+            description: ''
+          - name: WeicDisplayName
+            data_type: character varying
+            description: ''
+          - name: Kraftwerksnummer
+            data_type: character varying
+            description: ''
+          - name: Energietraeger
+            data_type: character varying
+            description: ''
+          - name: Bruttoleistung
+            data_type: double precision
+            description: ''
+          - name: Nettonennleistung
+            data_type: double precision
+            description: ''
+          - name: AnschlussAnHoechstOderHochSpannung
+            data_type: boolean
+            description: ''
+          - name: Schwarzstartfaehigkeit
+            data_type: boolean
+            description: ''
+          - name: Inselbetriebsfaehigkeit
+            data_type: boolean
+            description: ''
+          - name: Einsatzverantwortlicher
+            data_type: character varying
+            description: ''
+          - name: FernsteuerbarkeitNb
+            data_type: boolean
+            description: ''
+          - name: FernsteuerbarkeitDv
+            data_type: boolean
+            description: ''
+          - name: FernsteuerbarkeitDr
+            data_type: boolean
+            description: ''
+          - name: Einspeisungsart
+            data_type: character varying
+            description: ''
+          - name: PraequalifiziertFuerRegelenergie
+            data_type: boolean
+            description: ''
+          - name: GenMastrNummer
+            data_type: character varying
+            description: ''
+          - name: Netzbetreiberzuordnungen
+            data_type: character varying
+            description: ''
+          - name: Hausnummer_nv
+            data_type: boolean
+            description: ''
+          - name: Weic_nv
+            data_type: boolean
+            description: ''
+          - name: Kraftwerksnummer_nv
+            data_type: boolean
+            description: ''
+          - name: DatenQuelle
+            data_type: character varying
+            description: ''
+          - name: DatumDownload
+            data_type: date
+            description: ''
       - name: market_actors
 
         columns:
