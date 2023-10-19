@@ -26,6 +26,14 @@ storages AS (
     SELECT * FROM {{ ref('stg_mastr__storages') }} WHERE coordinate IS NOT NULL
 ),
 
+combustion AS (
+    SELECT * FROM {{ ref('stg_mastr__combustion') }} WHERE coordinate IS NOT NULL
+),
+
+biomass AS (
+    SELECT * FROM {{ ref('stg_mastr__biomass') }} WHERE coordinate IS NOT NULL
+),
+
 
 
 joined_tables AS (
@@ -33,6 +41,8 @@ joined_tables AS (
         lod2.building_id AS lod2_id,
         lod2.municipality_key,
         lod2.building_volume,
+        lod2.building_height,
+        lod2.building_envelope_area,
         lod2.roof_area_north,
         lod2.roof_area_east,
         lod2.roof_area_south,
@@ -42,6 +52,9 @@ joined_tables AS (
         alkis.usage_type_specification AS alkis_type_specification,
         osm.type AS osm_type,
         solar.power AS solar_power,
+        biomass.power AS biomass_power,
+        combustion.power AS combustion_power,
+        combustion.energy_carrier AS combustion_energy_carrier,
         storages.storage_capacity AS storage_capacity,
         solar.download_date AS mastr_updated_at,
         lod2.geometry AS lod2_geometry,
@@ -49,6 +62,8 @@ joined_tables AS (
     FROM osm
     LEFT JOIN alkis ON ST_CONTAINS(alkis.geometry, osm.geometry)
     LEFT JOIN solar ON ST_CONTAINS(osm.geometry, solar.coordinate)
+    LEFT JOIN biomass ON ST_CONTAINS(osm.geometry, biomass.coordinate)
+    LEFT JOIN combustion ON ST_CONTAINS(osm.geometry, combustion.coordinate)
     LEFT JOIN storages ON ST_CONTAINS(osm.geometry, storages.coordinate)
     LEFT JOIN lod2 ON ST_INTERSECTS(lod2.geometry, osm.geometry)
 ),
@@ -67,31 +82,42 @@ table_with_iou AS (
 
 final AS (
     SELECT
-        lod2_id,
         municipality_key,
         CASE
+            WHEN intersection_over_union > 0.7 THEN lod2_id
+            ELSE NULL  
+        END AS lod2_id,
+        CASE
             WHEN intersection_over_union > 0.7 THEN building_volume
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL  
         END AS building_volume,
         CASE
+            WHEN intersection_over_union > 0.7 THEN building_height
+            ELSE NULL
+        END AS building_height,
+        CASE
+            WHEN intersection_over_union > 0.7 THEN building_envelope_area
+            ELSE NULL
+        END AS building_envelope_area,
+        CASE
             WHEN intersection_over_union > 0.7 THEN roof_area_north
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL
         END AS roof_area_north,
         CASE
             WHEN intersection_over_union > 0.7 THEN roof_area_east
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL  
         END AS roof_area_east,
         CASE
             WHEN intersection_over_union > 0.7 THEN roof_area_south
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL
         END AS roof_area_south,
         CASE
             WHEN intersection_over_union > 0.7 THEN roof_area_west
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL
         END AS roof_area_west,
         CASE
             WHEN intersection_over_union > 0.7 THEN roof_area_undefined
-            ELSE NULL  -- or 'None' if you prefer a string
+            ELSE NULL  
         END AS roof_area_undefined,
         alkis_type,
         alkis_type_specification,
