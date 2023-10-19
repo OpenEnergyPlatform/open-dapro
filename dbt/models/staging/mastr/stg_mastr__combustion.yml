@@ -1,0 +1,47 @@
+version: 2
+models:
+  - name: stg_mastr__combustion
+    columns:
+      - name: mastr_id
+        description: ''
+        data_type: character varying
+      - name: municipality_id
+        description: ''
+        data_type: character varying
+      - name: municipality
+        description: ''
+        data_type: character varying
+      - name: district
+        description: ''
+        data_type: character varying
+      - name: zip_code
+        description: ''
+        data_type: character varying
+      - name: commissioning_date
+        description: ''
+        data_type: date
+      - name: planned_commissioning_date
+        description: ''
+        data_type: date
+      - name: unit_owner_mastr_id
+        description: ''
+        data_type: character varying
+      - name: power
+        description: ''
+        data_type: double precision
+      - name: energy_carrier
+        description: ''
+        data_type: character varying
+      - name: download_date
+        description: ''
+        data_type: date
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: installation_year
+        description: ''
+        data_type: text
+      - name: coordinate
+        description: ''
+        data_type: USER-DEFINED
+sources: []

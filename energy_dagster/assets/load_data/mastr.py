@@ -95,3 +95,19 @@ def market_actors() -> None:
     engine = utils.get_engine()
     db = Mastr(engine=engine)
     db.download(date=os.environ["MASTR_DOWNLOAD_DATE"], data=["market"])
+
+
+@asset(
+    key_prefix="raw_mastr",
+    group_name="mastr",
+    non_argument_deps={"download_mastr"},
+    compute_kind="python",
+)
+def combustion_extended() -> None:
+    """Download data on combustion power plants from the german public
+    registry 'Marktstammdatenregister (MaStR)' using the python package
+    open-mastr.
+    """
+    engine = utils.get_engine()
+    db = Mastr(engine=engine)
+    db.download(date=os.environ["MASTR_DOWNLOAD_DATE"], data=["combustion"])
