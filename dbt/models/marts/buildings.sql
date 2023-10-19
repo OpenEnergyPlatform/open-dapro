@@ -1,3 +1,11 @@
+{{ 
+    config(
+        indexes=[
+            {'columns': ['geometry'], 'type': 'gist'}
+        ]
+    ) 
+}}
+
 WITH alkis AS (
     SELECT * FROM {{ ref('stg_alkis') }}
 ),
