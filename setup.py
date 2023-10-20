@@ -20,7 +20,7 @@ setup(
     ],
     extras_require={
         "dev": [
-            "dagit",
+            "dagster-webserver",
             "pytest",
             "black",
             "dbt-osmosis",

@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 
 # Checkout and install dagster libraries needed to run the gRPC server
-# exposing your repository to dagit and dagster-daemon, and to load the DagsterInstance
+# exposing your repository to webserver and dagster-daemon, and to load the DagsterInstance
 
 RUN pip install \
     dagster \
