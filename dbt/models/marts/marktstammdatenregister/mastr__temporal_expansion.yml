@@ -1,0 +1,50 @@
+version: 2
+models:
+  - name: mastr__temporal_expansion
+    columns:
+      - name: municipality_id
+        description: 'ID of the municipality (dt. Amtlicher Gemeindeschluessel)'
+        data_type: text
+      - name: municipality
+        description: 'Name of the municipality'
+        data_type: text
+      - name: year
+        data_type: character varying
+        description: 'Timepoint of the timeseries data'
+      - name: power_biomass_per_year
+        description: 'Power of biomass in kW that was newly installed in the given year and municipality.'
+        data_type: double precision
+      - name: power_biomass_cummulative
+        description: 'Total power of biomass in kW in the given year and municipality.'
+        data_type: double precision
+      - name: download_date_biomass
+        description: 'Date when the MaStR containing the biomass data was downloaded.'
+        data_type: date
+      - name: power_solar_per_year
+        description: 'Power of solar PV in kW that was newly installed in the given year and municipality.'
+        data_type: double precision
+      - name: power_solar_cummulative
+        description: 'Total power of solar PV in kW in the given year and municipality.'
+        data_type: double precision
+      - name: download_date_solar
+        description: 'Date when the MaStR containing the solar PV data was downloaded.'
+        data_type: date
+      - name: power_wind_per_year
+        description: 'Power of wind turbines in kW that was newly installed in the given year and municipality.'
+        data_type: double precision
+      - name: power_wind_cummulative
+        description: 'Total power of wind turbines in kW in the given year and municipality.'
+        data_type: double precision
+      - name: download_date_wind
+        description: 'Date when the MaStR containing the wind turbine data was downloaded.'
+        data_type: date
+      - name: capacity_storage_per_year
+        description: 'Capacity of electric storages in kWh that was newly installed in the given year and municipality.'
+        data_type: double precision
+      - name: capacity_storage_cummulative
+        description: 'Total capacity of electric storages in kWh in the given year and municipality.'
+        data_type: double precision
+      - name: download_date_storage
+        description: 'Date when the MaStR containing the electric storage data was downloaded.'
+        data_type: date
+sources: []
