@@ -35,7 +35,9 @@ wind as (
 ),
 
 municipalities as (
-    select municipality_id
+    select 
+        municipality_id,
+        municipality
     from {{ ref('stg_destatis_areas_and_inhabitants') }}
 ),
 
@@ -48,6 +50,7 @@ years as (
 municipalities_with_years as (
     select
         municipalities.municipality_id,
+        municipalities.municipality,
         years.installation_year
     from municipalities
     cross join years
@@ -174,6 +177,7 @@ wind_cummulative as (
 final as (
     select
         m.municipality_id,
+        m.municipality,
         m.installation_year,
         b.power_biomass_per_year,
         b.power_biomass_cummulative,
