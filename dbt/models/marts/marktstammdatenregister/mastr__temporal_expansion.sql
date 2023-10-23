@@ -178,7 +178,7 @@ final as (
     select
         m.municipality_id,
         m.municipality,
-        m.installation_year,
+        m.installation_year as year,
         b.power_biomass_per_year,
         b.power_biomass_cummulative,
         b.download_date_biomass,
