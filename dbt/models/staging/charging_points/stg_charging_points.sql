@@ -19,7 +19,7 @@ final as (
         || COALESCE(
             "Steckertypen1" || ' - ' || "P1 [kW]" || ' kW', ''
         ) as connectors_and_power,
-        ST_SETSRID(ST_MAKEPOINT("Längengrad"::float, "Breitengrad"::float), 4326) as geo_point
+        ST_SETSRID(ST_MAKEPOINT(CAST(REPLACE("Längengrad", ',', '.') AS float), CAST(REPLACE("Breitengrad", ',', '.') AS float)), 4326) as geo_point
 
     from source
 )
