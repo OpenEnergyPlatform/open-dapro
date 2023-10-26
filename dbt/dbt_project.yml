@@ -23,10 +23,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   energy_dbt:
     staging:
-      +materialized: view
+      +materialized: table
       +schema: staging
     intermediate:
-      +materialized: view
+      +materialized: table
       +schema: intermediate
     marts:
       +materialized: table
