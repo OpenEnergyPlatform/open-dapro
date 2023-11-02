@@ -15,10 +15,10 @@ setup(
         "GeoAlchemy2",
         "docker",
         "cjio",
+        "dagster-webserver",
     ],
     extras_require={
         "dev": [
-            "dagster-webserver",
             "pytest",
             "black",
             "dbt-osmosis",
