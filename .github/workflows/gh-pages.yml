@@ -19,5 +19,10 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
+      - name: Delete pyproject.toml
+        run: |
+          if [ -f pyproject.toml ]; then
+            rm pyproject.toml
+          fi
       - run: pip install --upgrade -e .["dev"]
       - run: mkdocs gh-deploy --force
