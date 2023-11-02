@@ -1,8 +1,10 @@
 name: gh-pages
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+      
 permissions:
   contents: write
 jobs:
