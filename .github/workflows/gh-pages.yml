@@ -19,6 +19,5 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install --upgrade pendulum aiohttp
-      - run: pip install --upgrade .["dev"]
+      - run: pip install --upgrade -e .["dev"]
       - run: mkdocs gh-deploy --force
