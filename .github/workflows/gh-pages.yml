@@ -19,6 +19,5 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: rm pyproject.toml
-      - run: pip install --upgrade -e .["dev"]
+      - run: pip install mkdocstrings[python] mkdocs-material 
       - run: mkdocs gh-deploy --force
