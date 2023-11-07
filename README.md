@@ -1,8 +1,13 @@
-# energy_dagster
+[![Documentation](https://github.com/OpenEnergyPlatform/open-dapro/actions/workflows/gh-pages.yml/badge.svg)](https://openenergyplatform.github.io/open-dapro/)
 
-energy_dagster is a collection of automated data pipelines for the German energy system built with [Dagster](https://dagster.io/).
+# open-dapro: Data Processing and Pipelining for the German Energy System 
 
-## Getting started
+open-dapro is a collection of automated data pipelines for the German energy system built with [Dagster](https://dagster.io/) and [dbt](https://www.getdbt.com/).
+
+
+## Installation
+
+### Installation as a developer
 
 1. First, install your Dagster code location as a Python package. By using the -e (editable) flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
 
@@ -56,9 +61,14 @@ dagster - INFO - Loaded environment variables from .env file: pwd,uid,server,db,
 
 You can start writing your own assets in `energy_dagster/assets.py`. The assets are automatically loaded into the Dagster code location as you define them.
 
+### Installation with docker compose
+
+Make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. Pull the repository, enter it, and run
+```bash
+docker-compose up
+```
+
 ## Development
-
-
 ### Adding new Python dependencies
 
 You can specify new Python dependencies in `setup.py`.
@@ -81,15 +91,5 @@ This can be done using the following command:
 dbt-osmosis yaml refactor .\models\marts\
 ```
 
-## Deployment
-To run the pipelines in production, you can use the following command from the root directory of the project:
-
-```bash
-docker-compose up --build
-```
-
-To start the schedulers, enter the `docker_webserver` container and run the following command:
-
-```bash
-dagster schedule start --start-all
-```
+## Acknowledgement 
+This repository was developed at [fortiss GmbH]()
