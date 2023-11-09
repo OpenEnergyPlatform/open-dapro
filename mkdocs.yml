@@ -3,16 +3,16 @@ theme:
   name: material
   features:
     - navigation.tabs
-    - navigation.sections
+    - navigation.tabs.sticky
+    - navigation.tracking
     - navigation.top
-    - navigation.expand
-    - navigation.instant
-    - toc.integrate
+    - navigation.sections
     - search.suggest
     - search.highlight
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - toc.integrate
   language: en
   palette:
     # Palette toggle for dark mode
@@ -51,19 +51,15 @@ markdown_extensions:
   - pymdownx.mark
   - attr_list
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 
 nav:
   - Getting started: index.md
-  - Concepts:
-    - Dagster and dbt: dagster_and_dbt.md
-    - User Interface: user_interface.md
+  - Concepts: concepts.md
   - Datasets: datasets.md
-  - Join Development:
-    - Setup for Development: developing/setup_development.md 
-    - dbt style guide: developing/dbt_style_guide.md
+  - Join Development: development.md
   
 repo_url: https://github.com/OpenEnergyPlatform/open-dapro
 site_description: A Collection of Automated Data Pipelines for the German Energy System
