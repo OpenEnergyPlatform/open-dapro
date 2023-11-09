@@ -11,7 +11,14 @@ with source as (
     select * from {{ source('raw_mastr', 'biomass_extended') }}
 ),
 
-renamed as (
+active_units as (
+    select 
+        *
+    from source
+    where "EinheitBetriebsstatus" = 'In Betrieb'
+),
+
+final as (
 
     select
         "EinheitMastrNummer" as mastr_id,
@@ -30,8 +37,7 @@ renamed as (
             date_part('year', "GeplantesInbetriebnahmedatum")
         ) as installation_year,
         st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
-    from source
-
+    from active_units
 )
 
-select * from renamed
+select * from final

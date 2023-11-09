@@ -15,6 +15,14 @@ source_units as (
     select * from {{ source('raw_mastr', 'storage_units') }}
 ),
 
+
+active_units as (
+    select 
+        *
+    from source_extended
+    where "EinheitBetriebsstatus" = 'In Betrieb'
+),
+
 renamed_storage_units as (
 
     select
@@ -42,7 +50,7 @@ renamed_extended as (
             date_part('year', "GeplantesInbetriebnahmedatum")
         ) as installation_year,
         st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
-    from source_extended
+    from active_units
 
 ),
 
