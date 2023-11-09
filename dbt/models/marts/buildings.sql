@@ -81,6 +81,20 @@ table_with_iou AS (
     FROM joined_tables
 ),
 
+ranked_table_by_iou AS (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (Partition BY osm_id ORDER BY intersection_over_union DESC) AS row_number
+    FROM table_with_iou
+),
+
+table_with_unique_id AS (
+    SELECT 
+        *
+    FROM ranked_table_by_iou
+    WHERE row_number = 1
+),
+
 final AS (
     SELECT
         municipality_key,
@@ -129,7 +143,7 @@ final AS (
         mastr_updated_at,
         lod2_geometry,
         geometry
-    FROM table_with_iou
+    FROM table_with_unique_id
 )
 
 SELECT * FROM final

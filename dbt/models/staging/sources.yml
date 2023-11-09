@@ -1135,12 +1135,47 @@ sources:
       - name: districts_geoboundaries
       - name: municipalities_geoboundaries
       - name: osm_oberfranken
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_mittelfranken
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_unterfranken
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_oberbayern
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_niederbayern
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_oberpfalz
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: osm_schwaben
+        columns:
+          - name: osm_id
+            tests: 
+            - unique
+            - not_null
       - name: lod2_bavaria
       - name: load_alkis
       - name: destatis_areas_and_inhabitants

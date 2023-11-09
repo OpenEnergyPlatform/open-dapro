@@ -44,6 +44,9 @@ models:
       - name: osm_id
         data_type: text
         description: ''
+        tests: 
+        - unique
+        - not_null
       - name: solar_power
         description: ''
         data_type: double precision
