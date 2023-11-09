@@ -1,0 +1,22 @@
+version: 2
+models:
+  - name: stg_osm
+    columns:
+      - name: osm_id
+        description: ''
+        data_type: text
+      - name: code
+        description: ''
+        data_type: bigint
+      - name: fclass
+        description: ''
+        data_type: text
+      - name: name
+        description: ''
+        data_type: text
+      - name: type
+        description: ''
+        data_type: text
+      - name: geometry
+        description: ''
+        data_type: USER-DEFINED
