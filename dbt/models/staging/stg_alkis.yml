@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: stg_alkis
+    columns:
+      - name: alkis_id
+        description: ''
+        data_type: text
+      - name: updated_at
+        description: ''
+        data_type: text
+      - name: usage_type
+        description: ''
+        data_type: text
+      - name: usage_type_specification
+        description: ''
+        data_type: text
+      - name: geometry
+        description: ''
+        data_type: USER-DEFINED

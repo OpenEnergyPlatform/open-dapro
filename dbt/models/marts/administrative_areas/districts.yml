@@ -1,0 +1,46 @@
+version: 2
+models:
+  - name: districts
+    columns:
+      - name: district
+        description: ''
+        data_type: text
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: number_inhabitants
+        description: ''
+        data_type: double precision
+      - name: amount_charging_points
+        description: 'Total number of charging points.'
+        data_type: numeric
+      - name: download_date_biomass
+        description: 'Date when the MaStR containing the biomass data was downloaded.'
+        data_type: date
+      - name: download_date_solar
+        description: 'Date when the MaStR containing the solar PV data was downloaded.'
+        data_type: date
+      - name: download_date_wind
+        description: 'Date when the MaStR containing the wind turbine data was downloaded.'
+        data_type: date
+      - name: download_date_storage
+        description: 'Date when the MaStR containing the electric storage data was downloaded.'
+        data_type: date
+      - name: power_biomass
+        description: ''
+        data_type: double precision
+      - name: power_solar
+        description: ''
+        data_type: double precision
+      - name: power_wind
+        description: ''
+        data_type: double precision
+      - name: capacity_storage
+        description: ''
+        data_type: double precision
+      - name: geometry_array
+        description: ''
+        data_type: USER-DEFINED
+      - name: center
+        description: ''
+        data_type: USER-DEFINED

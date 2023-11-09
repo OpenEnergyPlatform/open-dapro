@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: stg_destatis_areas_and_inhabitants
+    columns:
+      - name: municipality
+        description: ''
+        data_type: text
+      - name: municipality_id
+        description: ''
+        data_type: text
+      - name: district
+        description: ''
+        data_type: text
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: number_inhabitants
+        description: ''
+        data_type: double precision

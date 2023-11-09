@@ -1,0 +1,31 @@
+version: 2
+models:
+  - name: int_municipalities
+    columns:
+      - name: municipality_id
+        description: ''
+        data_type: text
+      - name: municipality
+        description: ''
+        data_type: text
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: district
+        description: ''
+        data_type: text
+      - name: number_inhabitants
+        description: ''
+        data_type: double precision
+      - name: nuts
+        description: ''
+        data_type: text
+      - name: legal_effective_date
+        description: ''
+        data_type: text
+      - name: geometry_array
+        description: ''
+        data_type: USER-DEFINED
+      - name: center
+        description: ''
+        data_type: USER-DEFINED

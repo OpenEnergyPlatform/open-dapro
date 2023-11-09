@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: stg_zensus
+    columns:
+      - name: community_name
+        description: ''
+        data_type: text
+      - name: number_inhabitants
+        description: ''
+        data_type: bigint
+      - name: municipality_id
+        description: ''
+        data_type: text
+      - name: district_id
+        description: ''
+        data_type: text
