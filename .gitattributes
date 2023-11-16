@@ -1,0 +1,3 @@
+dbt/models/** linguist-detectable
+*.yaml linguist-vendored
+*.yml linguist-vendored
