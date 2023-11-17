@@ -7,7 +7,7 @@ open-dapro is a collection of automated data pipelines for the German energy sys
 
 ## Installation
 
-Make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. Pull the repository, enter it, and run
+Make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. Clone the repository, enter it, and run
 ```bash
 docker-compose up
 ```
