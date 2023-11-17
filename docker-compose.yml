@@ -36,13 +36,13 @@ services:
       DAGSTER_POSTGRES_PASSWORD: "postgres"
       DAGSTER_POSTGRES_DB: "postgres_db"
       DAGSTER_CURRENT_IMAGE: "docker_user_code_image"
-      pwd: postgres
-      uid:  postgres
-      server: dagster_energy_database
-      db: energy_database
+      pwd: ${DATA_WAREHOUSE_POSTGRES_PASSWORD:-postgres}
+      uid:  ${DATA_WAREHOUSE_POSTGRES_USER:-postgres}
+      server: data_warehouse_postgres
+      db: ${DATA_WAREHOUSE_POSTGRES_DBNAME:-energy_database}
       port: 5432
       schema: raw
-      MASTR_DOWNLOAD_DATE: today
+      MASTR_DOWNLOAD_DATE: ${MASTR_DOWNLOAD_DATE:-today} 
       DBT_PROFILE_FOLDER: prod
       DAGSTER_HOME: /opt/dagster/dagster_home
       IS_DEVELOP_MODE: False
@@ -75,7 +75,7 @@ services:
     expose:
       - "3000"
     ports:
-      - "3000:3000"
+      - ${DAGSTER_WEBSERVER_PORT:-3000}:3000
     environment:
       DAGSTER_POSTGRES_USER: "postgres"
       DAGSTER_POSTGRES_PASSWORD: "postgres"
@@ -104,15 +104,8 @@ services:
       DAGSTER_POSTGRES_USER: "postgres"
       DAGSTER_POSTGRES_PASSWORD: "postgres"
       DAGSTER_POSTGRES_DB: "postgres_db"
-      #pwd: ${pwd}
-      #uid:  ${uid}
-      #server: ${server}
-      #db: ${db}
-      #port: ${port}
-      #schema: ${schema}
-      #MASTR_DOWNLOAD_DATE: ${MASTR_DOWNLOAD_DATE}
-    volumes: # Make docker client accessible so we can launch containers using host docker
-      - /var/run/docker.sock:/var/run/docker.sock
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock # Make docker client accessible so we can launch containers using host docker
       - /tmp/io_manager_storage:/tmp/io_manager_storage
     networks:
       - docker_network
@@ -120,18 +113,18 @@ services:
       - docker_postgresql
       - docker_user_code
 
-  dagster_energy_database:
+  data_warehouse_postgres:
     image: postgis/postgis:15-3.3
-    container_name: dagster_energy_database
+    container_name: data_warehouse_postgres
     restart: always
     ports:
-      - '5510:5432' #host:container
+      - ${DATA_WAREHOUSE_POSTGRES_PORT:-5510}:5432 #host:container
     environment:
-      POSTGRES_DB: energy_database
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${DATA_WAREHOUSE_POSTGRES_DBNAME:-energy_database}
+      POSTGRES_USER: ${DATA_WAREHOUSE_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATA_WAREHOUSE_POSTGRES_PASSWORD:-postgres}
     volumes:
-      - energyDatabaseVolume:/var/lib/postgresql/data
+      - dataWarehousePostgresVolume:/var/lib/postgresql/data
       - ./docker/init_energy_database.sql:/docker-entrypoint-initdb.d/create_schema.sql
     networks:
       - docker_network
@@ -141,7 +134,7 @@ services:
     container_name: geoserver
     restart: always
     ports:
-      - "8002:8080"
+      - ${GEOSERVER_PORT:-8002}:8080
     volumes:
       - "geoserverData:/opt/geoserver_data"
     environment:
@@ -157,6 +150,6 @@ networks:
 
 volumes:
   dagsterPostgres:
-  energyDatabaseVolume:
+  dataWarehousePostgresVolume:
   dagsterHomeData:
   geoserverData:
