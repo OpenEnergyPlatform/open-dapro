@@ -12,7 +12,7 @@ data_sources:
     zipfile_path: "vg5000_12-31.utm32s.shape.ebenen/vg5000_ebenen_1231/VG5000_KRS.shp"
 
   ladesaeulenregister:
-    url: "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeulenregister.xlsx?__blob=publicationFile&v=43"
+    url: "https://data.bundesnetzagentur.de/Bundesnetzagentur/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/ladesaeulenregister.xlsx"
     filename: "Ladesaeulenregister.xlsx"
     save_directory: "ladesaeulenregister"
 
