@@ -6,172 +6,142 @@ sources:
     tables:
       - name: solar_extended
         columns:
-          - name: ZugeordneteWirkleistungWechselrichter
-            description: ''
-          - name: GemeinsamerWechselrichterMitSpeicher
-            description: ''
-          - name: AnzahlModule
-            description: ''
-          - name: Lage
-            description: ''
-          - name: Leistungsbegrenzung
-            description: ''
-          - name: EinheitlicheAusrichtungUndNeigungswinkel
-            description: ''
-          - name: Hauptausrichtung
-            description: ''
-          - name: HauptausrichtungNeigungswinkel
-            description: ''
-          - name: Nebenausrichtung
-            description: ''
-          - name: NebenausrichtungNeigungswinkel
-            description: ''
-          - name: InAnspruchGenommeneFlaeche
-            description: ''
-          - name: ArtDerFlaeche
-            description: ''
-          - name: InAnspruchGenommeneAckerflaeche
-            description: ''
-          - name: Nutzungsbereich
-            description: ''
-          - name: Buergerenergie
-            description: ''
-          - name: EegMastrNummer
-            description: ''
-          - name: ArtDerFlaecheIds
-            description: ''
-          - name: NetzbetreiberMastrNummer
-            description: ''
-          - name: Registrierungsdatum
-            description: ''
           - name: EinheitMastrNummer
-            description: ''
+            description: 'MaStR-Nummer der Einheit (SEE91234567890)'
           - name: DatumLetzteAktualisierung
-            description: ''
-          - name: LokationMastrNummer
-            description: ''
+            description: 'Datum der letzten Aktualisierung an diesem Objekt (2017-07-25T08:36:54.1004464)'
+          - name: LokationMaStRNummer
+            description: 'MaStR-Nummer der Lokation (SEL91234567890)'
           - name: NetzbetreiberpruefungStatus
-            description: ''
+            description: 'Der Status der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde. Systemkatalog: Status der Netzbetreiberprüfung (0)'
           - name: NetzbetreiberpruefungDatum
-            description: ''
-          - name: AnlagenbetreiberMastrNummer
-            description: ''
+            description: 'Datum der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde (2017-08-02)'
+          - name: AnlagenbetreiberMaStRNummer
+            description: 'MaStRNummer des Betreibers der Einheit (ABR91234567890)'
           - name: Land
-            description: ''
+            description: 'Standort der Einheit: Land: Katalogkategorie: Land (4535)'
           - name: Bundesland
-            description: ''
+            description: 'Standort der Einheit: Bundesland. Katalogkategorie: BundesländerEinheit (899)'
           - name: Landkreis
-            description: ''
+            description: 'Standort der Einheit: Landkreis (Bördekreis)'
           - name: Gemeinde
-            description: ''
+            description: 'Standort der Einheit: Gemeinde (Sülztal)'
           - name: Gemeindeschluessel
-            description: ''
+            description: 'Standort der Einheit: Gemeindeschlüssel (15125414)'
           - name: Postleitzahl
-            description: ''
+            description: 'Standort der Einheit: Postleitzahl (39179)'
           - name: Gemarkung
-            description: ''
+            description: 'Standort der Einheit: Gemarkung (896-98)'
           - name: FlurFlurstuecknummern
-            description: ''
+            description: 'Standort der Einheit: Flur und/oder Flurstücke (123-784)'
           - name: Strasse
-            description: ''
+            description: 'Standort der Einheit: Straße (Holzweg)'
           - name: StrasseNichtGefunden
-            description: ''
+            description: 'Angabe, dass die angegebene Straße nicht aus dem BKG-Adressdatenbestand stammt (false)'
           - name: Hausnummer
-            description: ''
-          - name: HausnummerNichtGefunden
-            description: ''
-          - name: Adresszusatz
-            description: ''
-          - name: Ort
-            description: ''
-          - name: Laengengrad
-            description: ''
-          - name: Breitengrad
-            description: ''
-          - name: UtmZonenwert
-            description: ''
-          - name: UtmEast
-            description: ''
-          - name: UtmNorth
-            description: ''
-          - name: GaussKruegerHoch
-            description: ''
-          - name: GaussKruegerRechts
-            description: ''
-          - name: Meldedatum
-            description: ''
-          - name: GeplantesInbetriebnahmedatum
-            description: ''
-          - name: Inbetriebnahmedatum
-            description: ''
-          - name: DatumEndgueltigeStilllegung
-            description: ''
-          - name: DatumBeginnVoruebergehendeStilllegung
-            description: ''
-          - name: DatumBeendigungVorlaeufigenStilllegung
-            description: ''
-          - name: DatumWiederaufnahmeBetrieb
-            description: ''
-          - name: EinheitSystemstatus
-            description: ''
-          - name: EinheitBetriebsstatus
-            description: ''
-          - name: BestandsanlageMastrNummer
-            description: ''
-          - name: NichtVorhandenInMigriertenEinheiten
-            description: ''
-          - name: AltAnlagenbetreiberMastrNummer
-            description: ''
-          - name: DatumDesBetreiberwechsels
-            description: ''
-          - name: DatumRegistrierungDesBetreiberwechsels
-            description: ''
-          - name: NameStromerzeugungseinheit
-            description: ''
-          - name: Weic
-            description: ''
-          - name: WeicDisplayName
-            description: ''
-          - name: Kraftwerksnummer
-            description: ''
-          - name: Energietraeger
-            description: ''
-          - name: Bruttoleistung
-            description: ''
-          - name: Nettonennleistung
-            description: ''
-          - name: AnschlussAnHoechstOderHochSpannung
-            description: ''
-          - name: Schwarzstartfaehigkeit
-            description: ''
-          - name: Inselbetriebsfaehigkeit
-            description: ''
-          - name: Einsatzverantwortlicher
-            description: ''
-          - name: FernsteuerbarkeitNb
-            description: ''
-          - name: FernsteuerbarkeitDv
-            description: ''
-          - name: FernsteuerbarkeitDr
-            description: ''
-          - name: Einspeisungsart
-            description: ''
-          - name: PraequalifiziertFuerRegelenergie
-            description: ''
-          - name: GenMastrNummer
-            description: ''
-          - name: Netzbetreiberzuordnungen
-            description: ''
+            description: 'Standort der Einheit: Hausnummer (4)'
           - name: Hausnummer_nv
-            description: ''
+            description: 'Standort der Einheit: Hausnummer. Nicht-vorhanden Flag (false)'
+          - name: HausnummerNichtGefunden
+            description: 'Angabe, dass die angegebene Hausnummer nicht aus dem BKG-Adressdatenbestand stammt (false)'
+          - name: Adresszusatz
+            description: 'Standort der Einheit: Adresszusatz (Hinterhaus)'
+          - name: Ort
+            description: 'Standort der Einheit: Ort (Langenweddingen)'
+          - name: Laengengrad
+            description: 'Koordinaten der Einheit: Längengrad (51.254)'
+          - name: Breitengrad
+            description: 'Koordinaten der Einheit: Breitengrad (12.597)'
+          - name: Registrierungsdatum
+            description: 'Registrierungsdatum der Gaserzeugungseinheit (2012-12-12)'
+          - name: GeplantesInbetriebnahmedatum
+            description: 'Geplantes Inbetriebnahmedatum der Stromerzeugungsseinheit (2014-10-24)'
+          - name: Inbetriebnahmedatum
+            description: 'Datum der Inbetriebnahme (1998-01-02)'
+          - name: DatumEndgueltigeStilllegung
+            description: 'Datum der endgültigen Stilllegung der Einheit (2020-01-02)'
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: 'Beginn der vorläufigen Stilllegung der Einheit (2014-02-04)'
+          - name: DatumWiederaufnahmeBetrieb
+            description: 'Datum der Wiederaufnahme des Betriebs (2015-01-02)'
+          - name: EinheitSystemstatus
+            description: 'Systemstatus der Einheit. Katalogkategorie: AnlagenSystemStatus (89212)'
+          - name: EinheitBetriebsstatus
+            description: 'Betriebsstatus der Einheit. Katalogkategorie: Anlagenbetriebsstatus (977)'
+          - name: BestandsanlageMastrNummer
+            description: 'Angaben über optional vorhandene MaStR-Nummer aus der Bestandsanlagenverwaltung (SEE91234567890)'
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: 'Angabe über das Nichtvorhandensein in den migrierten Einheiten (true)'
+          - name: AltAnlagenbetreiberMastrNummer
+            description: 'MaStR-Nummer des ehemaligen Betreibers der Einheit, wenn ein Betreiberwechsel durchgeführt wurde (ABR91234567890)'
+          - name: DatumDesBetreiberwechsels
+            description: 'Datum des realen Betreiberwechsels (2017-08-02)'
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: 'Datum der Registrierung des Betreiberwechsels (2017-07-02)'
+          - name: NameStromerzeugungseinheit
+            description: 'Vom Betreiber frei wählbare Bezeichnung der Stromerzeugungseinheit. (Einheit 14)'
+          - name: Weic
+            description: 'W-Code der Stromerzeugungseinheit (11XVE-SALESPK-P)'
           - name: Weic_nv
-            description: ''
+            description: 'W-Code der Stromerzeugungseinheit. Nicht-vorhanden Flag (false)'
+          - name: WeicDisplayName
+            description: 'Displayname des W-EIC (VES-PK)'
+          - name: Kraftwerksnummer
+            description: 'Bundesnetzagentur-Kraftwerksnummer (BNA0019)'
           - name: Kraftwerksnummer_nv
-            description: ''
-          - name: DatenQuelle
-            description: ''
-          - name: DatumDownload
-            description: ''
+            description: 'Bundesnetzagentur-Kraftwerksnummer. Nicht-vorhanden Flag (false)'
+          - name: Energietraeger
+            description: 'Energieträger der Einheit. Katalogkategorie: Energieträger (7855)'
+          - name: Bruttoleistung
+            description: 'Bruttoleistung in kW (150.112)'
+          - name: Nettonennleistung
+            description: 'Nettonennleistung in kW (148.987)'
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: 'Die Stromerzeugungseinheit ist an ein Höchst- oder Hochspannungsnetz angeschlossen (true)'
+          - name: Einsatzverantwortlicher
+            description: 'Marktpartner-ID des Einsatzverantwortlichen (9900123000007)'
+          - name: FernsteuerbarkeitNb
+            description: 'Fernsteuerbarkeit der Einheit durch einen Netzbetreiber (false)'
+          - name: FernsteuerbarkeitDv
+            description: 'Fernsteuerbarkeit der Einheit durch einen Direktvermarkter (true)'
+          - name: Einspeisungsart
+            description: 'Volleinspeisung oder Teileinspeisung. Katalogkategorie: Einspeisungsart (5242)'
+          - name: GenMastrNummer
+            description: 'MaStRNummer der zu dieser Einheit zugeordneten Genehmigung (GEN91234567890)'
+          - name: zugeordneteWirkleistungWechselrichter
+            description: 'Wechselrichterleistung der Stromerzeugungseinheit (147.254)'
+          - name: GemeinsamerWechselrichterMitSpeicher
+            description: 'Gemeinsamer Wechselrichter mit Stromspeicher. Katalogkategorie: Wechsekrichter (24636)'
+          - name: AnzahlModule
+            description: 'Anzahl der Module dieser Stromerzeugungseinheit (12)'
+          - name: Lage
+            description: 'Errichtungsort der Stromerzeugungseinheit. Katalogkategorie: SolarLage (367)'
+          - name: Leistungsbegrenzung
+            description: 'Die Leistung der Stromerzeugungseinheit ist auf einen bestimmten prozentualen Leistungsanteil begrenzt. Katalogkategorie: SolarLeistungsbegrenzung (4677)'
+          - name: EinheitlicheAusrichtungUndNeigungswinkel
+            description: 'Angabe, ob einheitliche Ausrichtung und Neigungswinkel bestehen. (true)'
+          - name: Hauptausrichtung
+            description: 'Die Ausrichtung bezeichnet die Himmelsrichtung. Katalogkategorie: AnlagenartSolarAusrichtung (467464)'
+          - name: HauptausrichtungNeigungswinkel
+            description: 'Der Neigungswinkel bezeichnet den Winkel gegenüber der Horizontalen. Katalogkategorie: AnlagenartSolarNeigungswinkel. Beispielwert: 758578'
+          - name: Nebenausrichtung
+            description: 'Die Ausrichtung bezeichnet die Himmelsrichtung. Katalogkategorie: AnlagenartSolarAusrichtung. Beispielwert: 467464'
+          - name: NebenausrichtungNeigungswinkel
+            description: 'Der Neigungswinkel bezeichnet den Winkel gegenüber der Horizontalen (Nebenausrichtung). Beispielwert: 758578'
+          - name: InAnspruchGenommeneFlaeche
+            description: 'In Anspruch genommene Fläche. Beispielwert: 456.981'
+          - name: ArtDerFlaecheIds
+            description: 'Art der in Anspruch genommenen Fläche. Katalogkategorien: SolarFlaechenArt. Beispielwerte: 97894, 8784'
+          - name: InAnspruchGenommeneAckerflaeche
+            description: 'In Anspruch genommene Ackerfläche. Beispielwert: 124.098'
+          - name: Nutzungsbereich
+            description: 'Vorrangige Nutzung des in Anspruch genommenen Gebäudes. Katalogkategorie: Nutzungsbereich. Beispielwert: 363536'
+          - name: Buergerenergie
+            description: 'Bürgerenergieeigenschaft der Einheit. Beispielwert: false'
+          - name: EegMaStRNummer
+            description: 'MaStR-Nummer der zugeordneten EEG-Anlage. Beispielwert: EEG91234567890'
+
+
       - name: wind_extended
         columns:
           - name: NameWindpark
@@ -538,148 +508,120 @@ sources:
             description: ''
       - name: biomass_extended
         columns:
-          - name: Hauptbrennstoff
-            description: ''
-          - name: Biomasseart
-            description: ''
-          - name: Technologie
-            description: ''
-          - name: EegMastrNummer
-            description: ''
-          - name: KwkMastrNummer
-            description: ''
-          - name: NetzbetreiberMastrNummer
-            description: ''
-          - name: Registrierungsdatum
-            description: ''
           - name: EinheitMastrNummer
-            description: ''
+            description: 'MaStR-Nummer der Einheit (SEE91234567890)'
           - name: DatumLetzteAktualisierung
-            description: ''
-          - name: LokationMastrNummer
-            description: ''
+            description: 'Datum der letzten Aktualisierung an diesem Objekt (2017-07-25T08:36:54.1004464)'
+          - name: LokationMaStRNummer
+            description: 'MaStR-Nummer der Lokation (LOK91234456789)'
           - name: NetzbetreiberpruefungStatus
-            description: ''
+            description: 'Der Status der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde. Systemkatalog: Status der Netzbetreiberprüfung (0)'
           - name: NetzbetreiberpruefungDatum
-            description: ''
-          - name: AnlagenbetreiberMastrNummer
-            description: ''
+            description: 'Datum der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde (2017-08-02)'
+          - name: AnlagenbetreiberMaStRNummer
+            description: 'MaStR-Nummer des Betreibers der Einheit (ABR915487958)'
           - name: Land
-            description: ''
+            description: 'Standort der Einheit: Land: Katalogkategorie: Land (4535)'
           - name: Bundesland
-            description: ''
+            description: 'Standort der Einheit: Bundesland. Katalogkategorie: BundesländerEinheit (899)'
           - name: Landkreis
-            description: ''
+            description: 'Standort der Einheit: Landkreis (Bördekreis)'
           - name: Gemeinde
-            description: ''
+            description: 'Standort der Einheit: Gemeinde (Sülztal)'
           - name: Gemeindeschluessel
-            description: ''
+            description: 'Standort der Einheit: Gemeindeschlüssel (15125414)'
           - name: Postleitzahl
-            description: ''
+            description: 'Standort der Einheit: Postleitzahl (39179)'
           - name: Gemarkung
-            description: ''
+            description: 'Standort der Einheit: Gemarkung (896-98)'
           - name: FlurFlurstuecknummern
-            description: ''
+            description: 'Standort der Einheit: Flur und/oder Flurstücke (123-784)'
           - name: Strasse
-            description: ''
+            description: 'Standort der Einheit: Straße (Holzweg)'
           - name: StrasseNichtGefunden
-            description: ''
+            description: 'Angabe, dass die angegebene Straße nicht aus dem BKG-Adressdatenbestand stammt (false)'
           - name: Hausnummer
-            description: ''
-          - name: HausnummerNichtGefunden
-            description: ''
-          - name: Adresszusatz
-            description: ''
-          - name: Ort
-            description: ''
-          - name: Laengengrad
-            description: ''
-          - name: Breitengrad
-            description: ''
-          - name: UtmZonenwert
-            description: ''
-          - name: UtmEast
-            description: ''
-          - name: UtmNorth
-            description: ''
-          - name: GaussKruegerHoch
-            description: ''
-          - name: GaussKruegerRechts
-            description: ''
-          - name: Meldedatum
-            description: ''
-          - name: GeplantesInbetriebnahmedatum
-            description: ''
-          - name: Inbetriebnahmedatum
-            description: ''
-          - name: DatumEndgueltigeStilllegung
-            description: ''
-          - name: DatumBeginnVoruebergehendeStilllegung
-            description: ''
-          - name: DatumBeendigungVorlaeufigenStilllegung
-            description: ''
-          - name: DatumWiederaufnahmeBetrieb
-            description: ''
-          - name: EinheitSystemstatus
-            description: ''
-          - name: EinheitBetriebsstatus
-            description: ''
-          - name: BestandsanlageMastrNummer
-            description: ''
-          - name: NichtVorhandenInMigriertenEinheiten
-            description: ''
-          - name: AltAnlagenbetreiberMastrNummer
-            description: ''
-          - name: DatumDesBetreiberwechsels
-            description: ''
-          - name: DatumRegistrierungDesBetreiberwechsels
-            description: ''
-          - name: NameStromerzeugungseinheit
-            description: ''
-          - name: Weic
-            description: ''
-          - name: WeicDisplayName
-            description: ''
-          - name: Kraftwerksnummer
-            description: ''
-          - name: Energietraeger
-            description: ''
-          - name: Bruttoleistung
-            description: ''
-          - name: Nettonennleistung
-            description: ''
-          - name: AnschlussAnHoechstOderHochSpannung
-            description: ''
-          - name: Schwarzstartfaehigkeit
-            description: ''
-          - name: Inselbetriebsfaehigkeit
-            description: ''
-          - name: Einsatzverantwortlicher
-            description: ''
-          - name: FernsteuerbarkeitNb
-            description: ''
-          - name: FernsteuerbarkeitDv
-            description: ''
-          - name: FernsteuerbarkeitDr
-            description: ''
-          - name: Einspeisungsart
-            description: ''
-          - name: PraequalifiziertFuerRegelenergie
-            description: ''
-          - name: GenMastrNummer
-            description: ''
-          - name: Netzbetreiberzuordnungen
-            description: ''
+            description: 'Standort der Einheit: Hausnummer (4)'
           - name: Hausnummer_nv
-            description: ''
+            description: 'Standort der Einheit: Hausnummer. Nicht-vorhanden Flag (false)'
+          - name: HausnummerNichtGefunden
+            description: 'Angabe, dass die angegebene Hausnummer nicht aus dem BKG-Adressdatenbestand stammt (false)'
+          - name: Adresszusatz
+            description: 'Standort der Einheit: Adresszusatz (Hinterhaus)'
+          - name: Ort
+            description: 'Standort der Einheit: Ort (Langenweddingen)'
+          - name: Laengengrad
+            description: 'Koordinaten der Einheit: Längengrad (51.254)'
+          - name: Breitengrad
+            description: 'Koordinaten der Einheit: Breitengrad (12.597)'
+          - name: Registrierungsdatum
+            description: 'Registrierungsdatum der Einheit (2012-12-12)'
+          - name: GeplantesInbetriebnahmedatum
+            description: 'Geplantes Inbetriebnahmedatum der Stromerzeugungsseinheit (2014-10-24)'
+          - name: Inbetriebnahmedatum
+            description: 'Datum der Inbetriebnahme (1998-01-02)'
+          - name: DatumEndgueltigeStilllegung
+            description: 'Datum der endgültigen Stilllegung der Einheit (2020-01-02)'
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: 'Beginn der vorläufigen Stilllegung der Einheit (2014-02-04)'
+          - name: DatumWiederaufnahmeBetrieb
+            description: 'Datum der Wiederaufnahme des Betriebs (2015-01-02)'
+          - name: EinheitSystemstatus
+            description: 'Systemstatus der Einheit. Katalogkategorie: AnlagenSystemStatus (89212)'
+          - name: EinheitBetriebsstatus
+            description: 'Betriebsstatus der Einheit. Katalogkategorie: Anlagenbetriebsstatus (977)'
+          - name: BestandsanlageMastrNummer
+            description: 'Angaben über optional vorhandene MaStR-Nummer aus der Bestandsanlagenverwaltung (SEE91234567890)'
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: 'Angabe über das Nichtvorhandensein in den migrierten Einheiten (true)'
+          - name: AltAnlagenbetreiberMastrNummer
+            description: 'MaStR-Nummer des ehemaligen Betreibers der Einheit, wenn ein Betreiberwechsel durchgeführt wurde (ABR91234567890)'
+          - name: DatumDesBetreiberwechsels
+            description: 'Datum des realen Betreiberwechsels (2017-08-02)'
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: 'Datum der Registrierung des Betreiberwechsels (2017-07-02)'
+          - name: NameStromerzeugungseinheit
+            description: 'Vom Betreiber frei wählbare Bezeichnung der Stromerzeugungseinheit. (Einheit 14)'
+          - name: Weic
+            description: 'W-Code der Stromerzeugungseinheit (11XVE-SALESPK-P)'
           - name: Weic_nv
-            description: ''
+            description: 'W-Code der Stromerzeugungseinheit. Nicht-vorhanden Flag (false)'
+          - name: WeicDisplayName
+            description: 'Displayname des W-EIC (VES-PK)'
+          - name: Kraftwerksnummer
+            description: 'Bundesnetzagentur-Kraftwerksnummer (BNA0019)'
           - name: Kraftwerksnummer_nv
-            description: ''
-          - name: DatenQuelle
-            description: ''
-          - name: DatumDownload
-            description: ''
+            description: 'Bundesnetzagentur-Kraftwerksnummer. Nicht-vorhanden Flag (false)'
+          - name: Energietraeger
+            description: 'Energieträger der Einheit. Katalogkategorie: Energieträger (7855)'
+          - name: Bruttoleistung
+            description: 'Bruttoleistung in kW (150.112)'
+          - name: Nettonennleistung
+            description: 'Nettonennleistung in kW (148.987)'
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: 'Die Stromerzeugungseinheit ist an ein Höchst- oder Hochspannungsnetz angeschlossen (true)'
+          - name: Einsatzverantwortlicher
+            description: 'Marktpartner-ID des Einsatzverantwortlichen (9900123000007)'
+          - name: FernsteuerbarkeitNb
+            description: 'Fernsteuerbarkeit der Einheit durch einen Netzbetreiber (false)'
+          - name: FernsteuerbarkeitDv
+            description: 'Fernsteuerbarkeit der Einheit durch einen Direktvermarkter (true)'
+          - name: Einspeisungsart
+            description: 'Volleinspeisung oder Teileinspeisung. Katalogkategorie: Einspeisungsart (5242)'
+          - name: GenMastrNummer
+            description: 'MaStR-Nummer der zu dieser Einheit zugeordneten Genehmigung (GEN987555545)'
+          - name: Hauptbrennstoff
+            description: 'Welcher Einsatzstoff oder Brennstoff wird hauptsächlich benutzt. Katalogkategorie: BiomasseBrennstoff (85758)'
+          - name: Biomasseart
+            description: 'Art der Biomasse. Katalogkategorie: BiomasseArt (467436)'
+          - name: Technologie
+            description: 'Technologie der Stromerzeugung. Katalogkategorie: TechnologieVerbrennungsanlage (356376)'
+          - name: EegMaStRNummer
+            description: 'MaStRNummer der zugeordneten EEG-Anlage (EEG958745894)'
+          - name: KwkMaStRNummer
+            description: 'MaStR-Nummer der verknüpften KWK-Anlage (KWK951478845)'
+
+
       - name: combustion_extended
         columns:
           - name: NameKraftwerk
