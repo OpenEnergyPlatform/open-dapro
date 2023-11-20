@@ -56,7 +56,10 @@ def lod2_factory(
             continue
         filename = url.split("/")[-1]
         utils.download_from_url(url, save_directory=gml_directory, filename=filename)
-        os.chmod(gml_directory, stat.S_IRWXO | stat.S_IRWXU | stat.S_IRWXG)
+        os.chmod(
+            gml_directory, stat.S_IRWXO | stat.S_IRWXU | stat.S_IRWXG
+        )  # change user rights so that the
+        # docker container can read the data in the gml_directory
 
         if (index + 1) % number_files_conversion == 0:
             # download number_files_conversion of gml files,
@@ -89,15 +92,6 @@ def lod2_factory(
                     name="citygml-tools-dagster",
                 )
 
-            # execute_docker_container(
-            #    context,
-            #    image="citygml4j/citygml-tools",
-            #    command="to-cityjson *.gml --vertex-precision=10",
-            #    container_kwargs={
-            #        "auto_remove": True,
-            #        "volumes": gml_directory.replace("\\", "/") + ":/data",
-            #    },
-            # )
             move_json_files(root=gml_directory, target=json_directory)
             delete_all_files_in_folder(gml_directory)
             write_lod2_to_database(
