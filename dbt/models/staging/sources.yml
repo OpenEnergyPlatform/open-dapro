@@ -621,6 +621,131 @@ sources:
           - name: KwkMaStRNummer
             description: 'MaStR-Nummer der verknüpften KWK-Anlage (KWK951478845)'
 
+      - name: hydro_extended
+        columns:
+          - name: EinheitMastrNummer
+            description: 'MaStR-Nummer der Einheit. (SEE91234567890)'
+          - name: DatumLetzteAktualisierung
+            description: 'Datum der letzten Aktualisierung an diesem Objekt. (2017-07-25T08:36:54.1004464)'
+          - name: LokationMaStRNummer
+            description: 'MaStR-Nummer der Lokation. (SEL91234567890)'
+          - name: NetzbetreiberpruefungStatus
+            description: 'Der Status der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde. Systemkatalog: Status der Netzbetreiberprüfung. (0)'
+          - name: NetzbetreiberpruefungDatum
+            description: 'Datum der letzten Netzbetreiberprüfung, insofern eine durchgeführt wurde. (2017-08-02)'
+          - name: AnlagenbetreiberMaStRNummer
+            description: 'MaStRNummer des Betreibers der Einheit. (ABR91234567890)'
+          - name: Land
+            description: 'Standort der Einheit: Land: Katalogkategorie: Land (4535)'
+          - name: Bundesland
+            description: 'Standort der Einheit: Bundesland. Katalogkategorie: BundesländerEinheit (899)'
+          - name: Landkreis
+            description: 'Standort der Einheit: Landkreis (Bördekreis)'
+          - name: Gemeinde
+            description: 'Standort der Einheit: Gemeinde (Sülztal)'
+          - name: Gemeindeschluessel
+            description: 'Standort der Einheit: Gemeindeschlüssel (15125414)'
+          - name: Postleitzahl
+            description: 'Standort der Einheit: Postleitzahl (39179)'
+          - name: Gemarkung
+            description: 'Standort der Einheit: Gemarkung (896-98)'
+          - name: FlurFlurstuecknummern
+            description: 'Standort der Einheit: Flur und/oder Flurstücke (123-784)'
+          - name: Strasse
+            description: 'Standort der Einheit: Straße (Holzweg)'
+          - name: StrasseNichtGefunden
+            description: 'Angabe, dass die angegebene Straße nicht aus dem BKG-Adressdatenbestand stammt (false)'
+          - name: Hausnummer
+            description: 'Standort der Einheit: Hausnummer (4)'
+          - name: Hausnummer_nv
+            description: 'Standort der Einheit: Hausnummer. Nicht-vorhanden Flag (false)'
+          - name: HausnummerNichtGefunden
+            description: 'Angabe, dass die angegebene Hausnummer nicht aus dem BKG-Adressdatenbestand stammt (false)'
+          - name: Adresszusatz
+            description: 'Standort der Einheit: Adresszusatz (Hinterhaus)'
+          - name: Ort
+            description: 'Standort der Einheit: Ort (Langenweddingen)'
+          - name: Laengengrad
+            description: 'Koordinaten der Einheit: Längengrad (51.254)'
+          - name: Breitengrad
+            description: 'Koordinaten der Einheit: Breitengrad (12.597)'
+          - name: Registrierungsdatum
+            description: 'Registrierungsdatum der Gaserzeugungseinheit (2012-12-12)'
+          - name: GeplantesInbetriebnahmedatum
+            description: 'Geplantes Inbetriebnahmedatum der Stromerzeugungsseinheit (2014-10-24)'
+          - name: Inbetriebnahmedatum
+            description: 'Datum der Inbetriebnahme (1998-01-02)'
+          - name: DatumEndgueltigeStilllegung
+            description: 'Datum der endgültigen Stilllegung der Einheit (2020-01-02)'
+          - name: DatumBeginnVoruebergehendeStilllegung
+            description: 'Beginn der vorläufigen Stilllegung der Einheit (2014-02-04)'
+          - name: DatumWiederaufnahmeBetrieb
+            description: 'Datum der Wiederaufnahme des Betriebs (2015-01-02)'
+          - name: EinheitSystemstatus
+            description: 'Systemstatus der Einheit. Katalogkategorie: AnlagenSystemStatus (89212)'
+          - name: EinheitBetriebsstatus
+            description: 'Betriebsstatus der Einheit. Katalogkategorie: Anlagenbetriebsstatus (977)'
+          - name: BestandsanlageMastrNummer
+            description: 'Angaben über optional vorhandene MaStR-Nummer aus der Bestandsanlagenverwaltung (SEE91234567890)'
+          - name: NichtVorhandenInMigriertenEinheiten
+            description: 'Angabe über das Nichtvorhandensein in den migrierten Einheiten (true)'
+          - name: AltAnlagenbetreiberMastrNummer
+            description: 'MaStR-Nummer des ehemaligen Betreibers der Einheit, wenn ein Betreiberwechsel durchgeführt wurde (ABR91234567890)'
+          - name: DatumDesBetreiberwechsels
+            description: 'Datum des realen Betreiberwechsels (2017-08-02)'
+          - name: DatumRegistrierungDesBetreiberwechsels
+            description: 'Datum der Registrierung des Betreiberwechsels (2017-07-02)'
+          - name: NameStromerzeugungseinheit
+            description: 'Vom Betreiber frei wählbare Bezeichnung der Stromerzeugungseinheit (Einheit 14)'
+          - name: Weic
+            description: 'W-Code der Stromerzeugungseinheit (11XVE-SALESPK-P)'
+          - name: Weic_nv
+            description: 'W-Code der Stromerzeugungseinheit. Nicht-vorhanden Flag (false)'
+          - name: WeicDisplayName
+            description: 'Displayname des W-EIC (VES-PK)'
+          - name: Kraftwerksnummer
+            description: 'Bundesnetzagentur-Kraftwerksnummer (BNA0019)'
+          - name: Kraftwerksnummer_nv
+            description: 'Bundesnetzagentur-Kraftwerksnummer. Nicht-vorhanden Flag (false)'
+          - name: Energietraeger
+            description: 'Energieträger der Einheit. Katalogkategorie: Energieträger (7855)'
+          - name: Bruttoleistung
+            description: 'Bruttoleistung in kW (150.112)'
+          - name: Nettonennleistung
+            description: 'Nettonennleistung in kW (148.987)'
+          - name: AnschlussAnHoechstOderHochSpannung
+            description: 'Die Stromerzeugungseinheit ist an ein Höchst- oder Hochspannungsnetz angeschlossen (true)'
+          - name: Einsatzverantwortlicher
+            description: 'Marktpartner-ID des Einsatzverantwortlichen (9900123000007)'
+          - name: FernsteuerbarkeitNb
+            description: 'Fernsteuerbarkeit der Einheit durch einen Netzbetreiber (false)'
+          - name: FernsteuerbarkeitDv
+            description: 'Fernsteuerbarkeit der Einheit durch einen Direktvermarkter (true)'
+          - name: Einspeisungsart
+            description: 'Volleinspeisung oder Teileinspeisung. Katalogkategorie: Einspeisungsart (5242)'
+          - name: GenMastrNummer
+            description: 'MaStRNummer der zu dieser Einheit zugeordneten Genehmigung (GEN91234567890)'
+          - name: NameKraftwerk
+            description: 'Name des Kraftwerks (Wasserpark 2)'
+          - name: ArtDerWasserkraftanlage
+            description: 'Art der Stromerzeugung aus Wasserkraft. Katalogkategorie: ArtDerWasserkraftanlage (4684848)'
+          - name: AnzeigeEinerStilllegung
+            description: 'Anzeige einer Stilllegung nach §13b Abs.1 Satz 1 (Vorlaeufig)'
+          - name: ArtDerStilllegung
+            description: 'Art der Stilllegung nach §13b. Katalogkategorie: ArtDerStilllegung (578457)'
+          - name: DatumBeginnVorlaeufigenOderEndgueltigenStilllegung
+            description: 'Beginn der vorläufigen oder endgültigen Stilllegung der Einheit (2014-01-02)'
+          - name: MinderungStromerzeugung
+            description: 'Auflagen, die zur Minderung der Stromerzeugung führen? (true)'
+          - name: BestandteilGrenzkraftwerk
+            description: 'Gehört die Stromerzeugungseinheit zu einem Grenzkraftwerk (true)'
+          - name: NettonennleistungDeutschland
+            description: 'Die höchste elektrische Dauerleistung unter Nennbedingungen dieser Stromerzeugungseinheit, die in ein deutsches Stromnetz eingespeist werden kann. (458.145)'
+          - name: ArtDesZuflusses
+            description: 'Welche Art von Zufluss wird zur Stromerzeugung verwendet. Katalogkategorie: Zuflussart (243637468)'
+          - name: EegMaStRNummer
+            description: 'MaStR-Nummer der zugeordneten EEG-Anlage (EEG91234567890)'
+
 
       - name: combustion_extended
         columns:
