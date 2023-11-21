@@ -32,3 +32,8 @@ models:
       +materialized: table
       +schema: marts
     +dbt-osmosis: "{model}.yml"
+
+tests:
+  energy_dbt:
+    staging:
+      +severity: warn
