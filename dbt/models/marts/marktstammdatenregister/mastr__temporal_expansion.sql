@@ -5,6 +5,7 @@ with storage as (
         storage_capacity,
         download_date
     from {{ ref('stg_mastr__storages') }}
+    where operating_status = 'In Betrieb'
 ),
 
 biomass as (
@@ -14,6 +15,7 @@ biomass as (
         power,
         download_date
     from {{ ref('stg_mastr__biomass') }}
+    where operating_status = 'In Betrieb'
 ),
 
 solar as (
@@ -23,6 +25,7 @@ solar as (
         power,
         download_date
     from {{ ref('stg_mastr__solar') }}
+    where operating_status = 'In Betrieb'
 ),
 
 wind as (
@@ -32,6 +35,7 @@ wind as (
         power,
         download_date
     from {{ ref('stg_mastr__wind') }}
+    where operating_status = 'In Betrieb'
 ),
 
 municipalities as (
