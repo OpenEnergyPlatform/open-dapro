@@ -11,17 +11,12 @@ with source as (
     select * from {{ source('raw_mastr', 'combustion_extended') }}
 ),
 
-active_units as (
-    select 
-        *
-    from source
-    where "EinheitBetriebsstatus" = 'In Betrieb'
-),
 
 renamed as (
 
     select
         "EinheitMastrNummer" as mastr_id,
+        "EinheitBetriebsstatus" as operating_status,
         "Gemeindeschluessel" as municipality_id,
         "Gemeinde" as municipality,
         "Landkreis" as district,
@@ -38,7 +33,7 @@ renamed as (
             date_part('year', "GeplantesInbetriebnahmedatum")
         ) as installation_year,
         st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
-    from active_units
+    from source
 
 )
 
