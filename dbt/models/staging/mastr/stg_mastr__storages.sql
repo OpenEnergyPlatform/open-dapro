@@ -51,6 +51,7 @@ renamed_extended as (
 storage_units as (
     select
         renamed_storage_units.mastr_id as mastr_id,
+        renamed_extended.operating_status,
         renamed_storage_units.storage_capacity,
         renamed_extended.municipality_id,
         renamed_extended.district_id,
