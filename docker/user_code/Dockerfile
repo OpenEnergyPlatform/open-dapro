@@ -9,16 +9,12 @@ RUN pip install \
     dagster-postgres \
     dagster-docker
 
-# Add repository code
-
 COPY .  /opt/dagster/app
 
 WORKDIR /opt/dagster/app
 
 RUN pip install -e . 
-# Not sure if the -e changes the behaviour
-
-RUN cd dbt && dbt deps
+RUN /bin/sh -c "cd dbt && dbt deps"
 
 # Run dagster gRPC server on port 4000
 
