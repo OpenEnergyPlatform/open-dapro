@@ -2,6 +2,7 @@
 target/
 logs/
 dbt/config/prod/.user.yml
+dbt/dbt_packages
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

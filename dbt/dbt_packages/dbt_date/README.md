@@ -32,7 +32,7 @@ Include in `packages.yml`
 ```yaml
 packages:
   - package: calogica/dbt_date
-    version: [">=0.9.0", "<0.10.0"]
+    version: [">=0.8.0", "<0.9.0"]
     # <see https://github.com/calogica/dbt-date/releases/latest> for the latest version tag
 ```
 
@@ -42,7 +42,22 @@ This package supports:
 * Snowflake
 * BigQuery
 * DuckDB
-* Spark
+
+For other platforms, you will have to include a shim package for the platform, such as `spark-utils`, or `tsql-utils`.
+
+For example, in `packages.yml`, you will need to include the relevant package:
+
+```yaml
+  - package: dbt-labs/spark_utils
+    version: <latest or range>
+```
+
+And reference in the dispatch list for `dbt_date` in `dbt_project.yml`:
+
+```yaml
+vars:
+    dbt_date_dispatch_list: [spark_utils]
+```
 
 ## Variables
 

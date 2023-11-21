@@ -43,8 +43,3 @@
     dayname({{ date }})
     {%- endif -%}
 {%- endmacro %}
-
-{%- macro spark__day_name(date, short) -%}
-{%- set f = 'E' if short else 'EEEE' -%}
-    date_format({{ date }}, '{{ f }}')
-{%- endmacro %}
