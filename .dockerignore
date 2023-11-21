@@ -4,6 +4,6 @@ docs/
 .gitignore
 .env.template
 .pre-commit-config.yaml
-README.md
+README.rst
 *.egg-info/
 .vscode
