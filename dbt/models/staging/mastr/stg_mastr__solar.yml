@@ -2,36 +2,123 @@ version: 2
 models:
   - name: stg_mastr__solar
     description: ''
+    tests:
+      - expect_column_pair_division_to_be_within:
+          column_A: power_gross
+          column_B: power_inverter
+          min_value: 0.05
+          max_value: 20
+      - expect_column_pair_division_to_be_within:
+          column_A: power_gross
+          column_B: number_of_modules
+          min_value: 0.05  # 50 Watt pro Modul
+          max_value: 0.9  # 900 Watt pro Modul
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: power_gross
+          column_B: power_net
+          or_equal: True
+      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+          column_A: power_inverter
+          column_B: power_net
+          or_equal: True
     columns:
       - name: mastr_id
         description: ''
-      - name: municipality_id
+        tests:
+          - unique:
+              config:
+                severity: error
+          - not_null:
+              config:
+                severity: error
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^[A-Z]{3}\\d{12}$"
+        data_type: character varying
+      - name: operating_status
         description: ''
-      - name: municipality
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
+        data_type: character varying
+      - name: grid_operator_inspection
+        data_type: character varying
         description: ''
-      - name: district
+      - name: installation_year
         description: ''
-      - name: zip_code
-        description: ''
+        data_type: integer
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1980  # (Optional)
+              max_value: 2030 # (Optional)
+              row_condition: "installation_year is not null" # (Optional)
       - name: commissioning_date
         description: ''
+        data_type: date
       - name: planned_commissioning_date
         description: ''
-      - name: unit_owner_mastr_id
+        data_type: date
+      - name: download_date
         description: ''
-      - name: power
+        data_type: date
+      - name: power_net
+        data_type: double precision
+        description: ''
+      - name: power_gross
+        data_type: double precision
+        description: ''
+      - name: power_inverter
+        data_type: double precision
+        description: ''
+      - name: number_of_modules
+        data_type: integer
         description: ''
       - name: orientation
         description: ''
+        data_type: character varying
       - name: orientation_secondary
         description: ''
+        data_type: character varying
       - name: combination_with_storage
         description: ''
+        data_type: character varying
+      - name: unit_type
+        data_type: character varying
+        description: ''
+      - name: unit_owner_mastr_id
+        description: ''
+        data_type: character varying
       - name: utilization_area
         description: ''
-      - name: download_date
+        data_type: character varying
+      - name: municipality_id
         description: ''
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^\\d{8}$"
+        data_type: character varying
+      - name: municipality
+        description: ''
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+        data_type: character varying
       - name: district_id
         description: ''
-      - name: installation_year
+        data_type: text
+      - name: district
+        description: ''
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+        data_type: character varying
+      - name: zip_code
+        description: ''
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^\\d{5}$"
+        data_type: character varying
+      - name: coordinate
+        data_type: USER-DEFINED
         description: ''
