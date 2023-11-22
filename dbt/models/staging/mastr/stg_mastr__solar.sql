@@ -19,10 +19,15 @@ renamed as (
         "EinheitBetriebsstatus" as operating_status,
         "NetzbetreiberpruefungStatus" as grid_operator_inspection,
         --dates
-        concat(
+        CASE
+        WHEN "Inbetriebnahmedatum" IS NOT NULL OR "GeplantesInbetriebnahmedatum" IS NOT NULL THEN
+            concat(
             date_part('year', "Inbetriebnahmedatum"),
             date_part('year', "GeplantesInbetriebnahmedatum")
-        ) as installation_year,
+        )::integer
+        ELSE
+            NULL
+        END as installation_year,
         "Inbetriebnahmedatum" as commissioning_date,
         "GeplantesInbetriebnahmedatum" as planned_commissioning_date,
         "DatumDownload" as download_date,
