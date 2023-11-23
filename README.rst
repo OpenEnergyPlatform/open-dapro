@@ -11,6 +11,20 @@ open-dapro
 .. image:: https://github.com/OpenEnergyPlatform/open-dapro/actions/workflows/gh-pages.yml/badge.svg
    :target: https://openenergyplatform.github.io/open-dapro/
 
+.. list-table::
+   :widths: auto
+
+   * - License
+     - |badge_license|
+   * - Documentation
+     - |badge_documentation|
+   * - Publication
+     -
+   * - Development
+     - |badge_issue_open| |badge_issue_closes| |badge_pr_open| |badge_pr_closes|
+   * - Community
+     - |badge_contributing| |badge_contributors| |badge_repo_counts|
+
 .. contents::
     :depth: 2
     :local:
@@ -36,3 +50,32 @@ Acknowledgement
 ================
 
 This repository was developed at `fortiss GmbH <https://www.fortiss.org/>`_ within the `eTwin.BY Project <https://www.fortiss.org/en/research/projects/detail/etwinby>`_. This work was funded by "Bayerische Staatsministerium für Wirtschaft, Landesentwicklung und Energie" as part of "Bayerischen Verbundförderprogramms (BayVFP) – Förderlinie Digitalisierung – Förderbereich Informations- und Kommunikationstechnik".
+
+.. |badge_license| image:: https://img.shields.io/github/license/OpenEnergyPlatform/open-dapro
+    :target: LICENSE.txt
+    :alt: License
+
+.. |badge_documentation| image::
+    :target:
+    :alt: Documentation
+
+.. |badge_contributing| image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
+    :alt: contributions
+
+.. |badge_repo_counts| image:: http://hits.dwyl.com/OpenEnergyPlatform/open-dapro.svg
+    :alt: counter
+
+.. |badge_contributors| image:: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
+    :alt: contributors
+
+.. |badge_issue_open| image:: https://img.shields.io/github/issues-raw/OpenEnergyPlatform/open-dapro
+    :alt: open issues
+
+.. |badge_issue_closes| image:: https://img.shields.io/github/issues-closed-raw/OpenEnergyPlatform/open-dapro
+    :alt: closes issues
+
+.. |badge_pr_open| image:: https://img.shields.io/github/issues-pr-raw/OpenEnergyPlatform/open-dapro
+    :alt: closes issues
+
+.. |badge_pr_closes| image:: https://img.shields.io/github/issues-pr-closed-raw/OpenEnergyPlatform/open-dapro
+    :alt: closes issues
