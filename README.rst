@@ -22,7 +22,7 @@ open-dapro: Data Processing and Pipelining for the German Energy System
 open-dapro is a collection of automated data pipelines for the German energy system built with `Dagster <https://dagster.io/>`_ and `dbt <https://www.getdbt.com/>`_.
 
 Installation
-------------
+=============
 
 Make sure you have `docker <https://www.docker.com/>`_ and `docker-compose <https://docs.docker.com/compose/>`_ installed. Clone the repository, enter it, and run:
 
@@ -33,6 +33,6 @@ Make sure you have `docker <https://www.docker.com/>`_ and `docker-compose <http
 To install the project in a developer setup, check the `Setup for Developers <https://openenergyplatform.github.io/open-dapro/developing/setup_development/>`_ on the documentation page.
 
 Acknowledgement
----------------
+================
 
 This repository was developed at `fortiss GmbH <https://www.fortiss.org/>`_ within the `eTwin.BY Project <https://www.fortiss.org/en/research/projects/detail/etwinby>`_. This work was funded by "Bayerische Staatsministerium für Wirtschaft, Landesentwicklung und Energie" as part of "Bayerischen Verbundförderprogramms (BayVFP) – Förderlinie Digitalisierung – Förderbereich Informations- und Kommunikationstechnik".
