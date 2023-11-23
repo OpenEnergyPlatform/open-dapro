@@ -8,11 +8,27 @@
 open-dapro
 ==========
 
-
-
-
 .. image:: https://github.com/OpenEnergyPlatform/open-dapro/actions/workflows/gh-pages.yml/badge.svg
    :target: https://openenergyplatform.github.io/open-dapro/
+
+.. list-table::
+   :widths: auto
+
+   * - License
+     - |badge_license|
+   * - Documentation
+     - |badge_documentation|
+   * - Publication
+     -
+   * - Development
+     - |badge_issue_open| |badge_issue_closes| |badge_pr_open| |badge_pr_closes|
+   * - Community
+     - |badge_contributing| |badge_contributors| |badge_repo_counts|
+
+.. contents::
+    :depth: 2
+    :local:
+    :backlinks: top
 
 open-dapro: Data Processing and Pipelining for the German Energy System
 =======================================================================
