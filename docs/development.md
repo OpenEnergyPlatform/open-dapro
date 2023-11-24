@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. Clone the repository [git.fortiss.org/ASCI-public/energy-dagster](https://git.fortiss.org/ASCI-public/energy-dagster) and open it.
+1. Clone the repository [github.com/OpenEnergyPlatform/open-dapro](https://github.com/OpenEnergyPlatform/open-dapro) and open it.
 1. Install your Dagster code location as a Python package. By using the -e (editable) flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
 
     ```bash
