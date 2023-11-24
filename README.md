@@ -12,7 +12,7 @@ Make sure you have [docker](https://www.docker.com/) and [docker-compose](https:
 docker-compose up
 ```
 
-To install the project in a developer setup check the [Setup for Developers](https://openenergyplatform.github.io/open-dapro/developing/setup_development/) on the documentation page.
+To install the project in a developer setup check the [Setup for Developers](https://openenergyplatform.github.io/open-dapro/development/) on the documentation page.
 
 
 ## Acknowledgement 
