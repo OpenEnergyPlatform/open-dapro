@@ -15,12 +15,12 @@ models:
           column_B: number_of_modules
           min_value: 0.05  # 50 Watt per module
           max_value: 0.9  # 900 Watt per module
-      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+      - expect_column_pair_values_A_to_be_greater_than_B:
           name: column_A_larger_B_stg_mastr__solar_power_gross_larger_net
           column_A: power_gross
           column_B: power_net
           or_equal: True
-      - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+      - expect_column_pair_values_A_to_be_greater_than_B:
           name: column_A_larger_B_stg_mastr__solar_power_inverter_larger_net
           column_A: power_inverter
           column_B: power_net
