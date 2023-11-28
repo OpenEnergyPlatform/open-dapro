@@ -44,6 +44,7 @@ models:
         tests:
           - not_null
           - accepted_values:
+              name: accepted_values_stg_mastr__solar_operating_status
               values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
         data_type: character varying
       - name: grid_operator_inspection
@@ -107,7 +108,7 @@ models:
         tests:
           - not_null
           - expect_column_values_to_match_regex:
-              name: regex_stg_mastr__solar_mmunicipality_key
+              name: regex_stg_mastr__solar_municipality_key
               regex: "^\\d{8}$"
         data_type: character varying
       - name: municipality
