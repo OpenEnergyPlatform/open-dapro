@@ -35,7 +35,7 @@ models:
           - not_null:
               config:
                 severity: error
-          - dbt_expectations.expect_column_values_to_match_regex:
+          - expect_column_values_to_match_regex:
               name: regex_stg_mastr__solar_mastr_id
               regex: "^[A-Z]{3}\\d{12}$"
         data_type: character varying
@@ -106,7 +106,7 @@ models:
         description: ''
         tests:
           - not_null
-          - dbt_expectations.expect_column_values_to_match_regex:
+          - expect_column_values_to_match_regex:
               name: regex_stg_mastr__solar_mmunicipality_key
               regex: "^\\d{8}$"
         data_type: character varying
@@ -130,8 +130,8 @@ models:
       - name: zip_code
         description: ''
         tests:
-          - dbt_expectations.expect_column_values_to_match_regex:
-              name: regex_stg_mastr__solar_mzip_code
+          - expect_column_values_to_match_regex:
+              name: regex_stg_mastr__solar_zip_code
               regex: "^\\d{5}$"
         data_type: character varying
       - name: coordinate
