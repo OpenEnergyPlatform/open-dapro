@@ -1,0 +1,1507 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Collection of Automated Data Pipelines for the German Energy System">
+      
+      
+      
+      
+        <link rel="prev" href="../datasets/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>Join Development - open-dapro</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setup-for-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="open-dapro" class="md-header__button md-logo" aria-label="open-dapro" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            open-dapro
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Join Development
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/OpenEnergyPlatform/open-dapro" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Getting started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../concepts/" class="md-tabs__link">
+        
+  
+    
+  
+  Concepts
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../datasets/" class="md-tabs__link">
+        
+  
+    
+  
+  Datasets
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Join Development
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="open-dapro" class="md-nav__button md-logo" aria-label="open-dapro" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    open-dapro
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/OpenEnergyPlatform/open-dapro" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datasets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Join Development
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Join Development
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-we-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools we use
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools we use">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      pre-commit hooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt-osmosis" class="md-nav__link">
+    <span class="md-ellipsis">
+      dbt osmosis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dbt-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      dbt Style Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="dbt Style Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Layers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-file-naming-and-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model File Naming and Coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Configurations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctes" class="md-nav__link">
+    <span class="md-ellipsis">
+      CTEs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CTEs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sql-with-ctes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example SQL with CTEs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL style guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL style guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example SQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml-and-markdown-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      YAML and Markdown style guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="YAML and Markdown style guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example YAML
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jinja-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jinja style guide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics style guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics style guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#organizing-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organizing Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics Conventions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-metrics-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Metrics YAML
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="setup-for-development">Setup for development</h1>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Clone the repository <a href="https://github.com/OpenEnergyPlatform/open-dapro">github.com/OpenEnergyPlatform/open-dapro</a> and open it.</li>
+<li>
+<p>Install your Dagster code location as a Python package. By using the -e (editable) flag, pip will install your Python package in <a href="https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs">"editable mode"</a> so that as you develop, local code changes will automatically apply.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>Next, make sure you have <a href="https://www.docker.com/">docker</a> and <a href="https://docs.docker.com/compose/install/standalone/">docker-compose</a> installed. You can check this by running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker-compose<span class="w"> </span>--version
+</code></pre></div>
+</li>
+<li>
+<p>You now need to rename the <code>.env.template</code> file to <code>.env</code> and change your credentials if needed. The <code>.env</code> file will not be uploaded to git. Note that these credentials have to match the database created with the <code>development/docker-compose.yml</code> file. </p>
+</li>
+<li>
+<p>To initialize the database and to create the docker container, run:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>development/initialize.py
+</code></pre></div>
+Check if the database is running on the server and port specified in the <code>.env</code> file. </p>
+</li>
+<li>
+<p>Start the Dagster UI web server:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>dagster<span class="w"> </span>dev
+</code></pre></div>
+<p>If the environment variables were loaded successfully, you should see the following line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>dagster - INFO - Loaded environment variables from .env file: pwd,uid,server,db,port,schema, MASTR_DOWNLOAD_DATE
+</code></pre></div>
+</li>
+<li>
+<p>Open <a href="http://127.0.0.1:3000">127.0.0.1:3000</a> with your browser to see the project. You can start writing your own assets in <code>energy_dagster/assets.py</code>. The assets are automatically loaded into the Dagster code location as you define them.</p>
+</li>
+</ol>
+<h2 id="tools-we-use">Tools we use</h2>
+<h3 id="pre-commit-hooks">pre-commit hooks</h3>
+<p>In this project, we use <a href="https://pre-commit.com/">pre-commit hooks</a> to lint the code before committing. The hooks are defined in the <code>.pre-commit-config.yaml</code> file. To install the hooks, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pre-commit<span class="w"> </span>install
+</code></pre></div>
+<p>This will install the hooks in your local repository. They will be executed before every commit and check for linting errors using the <a href="https://docs.sqlfluff.com/en/stable/">sqlfluff</a> and <a href="https://black.readthedocs.io/en/stable/">black</a> packages.</p>
+<h3 id="dbt-osmosis">dbt osmosis</h3>
+<p>You can use <code>dbt-osmosis</code> for creating, updating, and deleting dbt property files.
+This can be done using the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>dbt-osmosis yaml refactor .\models\marts\
+</code></pre></div>
+<h2 id="dbt-style-guide">dbt Style Guide</h2>
+<p>This style guide is a shortened version of the <a href="https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md">dbt-labs style guide</a>.</p>
+<h3 id="model-organization">Model Organization</h3>
+<p>Our models (typically) fit into two main categories:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Staging</td>
+<td>Contains models which clean and standardize data</td>
+</tr>
+<tr>
+<td>Marts</td>
+<td>Contains models which combine or heavily transform data</td>
+</tr>
+</tbody>
+</table>
+<p>Things to note:
+- There are different types of models
+that typically exist in each of the above categories.<br />
+See <a href="#model-layers">Model Layers</a> for more information. </p>
+<ul>
+<li>Read <a href="https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview">How we structure our dbt projects</a> for an example and more details around organization.</li>
+</ul>
+<h3 id="model-layers">Model Layers</h3>
+<ul>
+<li>Only models in <code>staging</code> should select from <a href="https://docs.getdbt.com/docs/building-a-dbt-project/using-sources">sources</a></li>
+<li>Models not within the <code>staging</code> folder should select from <a href="https://docs.getdbt.com/reference/dbt-jinja-functions/ref">refs</a>.</li>
+<li>
+<p>The following are the DAG stages that we tend to utilize:</p>
+<table>
+<thead>
+<tr>
+<th>dag_stage</th>
+<th>Typically found in</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>seed_</td>
+<td>/seeds</td>
+<td><li> Indicates a data set created from <code>dbt seed</code>.</td>
+</tr>
+<tr>
+<td>stg_</td>
+<td>/models/staging</td>
+<td><li> Indicates a data set that is being cleaned and standardized. </li><li> In absence of a base_ layer, it representthe 1:1 relationship between the source and first layer of models. li&gt;</td>
+</tr>
+<tr>
+<td>int_</td>
+<td>/models/marts</td>
+<td><li> Indicates a logical step towards creating a final data set. </li><li>Typically used for:</li><ul><li>Breaking ua very large fct_ or dim_ model into smaller pieces to reduce complexity</li><li>Creating a reusable data set to reference in multiple downstream fctand dim_ models</li></ul></td>
+</tr>
+<tr>
+<td>dim_</td>
+<td>/models/marts</td>
+<td><li> Flags data which is used to describe an entity. </li><li> Indicates a final data which is robust, versatile, anready for consumption. </li></td>
+</tr>
+<tr>
+<td>base_</td>
+<td>/models/staging</td>
+<td><li> Indicates cleaning and standardization on a data set before joining to other data sets in <code>stg_</code> models.<li> Typically used when multiple sources are rarely used independently. <br/><br/> <strong><em>Example</strong></em>: <br>Location data in our org is seldom used partially, so we want to create one cleaned data set which puts it all together. <br/><br/> <em>Step 1</em>: Models to clean and standardize each data set:<br/><ul><li>base_location__addresses.sql</li><li>base_location__countries.sql</li><li>base_location__states.sql</li></ul><br/><em>Step 2</em>: A model to join all location data as one entity for use in downstream modeling:<ul><li>stg_location__locations.sql</li></ul></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="model-file-naming-and-coding">Model File Naming and Coding</h3>
+<ul>
+<li>
+<p>All objects should be plural.<br />
+  Example: <code>stg_stripe__invoices.sql</code> vs. <code>stg_stripe__invoice.sql</code></p>
+</li>
+<li>
+<p>All objects should have a prefix to indicate their DAG stage in the flow.<br />
+  See <a href="#model-layers">Model Layers</a> for more information.</p>
+</li>
+<li>
+<p>All models should use the naming convention <code>&lt;type/dag_stage&gt;_&lt;source/topic&gt;__&lt;additional_context&gt;</code>. See <a href="https://docs.getdbt.com/blog/stakeholder-friendly-model-names">this article</a> for more information.</p>
+</li>
+<li>For models in the <strong>marts</strong> folder <code>__&lt;additional_context&gt;</code> is optional. </li>
+<li>
+<p>Models in the <strong>staging</strong> folder should use the source's name as the <code>&lt;source/topic&gt;</code> and the entity name as the <code>additional_context</code>.</p>
+<p>Examples:
+- seed_snowflake_spend.csv
+- base_stripe__invoices.sql
+- stg_stripe__customers.sql
+- stg_salesforce__customers.sql
+- int_customers__unioned.sql
+- fct_orders.sql</p>
+</li>
+<li>
+<p>Schema, table and column names should be in <code>snake_case</code>.</p>
+</li>
+<li>
+<p>Limit use of abbreviations that are related to domain knowledge. An onboarding
+  employee will understand <code>current_order_status</code> better than <code>current_os</code>.</p>
+</li>
+<li>
+<p>Each model should have a primary key that can identify the unique row, and should be named <code>&lt;object&gt;_id</code>, e.g. <code>account_id</code> – this makes it easier to know what <code>id</code> is being referenced in downstream joined models.</p>
+</li>
+<li>
+<p>For <code>base</code> or <code>staging</code> models, columns should be ordered in categories, where identifiers are first and date/time fields are at the end.<br />
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">transformed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">select</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="c1">-- ids</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="n">order_id</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="n">customer_id</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="c1">-- dimensions</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="n">order_status</span><span class="p">,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="n">is_shipped</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="c1">-- measures</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="n">order_total</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="c1">-- date/times</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="n">created_at</span><span class="p">,</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">        </span><span class="n">updated_at</span><span class="p">,</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">        </span><span class="c1">-- metadata</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">        </span><span class="n">_sdc_batched_at</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="k">source</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Date/time columns should be named according to these conventions:</p>
+</li>
+<li>
+<p>Timestamps: <code>&lt;event&gt;_at</code><br />
+    Format: UTC<br />
+    Example: <code>created_at</code></p>
+</li>
+<li>
+<p>Dates: <code>&lt;event&gt;_date</code><br />
+    Format: Date<br />
+    Example: <code>created_date</code></p>
+</li>
+<li>
+<p>Booleans should be prefixed with <code>is_</code> or <code>has_</code>.<br />
+  Example: <code>is_active_customer</code> and <code>has_admin_access</code></p>
+</li>
+<li>
+<p>Avoid using reserved words (such as <a href="https://docs.snowflake.com/en/sql-reference/reserved-keywords.html">these</a> for Snowflake) as column names.</p>
+</li>
+<li>
+<p>Consistency is key! Use the same field names across models where possible.<br />
+Example: a key to the <code>customers</code> table should be named <code>customer_id</code> rather than <code>user_id</code>.</p>
+</li>
+</ul>
+<h3 id="model-configurations">Model Configurations</h3>
+<ul>
+<li>Model configurations at the <a href="https://docs.getdbt.com/reference/model-configs#configuring-directories-of-models-in-dbt_projectyml">folder level</a> should be considered (and if applicable, applied) first.</li>
+<li>More specific configurations should be applied at the model level <a href="https://docs.getdbt.com/reference/model-configs#apply-configurations-to-one-model-only">using one of these methods</a>.</li>
+<li>Models within the <code>marts</code> folder should be materialized as <code>table</code> or <code>incremental</code>.</li>
+<li>By default, <code>marts</code> should be materialized as <code>table</code> within <code>dbt_project.yml</code>.</li>
+<li>If switching to <code>incremental</code>, this should be specified in the model's configuration.</li>
+</ul>
+<h3 id="testing">Testing</h3>
+<ul>
+<li>At a minimum, <code>unique</code> and <code>not_null</code> tests should be applied to the expected primary key of each model.</li>
+</ul>
+<h3 id="ctes">CTEs</h3>
+<p>For more information about why we use so many CTEs, check out <a href="https://docs.getdbt.com/terms/cte">this glossary entry</a>.</p>
+<ul>
+<li>
+<p>Where performance permits, CTEs should perform a single, logical unit of work.</p>
+</li>
+<li>
+<p>CTE names should be as verbose as needed to convey what they do.</p>
+</li>
+<li>
+<p>CTEs with confusing or noteable logic should be commented with SQL comments as you would with any complex functions, and should be located above the CTE.</p>
+</li>
+<li>
+<p>CTEs that are duplicated across models should be pulled out and created as their own models.</p>
+</li>
+<li>
+<p>CTEs fall in to two main categories:</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import</td>
+<td>Used to bring data into a model. These are kept relatively simple and refrain from complex operations such as joins and column transformations.</td>
+</tr>
+<tr>
+<td>Logical</td>
+<td>Used to perform a logical step with the data that is brought into the model toward the end result.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>All <code>{{ ref() }}</code> or <code>{{ source() }}</code> statements should be placed within import CTEs so that dependent model references are easily seen and located.</p>
+</li>
+<li>
+<p>Where applicable, opt for filtering within import CTEs over filtering within logical CTEs. This allows a developer to easily see which data contributes to the end result.</p>
+</li>
+<li>
+<p>SQL should end with a simple select statement. All other logic should be contained within CTEs to make stepping through logic easier while troubleshooting.
+  Example: <code>select * from final</code></p>
+</li>
+<li>
+<p>SQL and CTEs within a model should follow this structure:</p>
+</li>
+<li><code>with</code> statement</li>
+<li>Import CTEs</li>
+<li>Logical CTEs</li>
+<li>Simple select statement</li>
+</ul>
+<h4 id="example-sql-with-ctes">Example SQL with CTEs</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="w"> </span><span class="c1">-- Jaffle shop went international!</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">with</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1">-- Import CTEs</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">regions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop__regions&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">),</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">nations</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop__nations&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="p">),</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">suppliers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;stg_jaffle_shop__suppliers&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="p">),</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="c1">-- Logical CTEs</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">locations</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="k">select</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">        </span><span class="err">{{</span><span class="w"> </span><span class="n">dbt_utils</span><span class="p">.</span><span class="n">generate_surrogate_key</span><span class="p">([</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">            </span><span class="s1">&#39;regions.region_id&#39;</span><span class="p">,</span><span class="w">            </span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">            </span><span class="s1">&#39;nations.nation_id&#39;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">        </span><span class="p">])</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">location_sk</span><span class="p">,</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">        </span><span class="n">regions</span><span class="p">.</span><span class="n">region_id</span><span class="p">,</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">        </span><span class="n">regions</span><span class="p">.</span><span class="n">region</span><span class="p">,</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">        </span><span class="n">regions</span><span class="p">.</span><span class="n">region_comment</span><span class="p">,</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">        </span><span class="n">nations</span><span class="p">.</span><span class="n">nation_id</span><span class="p">,</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">        </span><span class="n">nations</span><span class="p">.</span><span class="n">nation</span><span class="p">,</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">        </span><span class="n">nations</span><span class="p">.</span><span class="n">nation_comment</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">regions</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">    </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">nations</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">regions</span><span class="p">.</span><span class="n">region_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nations</span><span class="p">.</span><span class="n">region_id</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="p">),</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="k">final</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="w">    </span><span class="k">select</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">supplier_id</span><span class="p">,</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">location_id</span><span class="p">,</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">region_id</span><span class="p">,</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">nation_id</span><span class="p">,</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">supplier_name</span><span class="p">,</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">supplier_address</span><span class="p">,</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">phone_number</span><span class="p">,</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">region</span><span class="p">,</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">region_comment</span><span class="p">,</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">nation</span><span class="p">,</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a><span class="w">        </span><span class="n">locations</span><span class="p">.</span><span class="n">nation_comment</span><span class="p">,</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="w">        </span><span class="n">suppliers</span><span class="p">.</span><span class="n">account_balance</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">suppliers</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="w">    </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">locations</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a><span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">suppliers</span><span class="p">.</span><span class="n">location_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">locations</span><span class="p">.</span><span class="n">location_sk</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a><span class="p">)</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>
+<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a><span class="c1">-- Simple select statement</span>
+<a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">final</span>
+</code></pre></div>
+<h3 id="sql-style-guide">SQL style guide</h3>
+<ul>
+<li><strong>DO NOT OPTIMIZE FOR FEWER LINES OF CODE.</strong>  </li>
+</ul>
+<p>New lines are cheap, brain time is expensive; new lines should be used within reason to produce code that is easily read.</p>
+<ul>
+<li>
+<p>When dealing with long <code>when</code> or <code>where</code> clauses, predicates should be on a new
+  line and indented.<br />
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">where</span><span class="w"> </span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">and</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pending&#39;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">and</span><span class="w"> </span><span class="k">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;hq&#39;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Lines of SQL should be no longer than 80 characters and new lines should be used to ensure this.<br />
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">sum</span><span class="p">(</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">case</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="n">order_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;complete&#39;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">            </span><span class="k">then</span><span class="w"> </span><span class="n">order_total</span><span class="w"> </span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">monthly_total</span><span class="p">,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="err">{{</span><span class="w"> </span><span class="n">get_windowed_values</span><span class="p">(</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">      </span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">      </span><span class="n">partition</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">      </span><span class="n">order_by</span><span class="o">=</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">      </span><span class="n">column_list</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">          </span><span class="s1">&#39;final_cost&#39;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_final_cost</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Use all lowercase unless a specific scenario needs you to do otherwise. This means that keywords, field names, function names, and file names
+  should all be lowercased.</p>
+</li>
+<li>
+<p>The <code>as</code> keyword should be used when aliasing a field or table</p>
+</li>
+<li>
+<p>Fields should be stated before aggregates / window functions</p>
+</li>
+<li>
+<p>Aggregations should be executed as early as possible before joining to another table.</p>
+</li>
+<li>
+<p>Ordering and grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see <a href="https://blog.getdbt.com/write-better-sql-a-defense-of-group-by-1/">this rant</a> for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design. If you really need to, the <a href="https://github.com/dbt-labs/dbt-utils/tree/0.8.6/macros/sql/groupby.sql">dbt_utils.group_by</a> function may come in handy.</p>
+</li>
+<li>
+<p>Prefer <code>union all</code> to <code>union</code> <a href="http://docs.aws.amazon.com/redshift/latest/dg/c_example_unionall_query.html">*</a></p>
+</li>
+<li>
+<p>Avoid table aliases in join conditions (especially initialisms) – it's harder to understand what the table called "c" is compared to "customers".</p>
+</li>
+<li>
+<p>If joining two or more tables, <em>always</em> prefix your column names with the table alias. If only selecting from one table, prefixes are not needed.</p>
+</li>
+<li>
+<p>Be explicit about your join (i.e. write <code>inner join</code> instead of <code>join</code>). <code>left joins</code> are the most common, <code>right joins</code> often indicate that you should change which table you select <code>from</code> and which one you <code>join</code> to.</p>
+</li>
+<li>
+<p>Avoid the <code>using</code> clause in joins, preferring instead to explicitly list the CTEs and associated join keys with an <code>on</code> clause.</p>
+</li>
+<li>
+<p>Joins should list the left table first (i.e., the table you're joining data to)<br />
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">select</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="n">trips</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">drivers</span><span class="p">.</span><span class="n">rating</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">driver_rating</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">riders</span><span class="p">.</span><span class="n">rating</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rider_rating</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">from</span><span class="w"> </span><span class="n">trips</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">drivers</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">   </span><span class="k">on</span><span class="w"> </span><span class="n">trips</span><span class="p">.</span><span class="n">driver_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivers</span><span class="p">.</span><span class="n">user_id</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">riders</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">trips</span><span class="p">.</span><span class="n">rider_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">riders</span><span class="p">.</span><span class="n">user_id</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h4 id="example-sql">Example SQL</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">with</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">my_data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;my_data&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">is_deleted</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">),</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">some_cte</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;some_cte&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">),</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="n">some_cte_agg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="k">select</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="n">id</span><span class="p">,</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="k">sum</span><span class="p">(</span><span class="n">field_4</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_field_4</span><span class="p">,</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="k">max</span><span class="p">(</span><span class="n">field_5</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">max_field_5</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">some_cte</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="p">),</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="k">final</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">[</span><span class="k">distinct</span><span class="p">]</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">        </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_1</span><span class="p">,</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">        </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_2</span><span class="p">,</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">        </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_3</span><span class="p">,</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">        </span><span class="c1">-- use line breaks to visually separate calculations into blocks</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">        </span><span class="k">case</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">cancellation_date</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">                </span><span class="k">and</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">expiration_date</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">                </span><span class="k">then</span><span class="w"> </span><span class="n">expiration_data</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">cancellation_date</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">                </span><span class="k">then</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">start_date</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">cancellation_date</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">cancellation_date</span><span class="p">,</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">        </span><span class="n">some_cte_agg</span><span class="p">.</span><span class="n">total_field_4</span><span class="p">,</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">        </span><span class="n">some_cte_agg</span><span class="p">.</span><span class="n">max_field_5</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">my_data</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="w">    </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">some_cte_agg</span><span class="w">  </span>
+<a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a><span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_cte_agg</span><span class="p">.</span><span class="n">id</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a><span class="w">    </span><span class="k">where</span><span class="w"> </span>
+<a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a><span class="w">        </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;abc&#39;</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="w">        </span><span class="k">and</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="w">            </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;def&#39;</span>
+<a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a><span class="w">            </span><span class="k">or</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ghi&#39;</span>
+<a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="w">        </span><span class="p">)</span>
+<a id="__codelineno-12-48" name="__codelineno-12-48" href="#__codelineno-12-48"></a><span class="w">    </span><span class="n">qualify</span><span class="w"> </span><span class="n">row_number</span><span class="p">()</span><span class="w"> </span><span class="n">over</span><span class="p">(</span>
+<a id="__codelineno-12-49" name="__codelineno-12-49" href="#__codelineno-12-49"></a><span class="w">        </span><span class="n">partition</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">field_1</span>
+<a id="__codelineno-12-50" name="__codelineno-12-50" href="#__codelineno-12-50"></a><span class="w">        </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">my_data</span><span class="p">.</span><span class="n">start_date</span><span class="w"> </span><span class="k">desc</span>
+<a id="__codelineno-12-51" name="__codelineno-12-51" href="#__codelineno-12-51"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-12-52" name="__codelineno-12-52" href="#__codelineno-12-52"></a><span class="p">)</span>
+<a id="__codelineno-12-53" name="__codelineno-12-53" href="#__codelineno-12-53"></a>
+<a id="__codelineno-12-54" name="__codelineno-12-54" href="#__codelineno-12-54"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">final</span>
+</code></pre></div>
+<h3 id="yaml-and-markdown-style-guide">YAML and Markdown style guide</h3>
+<ul>
+<li>
+<p>Every subdirectory contains their own <code>.yml</code> file(s) which contain configurations for the models within the subdirectory.</p>
+</li>
+<li>
+<p>YAML and markdown files should be prefixed with an underscore ( <code>_</code> ) to keep it at the top of the subdirectory.</p>
+</li>
+<li>
+<p>YAML and markdown files should be named with the convention <code>_&lt;description&gt;__&lt;config&gt;</code>.  </p>
+</li>
+</ul>
+<p>Examples: <code>_jaffle_shop__sources.yml</code>, <code>_jaffle_shop__docs.md</code>  </p>
+<ul>
+<li><code>description</code> is typically the folder of models you're setting configurations for.<br />
+    Examples: <code>core</code>, <code>staging</code>, <code>intermediate</code></li>
+<li><code>config</code> is the top-level resource you are configuring.<br />
+    Examples: <code>docs</code>, <code>models</code>, <code>sources</code></li>
+<li>
+<p>Indents should use two spaces.</p>
+</li>
+<li>
+<p>List items should be indented.</p>
+</li>
+<li>
+<p>Use a new line to separate list items that are dictionaries, where appropriate.</p>
+</li>
+<li>
+<p>Lines of YAML should be no longer than 80 characters.</p>
+</li>
+<li>
+<p>Items listed in a single .yml or .md file should be sorted alphabetically for ease of finding in larger files.</p>
+</li>
+<li>
+<p>Each top-level configuration should use a separate <code>.yml</code> file (i.e, sources, models)
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>models
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>├──<span class="w"> </span>marts
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>└──<span class="w"> </span>staging
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span>└──<span class="w"> </span>jaffle_shop
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span>├──<span class="w"> </span>_jaffle_shop__docs.md
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span>├──<span class="w"> </span>_jaffle_shop__models.yml
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">        </span>├──<span class="w"> </span>_jaffle_shop__sources.yml
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span>├──<span class="w"> </span>stg_jaffle_shop__customers.sql
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">        </span>├──<span class="w"> </span>stg_jaffle_shop__orders.sql
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">        </span>└──<span class="w"> </span>stg_jaffle_shop__payments.sql
+</code></pre></div></p>
+</li>
+<li>
+<p><code>dbt_project.yml</code> configurations should be prefixed with <code>+</code> to avoid namespace collision with directories.</p>
+</li>
+</ul>
+<p>Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>models:
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>my_project:
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span>marts:
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span>+materialized:<span class="w"> </span>table
+</code></pre></div></p>
+<h4 id="example-yaml">Example YAML</h4>
+<p><code>_jaffle_shop__models.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_jaffle_shop__nations</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This model cleans the raw nations data</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nation_id</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span><span class="w">   </span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_jaffle_shop__regions</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">      </span><span class="no">This model cleans the raw regions data before being joined with nations</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">      </span><span class="no">data to create one cleaned locations table for use in marts.</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">region_id</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_jaffle_shop__locations</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">doc(&#39;jaffle_shop_location_details&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a><span class="w">    </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">location_sk</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a><span class="w">        </span><span class="nt">tests</span><span class="p">:</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+</code></pre></div>
+<p>#### Example Markdown
+  <code>_jaffle_shop__docs.md</code>:</p>
+<p _="%" docs="docs" enumerated_statuses="enumerated_statuses">```markdown</p>
+<div class="highlight"><pre><span></span><code>  Although most of our data sets have statuses attached, you may find some
+  that are enumerated. The following table can help you identify these statuses.
+  | Status | Description                                                                 |
+  |--------|---------------|
+  | 1      | ordered       |
+  | 2      | shipped       |
+  | 3      | pending       |
+  | 4      | order_pending |
+
+
+{% enddocs %}
+
+{% docs statuses %}
+
+  Statuses can be found in many of our raw data sets. The following lists
+  statuses and their descriptions:
+  | Status        | Description                                                                 |
+  |---------------|-----------------------------------------------------------------------------|
+  | ordered       | A customer has paid at checkout.                                            |
+  | shipped       | An order has a tracking number attached.                                    |
+  | pending       | An order has been paid, but doesn&#39;t have a tracking number.                 |
+  | order_pending | A customer has not yet paid at checkout, but has items in their cart. |
+
+{% enddocs %}
+</code></pre></div>
+<p>```</p>
+<h3 id="jinja-style-guide">Jinja style guide</h3>
+<ul>
+<li>
+<p>Jinja delimiters should have spaces inside of the delimiter between the brackets and your code.<br />
+  Example: <code>{{ this }}</code> instead of <code>{{this}}</code></p>
+</li>
+<li>
+<p>Use <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#whitespace-control">whitespace control</a> to make compiled SQL more readable.</p>
+</li>
+<li>
+<p>An effort should be made for a good balance in readability for both templated 
+and compiled code. However, opt for code readability over compiled SQL readability
+when needed.</p>
+</li>
+<li>
+<p>A macro file should be named after the <em>main</em> macro it contains.</p>
+</li>
+<li>
+<p>A file with more than one macro should follow these conventions:</p>
+</li>
+<li>There is one macro which is the main focal point</li>
+<li>The file is named for the main macro or idea</li>
+<li>
+<p>All other macros within the file are only used for the purposes of the main 
+    idea and not used by other macros outside of the file.</p>
+</li>
+<li>
+<p>Use new lines to visually indicate logical blocks of Jinja or to enhance readability.<br />
+  Example:<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">orig_cols</span> <span class="o">=</span> <span class="nv">adapter.get_columns_in_relation</span><span class="o">(</span><span class="nv">ref</span><span class="o">(</span><span class="s1">&#39;fct_orders&#39;</span><span class="o">))</span> <span class="cp">%}</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">new_cols</span> <span class="o">=</span> <span class="nv">dbt_utils.star</span><span class="o">(</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>      <span class="nv">from</span><span class="o">=</span><span class="nv">ref</span><span class="o">(</span><span class="s1">&#39;fct_order_items&#39;</span><span class="o">),</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>      <span class="nv">except</span><span class="o">=</span><span class="nv">orig_cols</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="o">)</span> <span class="cp">%}</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="x">-- original columns. </span><span class="cp">{{</span> <span class="nv">col</span> <span class="cp">}}</span><span class="x"> is indented here, but choose what will satisfy</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="x">-- your own balance for Jinja vs. SQL readability. </span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">col</span> <span class="k">in</span> <span class="nv">orig_cols</span> <span class="cp">%}</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="x">      </span><span class="cp">{{</span> <span class="nv">col</span> <span class="cp">}}</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="x">-- column difference</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="cp">{{</span> <span class="nv">new_cols</span> <span class="cp">}}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Use new lines within Jinja delimiters and arrays if there are multiple arguments.<br />
+  Example:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="cp">{%</span>- <span class="k">dbt_utils</span><span class="nv">.star</span><span class="o">(</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>      <span class="nv">from</span><span class="o">=</span><span class="nv">ref</span><span class="o">(</span><span class="s1">&#39;stg_jaffle_shop__orders&#39;</span><span class="o">),</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>      <span class="nv">except</span><span class="o">=[</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>          <span class="s1">&#39;order_id&#39;</span><span class="o">,</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>          <span class="s1">&#39;ordered_at&#39;</span><span class="o">,</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>          <span class="s1">&#39;status&#39;</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>      <span class="o">],</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>      <span class="nv">prefix</span><span class="o">=</span><span class="s1">&#39;order_&#39;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="o">)</span> <span class="cp">%}</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h3 id="metrics-style-guide">Metrics style guide</h3>
+<h4 id="organizing-metrics">Organizing Metrics</h4>
+<ul>
+<li>Metrics are categorized by entity (object grain that the metrics occurs), and filenames directly correspond to metrics.<br />
+  Filenames are prefixed with <code>base__</code> only if they are pre-calculated inputs to derived metrics in other files.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>├── dbt_project.yml
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>└── models
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    ├── marts
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    ├── staging
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    └── metrics
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>        ├── projects
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        |   ├── active_projects.yml
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>        ├── accounts
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>        |   ├── active_cloud_accounts.yml
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        └── users
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>            ├── base__net_promoter_score.yml
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>            └── net_promoter_score.yml
+</code></pre></div></li>
+</ul>
+<h4 id="metrics-conventions">Metrics Conventions</h4>
+<p>dbt Metrics fall into four broad categories:
+1. Company metrics
+2. Team KPIs
+3. OKRs
+4. Specific metrics related to a product area, business unit, or business function that is not necessarily a team KPI, but important to track nonetheless.</p>
+<p>Because of the wide socialization of these docs and downstream usage in the BI layer, consistency and clarity are <em>very</em> important. Below are the general standards and examples of how we format and implement metrics at dbt Labs:
+* Metrics names must begin with a letter, cannot contain whitespace, and should be all lowercase.
+* The <a href="https://docs.getdbt.com/docs/building-a-dbt-project/metrics#available-properties">minimum required properties</a> must be present in the metric definition.
+* Tags and/or Meta properties should match the categories above and be used to organize metrics at the category or business function level.
+* Meta properties should be used to track metric definition ownership.
+* For up-to-date information on metrics, please see the <a href="https://docs.getdbt.com/docs/building-a-dbt-project/metrics#defining-a-metric">metrics docs on defining a metric</a> or the <a href="https://github.com/dbt-labs/dbt_metrics#readme">dbt-labs/metrics README</a></p>
+<h4 id="example-metrics-yaml">Example Metrics YAML</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nt">metrics</span><span class="p">:</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base__total_nps_respondents_cloud</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Base) Total of NPS Respondents (Cloud)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ref(&#39;fct_customer_nps&#39;)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">      </span><span class="no">&#39;The count of users responding to NPS surveys in dbt Cloud.&#39;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Company</span><span class="nv"> </span><span class="s">Metric&#39;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="nt">calculation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">count</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">    </span><span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique_id</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">    </span><span class="nt">timestamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created_at</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">    </span><span class="nt">time_grains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">day</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">month</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quarter</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">year</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">feedback_source</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">feedback_source</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;dbt_cloud_nps&#39;&quot;</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="w">    </span><span class="nt">meta</span><span class="p">:</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="w">      </span><span class="nt">metric_level</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Company&#39;</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="w">      </span><span class="nt">owner(s)</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Jane</span><span class="nv"> </span><span class="s">Doe&#39;</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base__count_nps_promoters_cloud</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(Base) Count of NPS Promoters (Cloud)</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ref(&#39;fct_customer_nps&#39;)</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a><span class="w">      </span><span class="no">&#39;The count of dbt Cloud respondents that fall into the promoters segment.&#39;</span>
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a><span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Company</span><span class="nv"> </span><span class="s">Metric&#39;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a><span class="w">    </span><span class="nt">calculation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">count</span>
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="w">    </span><span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique_id</span>
+<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>
+<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a><span class="w">    </span><span class="nt">timestamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created_at</span>
+<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="w">    </span><span class="nt">time_grains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">day</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">month</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quarter</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">year</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>
+<a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
+<a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">feedback_source</span>
+<a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span>
+<a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;dbt_cloud_nps&#39;&quot;</span>
+<a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nps_category</span>
+<a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span>
+<a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;promoter&#39;&quot;</span>
+<a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a>
+<a id="__codelineno-19-51" name="__codelineno-19-51" href="#__codelineno-19-51"></a><span class="w">    </span><span class="nt">meta</span><span class="p">:</span>
+<a id="__codelineno-19-52" name="__codelineno-19-52" href="#__codelineno-19-52"></a><span class="w">      </span><span class="nt">metric_level</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Company&#39;</span>
+<a id="__codelineno-19-53" name="__codelineno-19-53" href="#__codelineno-19-53"></a><span class="w">      </span><span class="nt">owner(s)</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Jane</span><span class="nv"> </span><span class="s">Doe&#39;</span>
+<a id="__codelineno-19-54" name="__codelineno-19-54" href="#__codelineno-19-54"></a>
+<a id="__codelineno-19-55" name="__codelineno-19-55" href="#__codelineno-19-55"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">promoters_pct</span>
+<a id="__codelineno-19-56" name="__codelineno-19-56" href="#__codelineno-19-56"></a><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Percent Promoters (Cloud)</span>
+<a id="__codelineno-19-57" name="__codelineno-19-57" href="#__codelineno-19-57"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">percent</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">dbt</span><span class="nv"> </span><span class="s">Cloud</span><span class="nv"> </span><span class="s">users</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">promoters</span><span class="nv"> </span><span class="s">segment.&#39;</span>
+<a id="__codelineno-19-58" name="__codelineno-19-58" href="#__codelineno-19-58"></a><span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Company</span><span class="nv"> </span><span class="s">Metric&#39;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-59" name="__codelineno-19-59" href="#__codelineno-19-59"></a>
+<a id="__codelineno-19-60" name="__codelineno-19-60" href="#__codelineno-19-60"></a><span class="w">    </span><span class="nt">calculation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived</span>
+<a id="__codelineno-19-61" name="__codelineno-19-61" href="#__codelineno-19-61"></a><span class="w">    </span><span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{metric(&#39;base__count_nps_promoters_cloud&#39;)}}</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">{{metric(&#39;base__total_nps_respondents_cloud&#39;)}}&quot;</span><span class="w"> </span>
+<a id="__codelineno-19-62" name="__codelineno-19-62" href="#__codelineno-19-62"></a>
+<a id="__codelineno-19-63" name="__codelineno-19-63" href="#__codelineno-19-63"></a><span class="w">    </span><span class="nt">timestamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created_at</span>
+<a id="__codelineno-19-64" name="__codelineno-19-64" href="#__codelineno-19-64"></a><span class="w">    </span><span class="nt">time_grains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">day</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">month</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quarter</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">year</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-19-65" name="__codelineno-19-65" href="#__codelineno-19-65"></a>
+<a id="__codelineno-19-66" name="__codelineno-19-66" href="#__codelineno-19-66"></a><span class="w">    </span><span class="nt">meta</span><span class="p">:</span>
+<a id="__codelineno-19-67" name="__codelineno-19-67" href="#__codelineno-19-67"></a><span class="w">      </span><span class="nt">metric_level</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Company&#39;</span>
+<a id="__codelineno-19-68" name="__codelineno-19-68" href="#__codelineno-19-68"></a><span class="w">      </span><span class="nt">owner(s)</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Jane</span><span class="nv"> </span><span class="s">Doe&#39;</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://fortiss.org"  target="_blank" rel="noopener">fortiss GmbH</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.top", "navigation.sections", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>
