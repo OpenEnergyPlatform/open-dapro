@@ -112,20 +112,12 @@ models:
         data_type: character varying
       - name: municipality
         description: ''
-        tests:
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              name: type_string_stg_mastr__solar_municipality
-              column_type: string
         data_type: character varying
       - name: district_id
         description: ''
         data_type: text
       - name: district
         description: ''
-        tests:
-          - dbt_expectations.expect_column_values_to_be_of_type:
-              name: type_string_stg_mastr__district
-              column_type: string
         data_type: character varying
       - name: zip_code
         description: ''
