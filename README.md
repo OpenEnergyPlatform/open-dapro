@@ -11,6 +11,7 @@ Make sure you have [docker](https://www.docker.com/) and [docker-compose](https:
 ```bash
 docker-compose up
 ```
+If everything worked, the GeoServer should be available at [http://127.0.0.1:8002](http://127.0.0.1:8002) and the Dagster UI at [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 To install the project in a developer setup check the [Setup for Developers](https://openenergyplatform.github.io/open-dapro/development/) on the documentation page.
 
