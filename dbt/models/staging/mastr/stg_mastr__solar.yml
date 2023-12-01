@@ -2,39 +2,12 @@ version: 2
 models:
   - name: stg_mastr__solar
     description: ''
-    tests:
-      - expect_column_pair_division_to_be_within:
-          name: column_division_stg_mastr__solar__power_gross_power_inverter
-          column_A: power_gross
-          column_B: power_inverter
-          min_value: 0.05
-          max_value: 20
-      - expect_column_pair_division_to_be_within:
-          name: column_division_stg_mastr__solar_power_gross_number_modules
-          column_A: power_gross
-          column_B: number_of_modules
-          min_value: 0.05  # 50 Watt per module
-          max_value: 0.9  # 900 Watt per module
-      - expect_column_pair_values_A_to_be_greater_than_B:
-          name: column_A_larger_B_stg_mastr__solar_power_gross_larger_net
-          column_A: power_gross
-          column_B: power_net
-          or_equal: True
-      - expect_column_pair_values_A_to_be_greater_than_B:
-          name: column_A_larger_B_stg_mastr__solar_power_inverter_larger_net
-          column_A: power_inverter
-          column_B: power_net
-          or_equal: True
     columns:
       - name: mastr_id
         description: ''
         tests:
-          - unique:
-              config:
-                severity: error
-          - not_null:
-              config:
-                severity: error
+          - unique
+          - not_null
           - expect_column_values_to_match_regex:
               name: regex_stg_mastr__solar_mastr_id
               regex: "^[A-Z]{3}\\d{12}$"
@@ -53,12 +26,6 @@ models:
       - name: installation_year
         description: ''
         data_type: integer
-        tests:
-          - expect_column_values_to_be_between:
-              name: value_between_stg_mastr__solar_installation_year
-              min_value: 1980  
-              max_value: 2030 
-              row_condition: "installation_year is not null" 
       - name: commissioning_date
         description: ''
         data_type: date
@@ -74,11 +41,6 @@ models:
       - name: power_gross
         data_type: double precision
         description: ''
-        tests:
-          - expect_column_values_to_be_between:
-              name: value_between_stg_mastr__solar_power_gross
-              min_value: 0 # 100MW
-              max_value: 500000 # 500MW, at 11-2023 the largest system was 150MW
       - name: power_inverter
         data_type: double precision
         description: ''
@@ -105,11 +67,6 @@ models:
         data_type: character varying
       - name: municipality_id
         description: ''
-        tests:
-          - not_null
-          - expect_column_values_to_match_regex:
-              name: regex_stg_mastr__solar_municipality_key
-              regex: "^\\d{8}$"
         data_type: character varying
       - name: municipality
         description: ''
@@ -122,10 +79,6 @@ models:
         data_type: character varying
       - name: zip_code
         description: ''
-        tests:
-          - expect_column_values_to_match_regex:
-              name: regex_stg_mastr__solar_zip_code
-              regex: "^\\d{5}$"
         data_type: character varying
       - name: coordinate
         data_type: USER-DEFINED

@@ -36,5 +36,3 @@ models:
 tests:
   energy_dbt:
     +store_failures_as: table
-    staging:
-      +severity: warn
