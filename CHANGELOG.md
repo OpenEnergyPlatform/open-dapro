@@ -7,7 +7,7 @@ The format is inspired from [Keep a Changelog](http://keepachangelog.com/en/1.0.
 and the versioning aims to respect [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## [v0.1.0] Initial Release - XXXX-XX-XX
+## [v0.1.0] Initial Release - 2023-12-01
 ### Added
 - Connect Open Street Maps as datasource
 - Connect Marktstammdatenregister as datasource
@@ -16,6 +16,7 @@ and the versioning aims to respect [Semantic Versioning](http://semver.org/spec/
 - Add dbt and sql-based data transformations
 - Add a documentation page at openenergyplatform.github.io/open-dapro/
 - Add a production deployment based on docker-compose
+- Move the repository from git.fortiss.org to github
 
 
 
