@@ -5,25 +5,66 @@ models:
     columns:
       - name: mastr_id
         description: ''
-      - name: municipality_id
+        data_type: character varying
+        tests:
+          - unique
+          - not_null
+          - expect_column_values_to_match_regex:
+              name: regex_stg_mastr__solar_mastr_id
+              regex: "^[A-Z]{3}\\d{12}$"
+      - name: operating_status
+        data_type: character varying
         description: ''
-      - name: municipality
+        tests:
+          - not_null
+          - accepted_values:
+              name: accepted_values_stg_mastr__solar_operating_status
+              values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
+      - name: grid_operator_inspection
+        data_type: character varying
         description: ''
-      - name: district
+      - name: installation_year
         description: ''
-      - name: zip_code
-        description: ''
+        data_type: integer
       - name: commissioning_date
         description: ''
+        data_type: date
       - name: planned_commissioning_date
+        description: ''
+        data_type: date
+      - name: download_date
+        description: ''
+        data_type: date
+      - name: power
+        description: ''
+        data_type: double precision
+      - name: fuel
+        data_type: character varying
+        description: ''
+      - name: fuel_type
+        data_type: character varying
+        description: ''
+      - name: combustion_technology
+        data_type: character varying
         description: ''
       - name: unit_owner_mastr_id
         description: ''
-      - name: power
+        data_type: character varying
+      - name: municipality_id
         description: ''
-      - name: download_date
+        data_type: character varying
+      - name: municipality
         description: ''
+        data_type: character varying
       - name: district_id
         description: ''
-      - name: installation_year
+        data_type: text
+      - name: district
+        description: ''
+        data_type: character varying
+      - name: zip_code
+        description: ''
+        data_type: character varying
+      - name: coordinate
+        data_type: USER-DEFINED
         description: ''
