@@ -10,7 +10,7 @@ models:
           - unique
           - not_null
           - expect_column_values_to_match_regex:
-              name: regex_stg_mastr__solar_mastr_id
+              name: regex_stg_mastr__biomass_mastr_id
               regex: "^[A-Z]{3}\\d{12}$"
       - name: operating_status
         data_type: character varying
@@ -18,7 +18,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              name: accepted_values_stg_mastr__solar_operating_status
+              name: accepted_values_stg_mastr__biomass_operating_status
               values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
       - name: grid_operator_inspection
         data_type: character varying
