@@ -27,21 +27,36 @@ renamed_storage_units as (
 renamed_extended as (
 
     select
+        --general
         "EinheitMastrNummer" as mastr_id,
         "EinheitBetriebsstatus" as operating_status,
-        "Gemeindeschluessel" as municipality_id,
-        "Gemeinde" as municipality,
-        "Landkreis" as district,
-        "Postleitzahl" as zip_code,
-        "Inbetriebnahmedatum" as commissioning_date,
-        "GeplantesInbetriebnahmedatum" as planned_commissioning_date,
-        "Nettonennleistung" as power,
-        "DatumDownload" as download_date,
-        left("Gemeindeschluessel", 5) as district_id,
-        concat(
+        "NetzbetreiberpruefungStatus" as grid_operator_inspection,
+        --dates
+        CASE
+        WHEN "Inbetriebnahmedatum" IS NOT NULL OR "GeplantesInbetriebnahmedatum" IS NOT NULL THEN
+            concat(
             date_part('year', "Inbetriebnahmedatum"),
             date_part('year', "GeplantesInbetriebnahmedatum")
-        ) as installation_year,
+        )::integer
+        ELSE
+            NULL
+        END as installation_year,
+        "Inbetriebnahmedatum" as commissioning_date,
+        "GeplantesInbetriebnahmedatum" as planned_commissioning_date,
+        "DatumDownload" as download_date,
+        --technical
+        "Nettonennleistung" as power_net,
+        "Bruttoleistung" as power_gross,
+        "ZugeordnenteWirkleistungWechselrichter" as power_inverter,
+        "Batterietechnologie" as battery_technology,
+        --owner
+        "AnlagenbetreiberMastrNummer" as unit_owner_mastr_id,
+        --location
+        "Gemeindeschluessel" as municipality_id,
+        "Gemeinde" as municipality,
+        left("Gemeindeschluessel", 5) as district_id,
+        "Landkreis" as district,
+        "Postleitzahl" as zip_code,
         st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
     from source_extended
 
@@ -50,25 +65,34 @@ renamed_extended as (
 
 storage_units as (
     select
-        renamed_storage_units.mastr_id as mastr_id,
-        renamed_extended.operating_status,
-        renamed_storage_units.storage_capacity,
-        renamed_extended.municipality_id,
-        renamed_extended.district_id,
-        renamed_extended.municipality,
-        renamed_extended.district,
-        renamed_extended.zip_code,
-        renamed_extended.commissioning_date,
-        renamed_extended.planned_commissioning_date,
-        renamed_extended.installation_year,
-        renamed_extended.power,
-        renamed_extended.download_date,
-        renamed_extended.coordinate
-    from renamed_storage_units
-
+        --general
+        ru.mastr_id as mastr_id,
+        re.operating_status,
+        re.grid_operator_inspection,
+        --dates
+        re.installation_year,
+        re.commissioning_date,
+        re.planned_commissioning_date,
+        re.download_date,
+        --technical
+        ru.storage_capacity,
+        re.power_net,
+        re.power_gross,
+        re.power_inverter,
+        re.battery_technology,
+        --owner
+        re.unit_owner_mastr_id,
+        --location
+        re.municipality_id,
+        re.municipality,
+        re.district_id,
+        re.district,
+        re.zip_code,
+        re.coordinate
+    from renamed_extended as re
     left join
-        renamed_extended
-        on renamed_storage_units.mastr_id = renamed_extended.mastr_id
+        renamed_storage_units as ru
+        on re.mastr_id = ru.mastr_id
 )
 
 select * from storage_units

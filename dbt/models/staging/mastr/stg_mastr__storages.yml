@@ -5,25 +5,71 @@ models:
     columns:
       - name: mastr_id
         description: ''
-      - name: storage_capacity
+        data_type: character varying
+        tests:
+          - unique
+          - not_null:
+              config:
+                severity: warn # Don't understand why, but ~100 storages, mainly pumped hydro, dont have a mastr_id
+          - expect_column_values_to_match_regex:
+              name: regex_stg_mastr__storages_mastr_id
+              regex: "^[A-Z]{3}\\d{12}$"
+      - name: operating_status
+        data_type: character varying
         description: ''
-      - name: municipality_id
-        description: ''
-      - name: district_id
-        description: ''
-      - name: municipality
-        description: ''
-      - name: district
-        description: ''
-      - name: zip_code
-        description: ''
-      - name: commissioning_date
-        description: ''
-      - name: planned_commissioning_date
+        tests:
+          - not_null
+          - accepted_values:
+              name: accepted_values_stg_mastr__storages_operating_status
+              values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
+      - name: grid_operator_inspection
+        data_type: character varying
         description: ''
       - name: installation_year
         description: ''
-      - name: power
+        data_type: integer
+      - name: commissioning_date
         description: ''
+        data_type: date
+      - name: planned_commissioning_date
+        description: ''
+        data_type: date
       - name: download_date
+        description: ''
+        data_type: date
+      - name: storage_capacity
+        description: ''
+        data_type: double precision
+      - name: power_net
+        data_type: double precision
+        description: ''
+      - name: power_gross
+        data_type: double precision
+        description: ''
+      - name: power_inverter
+        data_type: double precision
+        description: ''
+      - name: battery_technology
+        data_type: character varying
+        description: ''
+      - name: unit_owner_mastr_id
+        data_type: character varying
+        description: ''
+      - name: municipality_id
+        description: ''
+        data_type: character varying
+      - name: municipality
+        description: ''
+        data_type: character varying
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: district
+        description: ''
+        data_type: character varying
+      - name: zip_code
+        description: ''
+        data_type: character varying
+      - name: coordinate
+        data_type: USER-DEFINED
         description: ''
