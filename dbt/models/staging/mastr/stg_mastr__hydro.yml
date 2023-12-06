@@ -1,0 +1,66 @@
+version: 2
+models:
+  - name: stg_mastr__hydro
+    columns:
+      - name: mastr_id
+        description: ''
+        data_type: character varying
+        tests:
+          - unique
+          - not_null
+          - expect_column_values_to_match_regex:
+              name: regex_stg_mastr__hydro_mastr_id
+              regex: "^[A-Z]{3}\\d{12}$"
+      - name: operating_status
+        description: ''
+        data_type: character varying
+        tests:
+          - not_null
+          - accepted_values:
+              name: accepted_values_stg_mastr__hydro_operating_status
+              values: ['In Betrieb', 'In Planung', 'Endgültig stillgelegt', 'Vorübergehend stillgelegt']
+      - name: grid_operator_inspection
+        description: ''
+        data_type: character varying
+      - name: installation_year
+        description: ''
+        data_type: integer
+      - name: commissioning_date
+        description: ''
+        data_type: date
+      - name: planned_commissioning_date
+        description: ''
+        data_type: date
+      - name: download_date
+        description: ''
+        data_type: date
+      - name: plant_type
+        description: ''
+        data_type: character varying
+      - name: type_of_inflow
+        description: ''
+        data_type: character varying
+      - name: power
+        description: ''
+        data_type: double precision
+      - name: unit_owner_mastr_id
+        description: ''
+        data_type: character varying
+      - name: municipality_id
+        description: ''
+        data_type: character varying
+      - name: municipality
+        description: ''
+        data_type: character varying
+      - name: district_id
+        description: ''
+        data_type: text
+      - name: district
+        description: ''
+        data_type: character varying
+      - name: zip_code
+        description: ''
+        data_type: character varying
+      - name: coordinate
+        description: ''
+        data_type: USER-DEFINED
