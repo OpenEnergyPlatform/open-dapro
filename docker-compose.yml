@@ -30,6 +30,8 @@ services:
       dockerfile: ./docker/user_code/Dockerfile
     container_name: docker_user_code
     image: docker_user_code_image
+    # To ensure this command is run only once we create the flagfile
+    command: sh -c "cd dbt && dbt deps && cd .. && dagster api grpc -h 0.0.0.0 -p 4000 -m energy_dagster"
     restart: always
     environment:
       DAGSTER_POSTGRES_USER: "postgres"
