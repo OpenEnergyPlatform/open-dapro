@@ -13,6 +13,8 @@ from energy_dagster.utils import utils
     compute_kind="python",
 )
 def load_alkis(context) -> None:
+    """Load ALKIS (Automatisierte Liegenschaftskarte Informationssystem) data into a PostGIS database.
+    """
     constants = utils.download_from_constants("alkis_area_usage")
     filepath = os.path.join(constants["download_path"])
     if_exists = "replace"

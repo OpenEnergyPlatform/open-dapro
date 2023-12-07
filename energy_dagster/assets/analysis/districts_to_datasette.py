@@ -29,6 +29,29 @@ def replace_german_chars(input):
     },
 )
 def buildings_to_datasette(context, marts_buildings) -> None:
+    """
+    Convert and store building data in GeoJSON format to a Datasette SQLite database.
+
+    Parameters
+    ----------
+    context : AssetExecutionContext
+        The context object provided by Dagster during pipeline execution.
+    marts_buildings : GeoDataFrame
+        GeoDataFrame containing building data.
+
+    Returns
+    -------
+    None
+
+    Description
+    -----------
+    This asset function takes a GeoDataFrame containing building data and performs the following steps:
+    1. Replace German characters (umlauts) with their ASCII equivalents.
+    2. Drop the 'lod2_geometry' column from the GeoDataFrame.
+    3. Convert the 'mastr_updated_at' column to a string.
+    4. Write the GeoDataFrame to a GeoJSON file.
+    5. Convert the GeoJSON file to a Datasette SQLite database.
+    """
     sqlite_path = os.path.join(utils.get_dagster_data_path(), "datasette.db")
     geojson_path = os.path.join(utils.get_dagster_data_path(), "datasette.json")
     # marts_buildings.to_sql(

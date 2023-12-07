@@ -5,6 +5,13 @@ from energy_dagster.utils import utils
 
 
 def load_geoboundaries(area: str) -> gpd.GeoDataFrame:
+    """Load geographic boundary data for a specified area.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        GeoDataFrame containing the geographic boundaries for the specified area.
+    """
     constants = utils.download_from_constants(area)
     download_path = constants["download_path"]
     zipfile_path = constants["zipfile_path"]

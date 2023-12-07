@@ -22,6 +22,19 @@ def load_osm_from_shp(area: str) -> gpd.GeoDataFrame:
     compute_kind="python",
 )
 def osm_oberpfalz():
+    """
+    Asset function to load OSM building data for the Oberpfalz region.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        GeoDataFrame containing OSM building data for the Oberpfalz region.
+
+    Description
+    -----------
+    This asset function calls the 'load_osm_from_shp' function to load OSM building data specifically for the Oberpfalz region.
+    The resulting GeoDataFrame is marked as an asset with specific metadata for PostGIS integration.
+    """
     return load_osm_from_shp("osm_oberpfalz")
 
 
@@ -32,6 +45,19 @@ def osm_oberpfalz():
     compute_kind="python",
 )
 def osm_schwaben():
+    """
+    Asset function to load OSM building data for the Schwaben region.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        GeoDataFrame containing OSM building data for the Schwaben region.
+
+    Description
+    -----------
+    This asset function calls the 'load_osm_from_shp' function to load OSM building data specifically for the Schwaben region.
+    The resulting GeoDataFrame is marked as an asset with specific metadata for PostGIS integration.
+    """
     return load_osm_from_shp("osm_schwaben")
 
 
@@ -42,6 +68,9 @@ def osm_schwaben():
     compute_kind="python",
 )
 def osm_unterfranken():
+    """
+    Asset function to load OSM building data for the Unterfranken region.
+    """
     return load_osm_from_shp("osm_unterfranken")
 
 
@@ -52,6 +81,9 @@ def osm_unterfranken():
     compute_kind="python",
 )
 def osm_oberfranken():
+    """
+    Asset function to load OSM building data for the Oberfranken region.
+    """
     return load_osm_from_shp("osm_oberfranken")
 
 
@@ -62,6 +94,9 @@ def osm_oberfranken():
     compute_kind="python",
 )
 def osm_mittelfranken():
+    """
+    Asset function to load OSM building data for the Mittelfranken region.
+    """
     return load_osm_from_shp("osm_mittelfranken")
 
 
@@ -72,6 +107,9 @@ def osm_mittelfranken():
     compute_kind="python",
 )
 def osm_oberbayern():
+    """
+    Asset function to load OSM building data for the Oberbayern region.
+    """
     return load_osm_from_shp("osm_oberbayern")
 
 
@@ -82,4 +120,7 @@ def osm_oberbayern():
     compute_kind="python",
 )
 def osm_niederbayern():
+    """
+    Asset function to load OSM building data for the Niederbayern region.
+    """
     return load_osm_from_shp("osm_niederbayern")

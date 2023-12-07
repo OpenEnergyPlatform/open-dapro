@@ -13,6 +13,13 @@ from energy_dagster.utils import utils
     compute_kind="python",
 )
 def destatis_areas_and_inhabitants() -> pd.DataFrame:
+    """Load demographic data for German municipalities from the Destatis database.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing demographic data, including areas and inhabitants, for German municipalities.
+    """
     constants = utils.get_constants("destatis_areas_and_inhabitants")
     raw_data = request.urlopen(constants["url"]).read()
     return pd.read_excel(raw_data, "Onlineprodukt_Gemeinden30062023", skiprows=5)
