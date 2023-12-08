@@ -17,6 +17,9 @@ from energy_dagster.utils import utils
 
 @asset(key_prefix="raw", group_name="raw_data", compute_kind="python")
 def lod2_bavaria(context) -> None:
+    """
+    Load Level of Detail 2 (LOD2) building data for Bavaria into a PostGIS database.
+    """
     is_develop_mode = False if os.environ.get("IS_DEVELOP_MODE") == "false" else True
     lod2_factory(
         region_name="lod2_nuernberger_land",
@@ -28,6 +31,9 @@ def lod2_bavaria(context) -> None:
 def lod2_factory(
     region_name: str, context: AssetExecutionContext, is_develop_mode: bool
 ):
+    """
+    Factory function to download, convert, and store LOD2 building data for a specified region.
+    """
     number_files_conversion = 5
     client = docker.from_env()
     _ = client.images.pull(repository="citygml4j/citygml-tools")
@@ -102,6 +108,9 @@ def lod2_factory(
 
 
 def delete_duplicated_buildings(engine, context):
+    """
+    Delete duplicated buildings from a PostGIS table in a given database.
+    """
     schema, table_name = context.asset_key_for_output()[-1]
     drop_table_sql = text(
         f""""
@@ -126,6 +135,9 @@ def delete_duplicated_buildings(engine, context):
 
 
 def delete_table_from_dagster_context(engine, context):
+    """
+    Delete a table from the Dagster context in a PostGIS database.
+    """
     schema, table_name = context.asset_key_for_output()[-1]
     drop_table_sql = text(f"DROP TABLE IF EXISTS {schema}.{table_name} CASCADE")
 
