@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "postgres_db"
     volumes:
-      - dagsterPostgres:/var/lib/postgresql/data
+      - ${VOLUME_PATH_DAGSTER_POSTGRES:-dagsterPostgres}:/var/lib/postgresql/data
     networks:
       - docker_network
 
@@ -55,7 +55,7 @@ services:
     volumes:
       - .:/opt/dagster/app
       - /var/run/docker.sock:/var/run/docker.sock # to be able to run docker
-      - dagsterHomeData:/opt/dagster/dagster_home/data # have a shared volume that is also used by citygml container
+      - ${VOLUME_PATH_DAGSTER_HOME_DATA:-dagsterHomeData}:/opt/dagster/dagster_home/data # have a shared volume that is also used by citygml container
 
   # This service runs docker-webserver, which loads your user code from the user code container.
   # Since our instance uses the QueuedRunCoordinator, any runs submitted from webserver will be put on
@@ -126,7 +126,7 @@ services:
       POSTGRES_USER: ${DATA_WAREHOUSE_POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${DATA_WAREHOUSE_POSTGRES_PASSWORD:-postgres}
     volumes:
-      - dataWarehousePostgresVolume:/var/lib/postgresql/data
+      - ${VOLUME_PATH_DATA_WAREHOUSE_POSTGRES:-dataWarehousePostgresVolume}:/var/lib/postgresql/data
       - ./docker/init_energy_database.sql:/docker-entrypoint-initdb.d/create_schema.sql
     networks:
       - docker_network
@@ -138,7 +138,7 @@ services:
     ports:
       - ${GEOSERVER_PORT:-8002}:8080
     volumes:
-      - "geoserverData:/opt/geoserver_data"
+      - "${VOLUME_PATH_GEOSERVER_DATA:-geoserverData}:/opt/geoserver_data"
     environment:
       SKIP_DEMO_DATA: true
       ROOT_WEBAPP_REDIRECT: true
