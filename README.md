@@ -7,10 +7,16 @@ open-dapro is a collection of automated data pipelines for the German energy sys
 
 ## Installation
 
-Make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed. Clone the repository, enter it, and run
+Make sure you have [docker](https://www.docker.com/) installed. Clone the repository, enter it, and run
 ```bash
-docker-compose up
+docker compose up
 ```
+
+In case you want to change default variables, rename the `.env.template` file to `.env` and change the defined variables as you wish. Afterwards, run 
+```bash
+docker compose --env-file .env up
+```
+
 If everything worked, the GeoServer should be available at [http://127.0.0.1:8002](http://127.0.0.1:8002) and the Dagster UI at [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 To install the project in a developer setup check the [Setup for Developers](https://openenergyplatform.github.io/open-dapro/development/) on the documentation page.
