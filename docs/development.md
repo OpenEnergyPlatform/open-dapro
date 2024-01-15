@@ -9,10 +9,10 @@
     pip install -e ".[dev]"
     ```
 
-1. Next, make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/standalone/) installed. You can check this by running:
+1. Next, make sure you have [docker](https://www.docker.com/) installed. You can check this by running:
 
     ```bash
-    docker-compose --version
+    docker --version
     ```
 
 
