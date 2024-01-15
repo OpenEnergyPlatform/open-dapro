@@ -9,25 +9,6 @@ run_coordinator:
 run_launcher:
   module: dagster.core.launcher
   class: DefaultRunLauncher
-#  module: dagster_docker
-#  class: DockerRunLauncher
-#  config:
-#    env_vars:
-#      - DAGSTER_POSTGRES_USER
-#      - DAGSTER_POSTGRES_PASSWORD
-#      - DAGSTER_POSTGRES_DB
-#      - pwd
-#      - uid
-#      - server
-#      - db
-#      - port
-#      - schema
-#      - MASTR_DOWNLOAD_DATE
-#    network: docker_network
-#    container_kwargs:
-#      volumes: # Make docker client accessible to any launched containers as well
-#        - /var/run/docker.sock:/var/run/docker.sock
-#        - /tmp/io_manager_storage:/tmp/io_manager_storage
 
 run_storage:
   module: dagster_postgres.run_storage
@@ -72,4 +53,4 @@ event_log_storage:
       port: 5432
 
 telemetry:
-    enabled: false
+  enabled: false

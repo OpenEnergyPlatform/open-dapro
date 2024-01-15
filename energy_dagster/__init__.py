@@ -15,9 +15,9 @@ resources = {
     "db_io": db_io_manager.postgres_pandas_io_manager.configured(
         {
             "server": {"env": "server"},
-            "db": {"env": "db"},
-            "uid": {"env": "uid"},
-            "pwd": {"env": "pwd"},
+            "db": {"env": "DATA_WAREHOUSE_POSTGRES_DBNAME"},
+            "uid": {"env": "DATA_WAREHOUSE_POSTGRES_USER"},
+            "pwd": {"env": "DATA_WAREHOUSE_POSTGRES_PASSWORD"},
             "port": {"env": "port"},
             "schema": {"env": "schema"},
         }
@@ -25,9 +25,9 @@ resources = {
     "dbt_marts_to_geopandas": postgis_io_manager.postgis_geopandas_io_manager.configured(
         {
             "server": {"env": "server"},
-            "db": {"env": "db"},
-            "uid": {"env": "uid"},
-            "pwd": {"env": "pwd"},
+            "db": {"env": "DATA_WAREHOUSE_POSTGRES_DBNAME"},
+            "uid": {"env": "DATA_WAREHOUSE_POSTGRES_USER"},
+            "pwd": {"env": "DATA_WAREHOUSE_POSTGRES_PASSWORD"},
             "port": {"env": "port"},
             "schema": "data_marts",
         }
@@ -35,9 +35,9 @@ resources = {
     "postgis_io": postgis_io_manager.postgis_geopandas_io_manager.configured(
         {
             "server": {"env": "server"},
-            "db": {"env": "db"},
-            "uid": {"env": "uid"},
-            "pwd": {"env": "pwd"},
+            "db": {"env": "DATA_WAREHOUSE_POSTGRES_DBNAME"},
+            "uid": {"env": "DATA_WAREHOUSE_POSTGRES_USER"},
+            "pwd": {"env": "DATA_WAREHOUSE_POSTGRES_PASSWORD"},
             "port": {"env": "port"},
             "schema": {"env": "schema"},
         }

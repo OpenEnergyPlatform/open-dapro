@@ -9,9 +9,9 @@ from sqlalchemy import create_engine
 def get_engine_settings():
     host = os.environ["server"]
     port = os.environ["port"]
-    user = os.environ["uid"]
-    password = os.environ["pwd"]
-    dbname = os.environ["db"]
+    user = os.environ["DATA_WAREHOUSE_POSTGRES_USER"]
+    password = os.environ["DATA_WAREHOUSE_POSTGRES_PASSWORD"]
+    dbname = os.environ["DATA_WAREHOUSE_POSTGRES_DBNAME"]
 
     return {
         "host": host,
