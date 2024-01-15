@@ -4,8 +4,8 @@ energy_dbt:
     prod:
       type: postgres
       host: data_warehouse_postgres
-      user: postgres
-      password: postgres
+      user: "{{ env_var('DATA_WAREHOUSE_POSTGRES_USER') }}"
+      password: "{{ env_var('DATA_WAREHOUSE_POSTGRES_PASSWORD') }}"
       port: 5432
       dbname: energy_database
       schema: data
