@@ -11,6 +11,7 @@ and the versioning aims to respect [Semantic Versioning](http://semver.org/spec/
 ### Changed
 - Simplified the setup process [#22](https://github.com/OpenEnergyPlatform/open-dapro/pull/22)
 ### Removed
+- Remove dependency of the `docker-compose` standalone [#21](https://github.com/OpenEnergyPlatform/open-dapro/pull/21)
 
 
 ## [v0.1.0] Initial Release - 2023-12-01

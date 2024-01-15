@@ -24,7 +24,7 @@ def get_engine() -> sqlalchemy.engine.Engine:
 
 
 def setup_docker() -> None:
-    """Initialize a PostgreSQL database with docker-compose"""
+    """Initialize a PostgreSQL database with docker compose"""
     conf_file_path = os.path.abspath(os.path.dirname(__file__))
     subprocess.run(
         ["docker", "compose", "up", "-d"],
