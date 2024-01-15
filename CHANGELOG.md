@@ -6,6 +6,12 @@ For each version important additions, changes and removals are listed here.
 The format is inspired from [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and the versioning aims to respect [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [vX.X.X]
+### Added
+### Changed
+- Simplified the setup process [#22](https://github.com/OpenEnergyPlatform/open-dapro/pull/22)
+### Removed
+
 
 ## [v0.1.0] Initial Release - 2023-12-01
 ### Added
