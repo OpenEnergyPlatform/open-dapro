@@ -72,12 +72,12 @@ services:
       - "3000"
       - -w
       - workspace.yaml
+      - --path-prefix
+      - /dagster
     container_name: docker_webserver
     restart: always
     expose:
       - "3000"
-    ports:
-      - ${DAGSTER_WEBSERVER_PORT:-3000}:3000
     environment:
       DAGSTER_POSTGRES_USER: "postgres"
       DAGSTER_POSTGRES_PASSWORD: "postgres"
@@ -135,8 +135,8 @@ services:
     image: docker.osgeo.org/geoserver:2.23.1
     container_name: geoserver
     restart: always
-    ports:
-      - ${GEOSERVER_PORT:-8002}:8080
+    expose:
+      - "8080"
     volumes:
       - "${VOLUME_PATH_GEOSERVER_DATA:-geoserverData}:/opt/geoserver_data"
     environment:
@@ -144,6 +144,18 @@ services:
       ROOT_WEBAPP_REDIRECT: true
     networks:
       - docker_network
+
+  nginx-base:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx-base
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - docker_network
+
 
 networks:
   docker_network:
