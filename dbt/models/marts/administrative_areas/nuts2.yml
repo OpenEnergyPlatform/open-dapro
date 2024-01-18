@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: nuts2
+    description: Energy system and geoinformation of each german NUTS-2.
+    columns:
+      - name: nuts2_id
+        description: The id of the nuts-2 (Nomenclature des unites territoriales statistiques).
+        tests:
+          - not_null
+          - unique
+      - name: number_inhabitants
+        description: Number of inhabitants in the municiapiliy, taken from the latest zensus.
+      - name: geometry_array
+        description: The boundaries of the municipality.
+        tests:
+          - not_null
+      - name: center
+        description: The center of the municipality, calculated using the Postgis ST_Centroid function.
+        tests:
+          - not_null
+      - name: power_biomass
+        description: Total installed biomass power [in kW].
+      - name: download_date_biomass
+        description: ''
+      - name: power_solar
+        description: Total installed solar power [in kW].
+      - name: download_date_solar
+        description: ''
+      - name: power_wind
+        description: Total installed wind power [in kW].
+      - name: download_date_wind
+        description: ''
+      - name: capacity_storage
+        description: Total installed storage capacity [in kWh].
+
+      - name: download_date_storage
+        description: ''
