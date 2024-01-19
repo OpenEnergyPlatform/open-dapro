@@ -24,6 +24,3 @@ To install the project in a developer setup check the [Setup for Developers](htt
 
 ## Acknowledgement 
 This repository was developed at [fortiss GmbH](https://www.fortiss.org/) within the [eTwin.BY Project](https://www.fortiss.org/en/research/projects/detail/etwinby). This work was funded by "Bayerische Staatsministerium für Wirtschaft, Landesentwicklung und Energie" as part of "Bayerischen Verbundförderprogramms (BayVFP) – Förderlinie Digitalisierung – Förderbereich Informations- und Kommunikationstechnik".
-<div align="center">
-  <img src="https://github.com/OpenEnergyPlatform/open-dapro/assets/74312290/e88b3c4e-4c58-41cf-9b61-a8ff591bdeea" alt="Logo of the Research Project eTwin.BY" width="200" height="200">
-</div>
