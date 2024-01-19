@@ -8,12 +8,13 @@
   * Extend existing pipelines with the datasets you need.
 
 ## Installation
-1. Clone the repository [git.fortiss.org/ASCI-public/energy-dagster](https://git.fortiss.org/ASCI-public/energy-dagster) and open it in a terminal.
+1. Clone the repository [github.com/OpenEnergyPlatform/open-dapro](https://github.com/OpenEnergyPlatform/open-dapro) and open it in a terminal.
 1. Make sure you have [docker](https://www.docker.com/) installed by running 
-```bash
-docker --version
-```
-1. Run `docker compose up` and go to [localhost:3000](localhost:3000){:target="_blank"} to see the dagster UI. A documentation of the dagster UI can be found [here](https://docs.dagster.io/concepts/webserver/ui){:target="_blank"}.
+1. Rename the `.env.template` file to `.env` and change the defined variables as you wish. Afterwards, run 
+  ```bash
+  docker compose --env-file .env up
+  ```
+  If everything worked, the GeoServer should be available at [localhost/geoserver](http:localhost/geoserver) with credentials `admin:geoserver` and the Dagster UI at [localhost/dagster](http:localhost/dagster) with credentials `dagster-admin:admin`.
 1. Start exploring the data pipelines :tada:
 
 For an alternative setup you can also follow the instructions in the [Setup for development](development.md).
