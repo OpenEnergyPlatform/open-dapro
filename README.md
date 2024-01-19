@@ -17,7 +17,7 @@ In case you want to change default variables, rename the `.env.template` file to
 docker compose --env-file .env up
 ```
 
-If everything worked, the GeoServer should be available at [http://127.0.0.1:8002](http://127.0.0.1:8002) and the Dagster UI at [http://127.0.0.1:3000](http://127.0.0.1:3000)
+If everything worked, the GeoServer should be available at [localhost/geoserver](http:localhost/geoserver) with credentials `admin:geoserver` and the Dagster UI at [localhost/dagster](http:localhost/dagster) with credentials `dagster-admin:admin`.
 
 To install the project in a developer setup check the [Setup for Developers](https://openenergyplatform.github.io/open-dapro/development/) on the documentation page.
 
