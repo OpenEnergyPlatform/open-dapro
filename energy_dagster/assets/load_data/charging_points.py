@@ -24,4 +24,6 @@ def charging_points() -> pd.DataFrame:
     """
     constants = utils.get_constants("ladesaeulenregister")
     raw_data = request.urlopen(constants["url"]).read()
-    return pd.read_excel(raw_data, skiprows=10)
+    return pd.read_excel(
+        raw_data, skiprows=10, dtype={"Breitengrad": str, "Längengrad": str}
+    )

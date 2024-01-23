@@ -19,7 +19,13 @@ final as (
         || COALESCE(
             "Steckertypen1" || ' - ' || "P1 [kW]" || ' kW', ''
         ) as connectors_and_power,
-        ST_SETSRID(ST_MAKEPOINT(CAST(REPLACE("Längengrad", ',', '.') AS float), CAST(REPLACE("Breitengrad", ',', '.') AS float)), 4326) as geo_point
+        ST_MAKEPOINT(
+            CAST(REPLACE(REPLACE("Längengrad", ',', '.'), ' ', '') AS float),
+            CAST(REPLACE(REPLACE("Breitengrad", ',', '.'), ' ', '') AS float),
+            4326
+        ) as geo_point 
+        -- The replacement of the empty space here is actually a special char - not the empty space
+        -- You need to leave it that way
 
     from source
 )
