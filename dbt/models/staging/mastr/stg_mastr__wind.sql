@@ -28,10 +28,15 @@ renamed as (
         "Hersteller" as manufacturer,
         "DatumDownload" as download_date,
         left("Gemeindeschluessel", 5) as district_id,
-        concat(
+        CASE
+        WHEN "Inbetriebnahmedatum" IS NOT NULL OR "GeplantesInbetriebnahmedatum" IS NOT NULL THEN
+            concat(
             date_part('year', "Inbetriebnahmedatum"),
             date_part('year', "GeplantesInbetriebnahmedatum")
-        ) as installation_year,
+        )::integer
+        ELSE
+            NULL
+        END as installation_year,
         st_setsrid(st_point("Laengengrad", "Breitengrad"), 4326) as coordinate
     from source
 
