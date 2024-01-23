@@ -22,7 +22,7 @@ solar as (
     select
         municipality_id,
         installation_year,
-        power,
+        power_net as power,
         download_date
     from {{ ref('stg_mastr__solar') }}
     where operating_status = 'In Betrieb'
@@ -46,7 +46,7 @@ municipalities as (
 ),
 
 years as (
-    select cast(generate_series(1995, 2023) as varchar(4)) as installation_year
+    select cast(generate_series(1995, 2023) as int) as installation_year
     union all
     select null as installation_year
 ),
