@@ -9,21 +9,22 @@ from sqlalchemy import DDL, create_engine, exc
 
 def get_engine() -> sqlalchemy.engine.Engine:
     try:
-        host = os.environ["server"]
+        dbname = os.environ["DATA_WAREHOUSE_POSTGRES_DBNAME"]
     except KeyError:
         load_dotenv()
-        host = os.environ["server"]
+        dbname = os.environ["DATA_WAREHOUSE_POSTGRES_DBNAME"]
+    host = "localhost"
     port = os.environ["port"]
-    user = os.environ["uid"]
-    password = os.environ["pwd"]
-    dbname = os.environ["db"]
+    user = os.environ["DATA_WAREHOUSE_POSTGRES_USER"]
+    password = os.environ["DATA_WAREHOUSE_POSTGRES_PASSWORD"]
+
     return create_engine(
         f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{dbname}"
     )
 
 
 def setup_docker() -> None:
-    """Initialize a PostgreSQL database with docker-compose"""
+    """Initialize a PostgreSQL database with docker compose"""
     conf_file_path = os.path.abspath(os.path.dirname(__file__))
     subprocess.run(
         ["docker", "compose", "up", "-d"],

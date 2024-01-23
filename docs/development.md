@@ -9,10 +9,10 @@
     pip install -e ".[dev]"
     ```
 
-1. Next, make sure you have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/standalone/) installed. You can check this by running:
+1. Next, make sure you have [docker](https://www.docker.com/) installed. You can check this by running:
 
     ```bash
-    docker-compose --version
+    docker --version
     ```
 
 
@@ -34,7 +34,7 @@
     If the environment variables were loaded successfully, you should see the following line:
 
     ```
-    dagster - INFO - Loaded environment variables from .env file: pwd,uid,server,db,port,schema, MASTR_DOWNLOAD_DATE
+    dagster - INFO - Loaded environment variables from .env file: MASTR_DOWNLOAD_DATE, ...
     ```
 
 1. Open [127.0.0.1:3000](http://127.0.0.1:3000) with your browser to see the project. You can start writing your own assets in `energy_dagster/assets.py`. The assets are automatically loaded into the Dagster code location as you define them.
