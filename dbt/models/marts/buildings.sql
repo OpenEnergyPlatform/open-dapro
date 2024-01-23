@@ -52,7 +52,7 @@ joined_tables AS (
         alkis.usage_type_specification AS alkis_type_specification,
         osm.type AS osm_type,
         osm.osm_id,
-        solar.power AS solar_power,
+        solar.power_net AS solar_power,
         biomass.power AS biomass_power,
         combustion.power AS combustion_power,
         combustion.energy_carrier AS combustion_energy_carrier,
