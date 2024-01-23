@@ -1,3 +1,7 @@
+# nginx
+docker/nginx/.htpasswd
+.htpasswd
+
 # dbt
 target/
 logs/
