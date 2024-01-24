@@ -8,30 +8,40 @@ models:
         tests:
           - not_null
           - unique
+        data_type: text
       - name: number_inhabitants
-        description: Number of inhabitants in the municiapiliy, taken from the latest zensus.
-      - name: geometry_array
-        description: The boundaries of the municipality.
-        tests:
-          - not_null
-      - name: center
-        description: The center of the municipality, calculated using the Postgis ST_Centroid function.
-        tests:
-          - not_null
+        description: Number of inhabitants in the NUTS2 region, taken from DESTATIS.
+        data_type: double precision
+      - name: amount_charging_points
+        data_type: numeric
+        description: Total number of charging points.
+      - name: download_date_biomass
+        description: 'Date when the MaStR containing the biomass data was downloaded.'
+        data_type: date
+      - name: download_date_solar
+        description: 'Date when the MaStR containing the solar PV data was downloaded.'
+        data_type: date
+      - name: download_date_wind
+        description: 'Date when the MaStR containing the wind turbine data was downloaded.'
+        data_type: date
+      - name: download_date_storage
+        description: 'Date when the MaStR containing the electric storage data was downloaded.'
+        data_type: date
       - name: power_biomass
         description: Total installed biomass power [in kW].
-      - name: download_date_biomass
-        description: ''
+        data_type: double precision
       - name: power_solar
         description: Total installed solar power [in kW].
-      - name: download_date_solar
-        description: ''
+        data_type: double precision
       - name: power_wind
         description: Total installed wind power [in kW].
-      - name: download_date_wind
-        description: ''
+        data_type: double precision
       - name: capacity_storage
         description: Total installed storage capacity [in kWh].
 
-      - name: download_date_storage
-        description: ''
+        data_type: double precision
+      - name: geometry_array
+        description: The boundaries of the NUTS2 region.
+        tests:
+          - not_null
+        data_type: USER-DEFINED

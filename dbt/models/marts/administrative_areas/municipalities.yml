@@ -14,6 +14,9 @@ models:
       - name: district
         description: ''
         data_type: text
+      - name: nuts
+        data_type: text
+        description: ''
       - name: number_inhabitants
         description: ''
         data_type: double precision
