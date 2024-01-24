@@ -1,28 +1,20 @@
 version: 2
 models:
-  - name: municipalities
+  - name: nuts2
+    description: Energy system and geoinformation of each german NUTS-2.
     columns:
-      - name: municipality_id
-        description: 'The id of the municipality (Amtlicher Gemeindeschluessel).'
+      - name: nuts2_id
+        description: The id of the nuts-2 (Nomenclature des unites territoriales statistiques).
+        tests:
+          - not_null
+          - unique
         data_type: text
-      - name: municipality
-        description: 'Name of the municipality'
-        data_type: text
-      - name: district_id
-        description: ''
-        data_type: text
-      - name: district
-        description: ''
-        data_type: text
-      - name: nuts
-        data_type: text
-        description: ''
       - name: number_inhabitants
-        description: ''
+        description: Number of inhabitants in the NUTS2 region, taken from DESTATIS.
         data_type: double precision
       - name: amount_charging_points
-        description: 'Total number of charging points.'
         data_type: numeric
+        description: Total number of charging points.
       - name: download_date_biomass
         description: 'Date when the MaStR containing the biomass data was downloaded.'
         data_type: date
@@ -35,21 +27,21 @@ models:
       - name: download_date_storage
         description: 'Date when the MaStR containing the electric storage data was downloaded.'
         data_type: date
-      - name: geometry_array
-        description: ''
-        data_type: USER-DEFINED
-      - name: center
-        description: ''
-        data_type: USER-DEFINED
       - name: power_biomass
-        description: ''
+        description: Total installed biomass power [in kW].
         data_type: double precision
       - name: power_solar
-        description: ''
+        description: Total installed solar power [in kW].
         data_type: double precision
       - name: power_wind
-        description: ''
+        description: Total installed wind power [in kW].
         data_type: double precision
       - name: capacity_storage
-        description: ''
+        description: Total installed storage capacity [in kWh].
+
         data_type: double precision
+      - name: geometry_array
+        description: The boundaries of the NUTS2 region.
+        tests:
+          - not_null
+        data_type: USER-DEFINED

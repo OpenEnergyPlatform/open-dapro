@@ -18,6 +18,7 @@ municipalities as (
         municipality,
         district_id,
         district,
+        nuts,
         number_inhabitants,
         geometry_array,
         center
@@ -49,6 +50,7 @@ join_charging_points as (
         municipalities.municipality,
         municipalities.district_id,
         municipalities.district,
+        municipalities.nuts,
         municipalities.number_inhabitants,
         charging_points_per_municipality.amount_charging_points,
         municipalities.geometry_array,
@@ -64,6 +66,7 @@ final as (
         join_charging_points.municipality,
         join_charging_points.district_id,
         join_charging_points.district,
+        join_charging_points.nuts,
         join_charging_points.number_inhabitants,
         join_charging_points.amount_charging_points,
         mastr_aggregated.download_date_biomass,
