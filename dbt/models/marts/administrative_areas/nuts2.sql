@@ -1,6 +1,6 @@
 WITH municipalities AS (
     SELECT * FROM {{ ref('municipalities') }}
-)
+),
 
 nuts2 AS (
     SELECT
@@ -15,7 +15,7 @@ nuts2 AS (
         sum(power_solar) AS power_solar,
         sum(power_wind) AS power_wind,
         sum(capacity_storage) AS capacity_storage,
-		ST_Union(geometry_array) AS geometry_array
+        st_union(geometry_array) AS geometry_array
     FROM municipalities
     GROUP BY nuts2_id
 )
